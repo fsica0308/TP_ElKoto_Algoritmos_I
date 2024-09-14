@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "nombre": "Nesquik original cacao en polvo 800 g.",
+        "marca": "Nesquik",
+        "precio": 7919,
+        "ubicacion": "Gondola 3",
+        "stock": 53,
+        "promocion": 252
+    },
+    {
+        "id": 2,
+        "nombre": "Pan blanco Bimbo 550 g.",
+        "marca": "Bimbo",
+        "precio": 5069,
+        "ubicacion": "Gondola 2",
+        "stock": 24,
+        "promocion": 15
+    },
+    {
+        "id": 3,
+        "nombre": "Edulcorante líquido Chuker sucralosa 00 cc.",
+        "marca": "Chuker",
+        "precio": 4315,
+        "ubicacion": "Gondola 3",
+        "stock": 67,
+        "promocion": "2x1"
+    }
+]
