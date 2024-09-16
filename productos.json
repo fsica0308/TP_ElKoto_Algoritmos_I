@@ -25,5 +25,158 @@
         "ubicacion": "Gondola 3",
         "stock": 67,
         "promocion": "2x1"
+    },
+    {
+        "id": 4,
+        "nombre": "Aceite de Girasol 1.5L",
+        "marca": "Cocinero",
+        "precio": 1780,
+        "ubicacion": "Góndola 1",
+        "stock": 120,
+        "promocion": "3x2"
+    },
+    {
+        "id": 5,
+        "nombre": "Fideos Spaghetti 500g",
+        "marca": "Lucchetti",
+        "precio": 1350,
+        "ubicacion": "Góndola 2",
+        "stock": 200,
+        "promocion": null
+    },
+    {
+        "id": 6,
+        "nombre": "Azúcar Blanca 1kg",
+        "marca": "Ledesma",
+        "precio": 1320,
+        "ubicacion": "Góndola 3",
+        "stock": 95,
+        "promocion": "2x1"
+    },
+    {
+        "id": 7,
+        "nombre": "Arroz Largo Fino 1kg",
+        "marca": "Gallo",
+        "precio": 1440,
+        "ubicacion": "Góndola 4",
+        "stock": 100,
+        "promocion": null
+    },
+    {
+        "id": 8,
+        "nombre": "Café Instantáneo 170g",
+        "marca": "Nescafé",
+        "precio": 2290,
+        "ubicacion": "Góndola 5",
+        "stock": 50,
+        "promocion": "15"
+    },
+    {
+        "id": 9,
+        "nombre": "Harina de Trigo 1kg",
+        "marca": "Favorita",
+        "precio": 1260,
+        "ubicacion": "Góndola 6",
+        "stock": 180,
+        "promocion": null
+    },
+    {
+        "id": 10,
+        "nombre": "Huevos 12 unidades",
+        "marca": "Granja Tres Arroyos",
+        "precio": 1780,
+        "ubicacion": "Góndola 7",
+        "stock": 300,
+        "promocion": null
+    },
+    {
+        "id": 11,
+        "nombre": "Manteca 200g",
+        "marca": "Sancor",
+        "precio": 1430,
+        "ubicacion": "Góndola 8",
+        "stock": 140,
+        "promocion": "10"
+    },
+    {
+        "id": 12,
+        "nombre": "Galletitas Dulces 365g",
+        "marca": "Chocolinas",
+        "precio": 990,
+        "ubicacion": "Góndola 1",
+        "stock": 210,
+        "promocion": null
+    },
+    {
+        "id": 13,
+        "nombre": "Sal Fina 500g",
+        "marca": "Celusal",
+        "precio": 1180,
+        "ubicacion": "Góndola 2",
+        "stock": 160,
+        "promocion": null
+    },
+    {
+        "id": 14,
+        "nombre": "Salsa de Tomate 340g",
+        "marca": "Arcor",
+        "precio": 2240,
+        "ubicacion": "Góndola 3",
+        "stock": 180,
+        "promocion": null
+    },
+    {
+        "id": 15,
+        "nombre": "Mayonesa 500g",
+        "marca": "Hellmann's",
+        "precio": 2510,
+        "ubicacion": "Góndola 4",
+        "stock": 90,
+        "promocion": "252"
+    },
+    {
+        "id": 16,
+        "nombre": "Gaseosa 2.25L",
+        "marca": "Coca-Cola",
+        "precio": 2710,
+        "ubicacion": "Góndola 5",
+        "stock": 160,
+        "promocion": null
+    },
+    {
+        "id": 17,
+        "nombre": "Detergente 750ml",
+        "marca": "Ala",
+        "precio": 2230,
+        "ubicacion": "Góndola 6",
+        "stock": 120,
+        "promocion": "5"
+    },
+    {
+        "id": 18,
+        "nombre": "Lavandina 1L",
+        "marca": "Ayudín",
+        "precio": 1200,
+        "ubicacion": "Góndola 7",
+        "stock": 140,
+        "promocion": null
+    },
+    {
+        "id": 19,
+        "nombre": "Shampoo 400ml",
+        "marca": "Sedal",
+        "precio": 3650,
+        "ubicacion": "Góndola 8",
+        "stock": 110,
+        "promocion": "20"
+    },
+    {
+        "id": 20,
+        "nombre": "Papel Higiénico 4 rollos",
+        "marca": "Elite",
+        "precio": 2290,
+        "ubicacion": "Góndola 1",
+        "stock": 200,
+        "promocion": null
     }
 ]
