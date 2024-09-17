@@ -6,7 +6,7 @@
         "precio": 7919,
         "ubicacion": "Gondola 3",
         "stock": 53,
-        "promocion": 252
+        "promocion": "252"
     },
     {
         "id": 2,
@@ -15,11 +15,11 @@
         "precio": 5069,
         "ubicacion": "Gondola 2",
         "stock": 24,
-        "promocion": 15
+        "promocion": "15"
     },
     {
         "id": 3,
-        "nombre": "Edulcorante líquido Chuker sucralosa 00 cc.",
+        "nombre": "Edulcorante liquido Chuker sucralosa 00 cc.",
         "marca": "Chuker",
         "precio": 4315,
         "ubicacion": "Gondola 3",
@@ -31,7 +31,7 @@
         "nombre": "Aceite de Girasol 1.5L",
         "marca": "Cocinero",
         "precio": 1780,
-        "ubicacion": "Góndola 1",
+        "ubicacion": "Gondola 1",
         "stock": 120,
         "promocion": "3x2"
     },
@@ -40,16 +40,16 @@
         "nombre": "Fideos Spaghetti 500g",
         "marca": "Lucchetti",
         "precio": 1350,
-        "ubicacion": "Góndola 2",
+        "ubicacion": "Gondola 2",
         "stock": 200,
-        "promocion": null
+        "promocion": "0"
     },
     {
         "id": 6,
-        "nombre": "Azúcar Blanca 1kg",
+        "nombre": "Azucar Blanca 1kg",
         "marca": "Ledesma",
         "precio": 1320,
-        "ubicacion": "Góndola 3",
+        "ubicacion": "Gondola 3",
         "stock": 95,
         "promocion": "2x1"
     },
@@ -58,16 +58,16 @@
         "nombre": "Arroz Largo Fino 1kg",
         "marca": "Gallo",
         "precio": 1440,
-        "ubicacion": "Góndola 4",
+        "ubicacion": "Gondola 4",
         "stock": 100,
-        "promocion": null
+        "promocion": "0"
     },
     {
         "id": 8,
-        "nombre": "Café Instantáneo 170g",
-        "marca": "Nescafé",
+        "nombre": "Cafe Instantaneo 170g",
+        "marca": "Nescafe",
         "precio": 2290,
-        "ubicacion": "Góndola 5",
+        "ubicacion": "Gondola 5",
         "stock": 50,
         "promocion": "15"
     },
@@ -76,25 +76,25 @@
         "nombre": "Harina de Trigo 1kg",
         "marca": "Favorita",
         "precio": 1260,
-        "ubicacion": "Góndola 6",
+        "ubicacion": "Gondola 6",
         "stock": 180,
-        "promocion": null
+        "promocion": "0"
     },
     {
         "id": 10,
         "nombre": "Huevos 12 unidades",
         "marca": "Granja Tres Arroyos",
         "precio": 1780,
-        "ubicacion": "Góndola 7",
+        "ubicacion": "Gondola 7",
         "stock": 300,
-        "promocion": null
+        "promocion": "0"
     },
     {
         "id": 11,
         "nombre": "Manteca 200g",
         "marca": "Sancor",
         "precio": 1430,
-        "ubicacion": "Góndola 8",
+        "ubicacion": "Gondola 8",
         "stock": 140,
         "promocion": "10"
     },
@@ -103,34 +103,34 @@
         "nombre": "Galletitas Dulces 365g",
         "marca": "Chocolinas",
         "precio": 990,
-        "ubicacion": "Góndola 1",
+        "ubicacion": "Gondola 1",
         "stock": 210,
-        "promocion": null
+        "promocion": "0"
     },
     {
         "id": 13,
         "nombre": "Sal Fina 500g",
         "marca": "Celusal",
         "precio": 1180,
-        "ubicacion": "Góndola 2",
+        "ubicacion": "Gondola 2",
         "stock": 160,
-        "promocion": null
+        "promocion": "0"
     },
     {
         "id": 14,
         "nombre": "Salsa de Tomate 340g",
         "marca": "Arcor",
         "precio": 2240,
-        "ubicacion": "Góndola 3",
+        "ubicacion": "Gondola 3",
         "stock": 180,
-        "promocion": null
+        "promocion": "0"
     },
     {
         "id": 15,
         "nombre": "Mayonesa 500g",
         "marca": "Hellmann's",
         "precio": 2510,
-        "ubicacion": "Góndola 4",
+        "ubicacion": "Gondola 4",
         "stock": 90,
         "promocion": "252"
     },
@@ -139,44 +139,53 @@
         "nombre": "Gaseosa 2.25L",
         "marca": "Coca-Cola",
         "precio": 2710,
-        "ubicacion": "Góndola 5",
+        "ubicacion": "Gondola 5",
         "stock": 160,
-        "promocion": null
+        "promocion": "0"
     },
     {
         "id": 17,
         "nombre": "Detergente 750ml",
         "marca": "Ala",
         "precio": 2230,
-        "ubicacion": "Góndola 6",
+        "ubicacion": "Gondola 6",
         "stock": 120,
         "promocion": "5"
     },
     {
         "id": 18,
         "nombre": "Lavandina 1L",
-        "marca": "Ayudín",
+        "marca": "Ayudin",
         "precio": 1200,
-        "ubicacion": "Góndola 7",
+        "ubicacion": "Gondola 7",
         "stock": 140,
-        "promocion": null
+        "promocion": "0"
     },
     {
         "id": 19,
         "nombre": "Shampoo 400ml",
         "marca": "Sedal",
         "precio": 3650,
-        "ubicacion": "Góndola 8",
+        "ubicacion": "Gondola 8",
         "stock": 110,
         "promocion": "20"
     },
     {
         "id": 20,
-        "nombre": "Papel Higiénico 4 rollos",
+        "nombre": "Papel Higienico 4 rollos",
         "marca": "Elite",
         "precio": 2290,
-        "ubicacion": "Góndola 1",
+        "ubicacion": "Gondola 1",
         "stock": 200,
-        "promocion": null
+        "promocion": "0"
+    },
+    {
+        "id": 21,
+        "nombre": "producto de prueba",
+        "marca": "prueba",
+        "precio": 1520.56,
+        "ubicacion": "gondola de prueba",
+        "stock": 45,
+        "promocion": "456"
     }
 ]
