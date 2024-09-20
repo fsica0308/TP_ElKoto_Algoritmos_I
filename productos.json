@@ -181,11 +181,11 @@
     },
     {
         "id": 21,
-        "nombre": "producto de prueba",
-        "marca": "prueba",
-        "precio": 1520.56,
+        "nombre": "Test hecho a las 20/09  16:50hrs",
+        "marca": "TEST MODIFICACION",
+        "precio": 25.0,
         "ubicacion": "gondola de prueba",
-        "stock": 45,
-        "promocion": "456"
+        "stock": 22,
+        "promocion": "15% descuento"
     }
 ]

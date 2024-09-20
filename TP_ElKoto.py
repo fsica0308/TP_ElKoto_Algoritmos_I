@@ -322,71 +322,88 @@ def modificar_producto(productos):
                 # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
                 # practica o solo fue el profe anterior
         
-    #pido todos los datos del producto que se quiere modificar nuevamente, con las mismas validaciones que en el alta
-    nombre = input("\tIngrese el nombre: ")
-    marca = input("\tIngrese la marca: ")
-    precio = float(input("\tIngrese el precio (sin signos): "))
-    while precio <= 0:
-        precio = float(input("\tError. Ingrese el precio (sin signos): "))
-        
-    ubicacion = input("\tIngrese la ubicacion: ")
     
-    stock = int(input("\tIngrese el stock: "))
-    while stock < 1:
-        stock = int(input("\tError. Ingrese el stock: "))
-    
-    print("\t¿Desea agregar una promocion? \n\t\t1.Si \n\t\t2.No")
-    print()
-    promo = int(input("\t\tOpcion: "))
+    #Inicializo en 0 porque la peticion y validacion la manejo dentro del while
+    opcion = 0
+    #validamos que la opcion este dentro del rango, el sistema se detiene cuando se ingresa la opcion 7 de finalizar
+    while opcion != 7 and (opcion >= 1 or opcion <= 7):  
+        #le consulto que datos desea modificar
+        opcion = int(input("\nIndique qué campo desea modificar: \n"
+                           "\t1. Nombre\n"
+                           "\t2. Marca\n"
+                           "\t3. Precio\n"
+                           "\t4. Ubicación\n"
+                           "\t5. Stock\n"
+                           "\t6. Promoción\n"
+                           "\t7. Finalizar (guardar y salir)\n"
+                           "\tOpción: "))
 
-    while promo < 1 or promo > 2:
-        promo = int(input("\t\tError. Ingrese una opcion correcta: ")) 
-    promocion = "0"    
-    if promo == 1:
-        print("\tQue promocion desea agregar (ejemplos): \n\t\t1.NxM \n\t\t2.N'%' en la M unidad \n\t\t3.N'%'")
-        print()
-        promo_opcion = int(input("\t\tOpcion: "))
-        while promo_opcion < 1 or promo_opcion > 3:
-            promo_opcion = int(input("\t\tError. Ingrese una opcion correcta: ")) 
-        if promo_opcion == 1:
-            valor_1 = int(input("Ingrese el primer valor: "))
-            while valor_1 < 1:
-                valor_1 = int(input("Error. Ingrese el primer valor: "))
-            valor_2 = int(input("Ingrese el segundo valor: "))
-            while valor_2 < 1:
-                valor_2 = int(input("Error. Ingrese el segundo valor: "))
-            promocion = str(valor_1) + "x" + str(valor_2) #agregue parse a str pq sino rompia
-        elif promo_opcion == 2:
-            valor_1 = int(input("Ingrese el primer valor: "))
-            while valor_1 < 1 or valor_1 > 99:
-                valor_1 = int(input("Error. Ingrese el primer valor: "))
-            valor_2 = int(input("Ingrese el segundo valor: "))
-            while valor_2 < 1:
-                valor_2 = int(input("Error. Ingrese el segundo valor: "))
-            promocion = str(valor_1) + str(valor_2)
+        if opcion == 1:
+            nombre = input("\tIngrese el nuevo nombre: ")
+            encontrado['nombre'] = nombre
+
+        elif opcion == 2:
+            marca = input("\tIngrese la nueva marca: ")
+            encontrado['marca'] = marca
+
+        elif opcion == 3:
+            precio = float(input("\tIngrese el nuevo precio (sin signos): "))
+            while precio <= 0:
+                precio = float(input("\tError. Ingrese un precio válido (sin signos): "))
+            encontrado['precio'] = precio
+
+        elif opcion == 4:
+            ubicacion = input("\tIngrese la nueva ubicación: ")
+            encontrado['ubicacion'] = ubicacion
+
+        elif opcion == 5:
+            stock = int(input("\tIngrese el nuevo stock: "))
+            while stock < 1:
+                stock = int(input("\tError. Ingrese un stock válido: "))
+            encontrado['stock'] = stock
+
+        elif opcion == 6:
+            print("\t¿Desea agregar una promoción? \n\t\t1. Sí \n\t\t2. No")
+            promo = int(input("\t\tOpción: "))
+            while promo < 1 or promo > 2:
+                promo = int(input("\t\tError. Ingrese una opción correcta: ")) 
+            
+            promocion = "0"
+            if promo == 1:
+                print("\t¿Qué promoción desea agregar? (ejemplos): \n\t\t1. NxM \n\t\t2. N'%' en la M unidad \n\t\t3. N'% descuento'")
+                promo_opcion = int(input("\t\tOpción: "))
+                while promo_opcion < 1 or promo_opcion > 3:
+                    promo_opcion = int(input("\t\tError. Ingrese una opción correcta: ")) 
+                
+                if promo_opcion == 1:
+                    valor_1 = int(input("Ingrese el primer valor: "))
+                    valor_2 = int(input("Ingrese el segundo valor: "))
+                    promocion = f"{valor_1}x{valor_2}"
+                elif promo_opcion == 2:
+                    valor_1 = int(input("Ingrese el porcentaje: "))
+                    valor_2 = int(input("Ingrese la unidad: "))
+                    promocion = f"{valor_1}% en la {valor_2} unidad"
+                elif promo_opcion == 3:
+                    valor_1 = int(input("Ingrese el porcentaje de descuento: "))
+                    promocion = f"{valor_1}% descuento"
+            
+            encontrado['promocion'] = promocion
+
+        elif opcion == 7:
+            productosJSON = json.dumps(productos, indent=4)
+            try:
+                with open("productos.json", "w") as archivo:
+                    archivo.write(productosJSON)
+                print("Producto modificado con éxito y archivo actualizado.")
+            except:
+                print("No se pudo modificar el producto en el archivo productos.")
+            # Si la opcion es 7, es decir finalizar, guardo los cambios en el archivo
+
         else:
-            valor_1 = int(input("Ingrese el valor: "))
-            while valor_1 < 1 or valor_1 > 99:
-                valor_1 = int(input("Error. Ingrese el valor: "))
-            promocion = str(valor_1)    
-    else:
-        promocion = "0"
+            print("Opcion incorrecta, vuelva a ingresar una valida.")
 
-    encontrado['nombre'] = nombre
-    encontrado['marca'] = marca
-    encontrado['precio'] = precio
-    encontrado['ubicacion'] = ubicacion
-    encontrado['stock'] = stock
-    encontrado['promocion'] = promocion  
     
-    productosJSON = json.dumps(productos, indent=4)
-    try:
-        archivo = open("productos.json", "w") #open("TP_ElKoto_Algoritmos_I/productos.json", "w")
-        archivo.write(productosJSON)
-        archivo.close()
-        print("Producto modificado con exito")
-    except:
-        print("No se pudo modificar el producto en el archivo productos") 
+     
 
 # La diferencia con la funcion mostrar menu productos es que esta solo muestra la tabla de manera informativa, 
 # no permite realizar acciones como filtrar
