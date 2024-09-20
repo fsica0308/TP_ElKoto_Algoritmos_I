@@ -7,6 +7,8 @@ Promociones: 2x1 se guarda como texto "2x1", descuentos se guarda el % ej: 45, d
 Ademas las promociones son unicamente enteros. En caso de no tener promocion se indica con un 0.
 
 JSON: Todo lo que se ingrese al JSON debe ingresarse sin tildes.
+
+Agregar comentarios de todo el codigo y agregar descripciones a las funciones con: """descripcion"""
 '''
 
 #Funcion Menu Inicial
@@ -148,10 +150,8 @@ def menu_abm_productos():
         if opcion == 1:
             alta_producto(productos)
         elif opcion == 2:
-            print("baja prod")
             baja_producto(productos)
         else:
-            print("mod prod")
             modificar_producto(productos)
             
         print("Menu ABM Productos: \n\t1. Alta Producto \n\t2. Baja Producto \n\t3. Modificacion Producto \n\t4. Volver")
@@ -207,7 +207,7 @@ def alta_producto(productos):
         promo = int(input("\t\tError. Ingrese una opcion correcta: ")) 
         
     if promo == 1:
-        print("\tQue promocion desea agregar (ejemplos): \n\t\t1.NxM \n\t\t2.N'%' en la M unidad \n\t\t3.N'%'")
+        print("\tQue promocion desea agregar (ejemplos): \n\t\t1.NxM \n\t\t2.N'%' en la M unidad \n\t\t3.N'%' de descuento")
         print()
         promo_opcion = int(input("\t\tOpcion: "))
         while promo_opcion < 1 or promo_opcion > 3:
@@ -246,7 +246,6 @@ def alta_producto(productos):
     except:
         print("No se puede grabar el archivo productos")
 
-
 # Función para obtener el valor del campo "id"
 def obtener_id(elemento):
     return elemento['id']
@@ -266,8 +265,7 @@ def baja_producto(productos):
             encontrado = True
             #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
             # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
-            # practica o solo fue el profe anterior
-            
+            # practica o solo fue el profe anterior     
         
     while not encontrado:
         print(f"El producto con id {idProducto} no existe, ingrese otro por favor: ")
@@ -291,7 +289,6 @@ def baja_producto(productos):
         print("Producto eliminado con exito")
     except:
         print("No se pudo eliminar el producto en el archivo productos") 
-
 
 # Funcion de baja de articulos
 def modificar_producto(productos):
@@ -370,22 +367,32 @@ def modificar_producto(productos):
             
             promocion = "0"
             if promo == 1:
-                print("\t¿Qué promoción desea agregar? (ejemplos): \n\t\t1. NxM \n\t\t2. N'%' en la M unidad \n\t\t3. N'% descuento'")
+                print("\t¿Qué promoción desea agregar? (ejemplos): \n\t\t1. NxM \n\t\t2. N'%' en la M unidad \n\t\t3. N'%' descuento")
                 promo_opcion = int(input("\t\tOpción: "))
                 while promo_opcion < 1 or promo_opcion > 3:
                     promo_opcion = int(input("\t\tError. Ingrese una opción correcta: ")) 
                 
                 if promo_opcion == 1:
                     valor_1 = int(input("Ingrese el primer valor: "))
+                    while valor_1 < 1:
+                        valor_1 = int(input("Error. Ingrese el primer valor: "))
                     valor_2 = int(input("Ingrese el segundo valor: "))
+                    while valor_2 < 1:
+                        valor_2 = int(input("Error. Ingrese el segundo valor: "))
                     promocion = f"{valor_1}x{valor_2}"
                 elif promo_opcion == 2:
                     valor_1 = int(input("Ingrese el porcentaje: "))
+                    while valor_1 < 1 or valor_1 > 99:
+                        valor_1 = int(input("Error. Ingrese el porcentaje: "))
                     valor_2 = int(input("Ingrese la unidad: "))
-                    promocion = f"{valor_1}% en la {valor_2} unidad"
+                    while valor_2 < 1:
+                        valor_2 = int(input("Error. Ingrese el segundo valor: "))
+                    promocion = str(valor_1) + str(valor_2) # promocion = f"{valor_1}% en la {valor_2} unidad"
                 elif promo_opcion == 3:
                     valor_1 = int(input("Ingrese el porcentaje de descuento: "))
-                    promocion = f"{valor_1}% descuento"
+                    while valor_1 < 1 or valor_1 > 99:
+                        valor_1 = int(input("Error. Ingrese el porcentaje de descuento: "))
+                    promocion = str(valor_1) # promocion = f"{valor_1}% descuento"
             
             encontrado['promocion'] = promocion
 
@@ -401,9 +408,6 @@ def modificar_producto(productos):
 
         else:
             print("Opcion incorrecta, vuelva a ingresar una valida.")
-
-    
-     
 
 # La diferencia con la funcion mostrar menu productos es que esta solo muestra la tabla de manera informativa, 
 # no permite realizar acciones como filtrar
@@ -430,9 +434,9 @@ def mostrar_info_productos():
     for fila in productos:
         linea = " | ".join([str(fila[columna]).ljust(anchuras[columna]) for columna in columnas])
         print(linea)
-
-
-
+        
+def funciones_caja():
+    mostrar_info_productos()
 
 def menu_salir():
     banner = """
