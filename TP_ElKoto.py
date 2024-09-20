@@ -31,7 +31,7 @@ def menu_principal():
 
 def leer_archivo():
     try:
-        archivo = open("TP_ElKoto_Algoritmos_I/productos.json", "r")
+        archivo = open("productos.json", "r")
         lineas_productos = archivo.read()
         archivo.close()
     
@@ -149,8 +149,10 @@ def menu_abm_productos():
             alta_producto(productos)
         elif opcion == 2:
             print("baja prod")
+            baja_producto(productos)
         else:
             print("mod prod")
+            modificar_producto(productos)
             
         print("Menu ABM Productos: \n\t1. Alta Producto \n\t2. Baja Producto \n\t3. Modificacion Producto \n\t4. Volver")
         print()
@@ -217,7 +219,7 @@ def alta_producto(productos):
             valor_2 = int(input("Ingrese el segundo valor: "))
             while valor_2 < 1:
                 valor_2 = int(input("Error. Ingrese el segundo valor: "))
-            promocion = valor_1 + "x" + valor_2
+            promocion = str(valor_1) + "x" + str(valor_2) #agregue parse a str pq sino rompia
         elif promo_opcion == 2:
             valor_1 = int(input("Ingrese el primer valor: "))
             while valor_1 < 1 or valor_1 > 99:
@@ -230,22 +232,190 @@ def alta_producto(productos):
             valor_1 = int(input("Ingrese el valor: "))
             while valor_1 < 1 or valor_1 > 99:
                 valor_1 = int(input("Error. Ingrese el valor: "))
+            promocion = str(valor_1)   #agrego, faltaba asignar a variable promocion    
     else:
         promocion = "0"
     
     productos.append({"id": id, "nombre": nombre, "marca": marca, "precio": precio, "ubicacion": ubicacion, "stock": stock, "promocion": promocion})
     productosJSON = json.dumps(productos, indent=4)
     try:
-        archivo = open("TP_ElKoto_Algoritmos_I/productos.json", "w")
+        archivo = open("productos.json", "w") #open("TP_ElKoto_Algoritmos_I/productos.json", "w")
         archivo.write(productosJSON)
         archivo.close()
         print("Producto agregado!")
     except:
         print("No se puede grabar el archivo productos")
-        
+
+
 # Función para obtener el valor del campo "id"
 def obtener_id(elemento):
     return elemento['id']
+
+
+# Funcion de baja de articulos
+def baja_producto(productos):
+    mostrar_info_productos()
+    
+    print()
+    idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
+    encontrado = False
+
+    # Recorrer la lista y verificar si algún diccionario tiene el id del producto que se requiere eliminar
+    for diccionario in productos:
+        if diccionario['id'] == idProducto :
+            encontrado = True
+            #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
+            # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
+            # practica o solo fue el profe anterior
+            
+        
+    while not encontrado:
+        print(f"El producto con id {idProducto} no existe, ingrese otro por favor: ")
+        idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
+        encontrado = False
+        for diccionario in productos:
+            if diccionario['id'] == idProducto :
+                encontrado = True
+                #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
+                # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
+                # practica o solo fue el profe anterior
+        
+    if encontrado :
+         productos_actualizados = [producto for producto in productos if producto['id'] != idProducto]
+    
+    productosJSON = json.dumps(productos_actualizados, indent=4)
+    try:
+        archivo = open("productos.json", "w") #open("TP_ElKoto_Algoritmos_I/productos.json", "w") NO ME LEIA EL ARCHIVO SI PONIA LA RUTA CON LA CARPETA INCLUIDA
+        archivo.write(productosJSON)
+        archivo.close()
+        print("Producto eliminado con exito")
+    except:
+        print("No se pudo eliminar el producto en el archivo productos") 
+
+
+# Funcion de baja de articulos
+def modificar_producto(productos):
+    mostrar_info_productos()
+
+    print()
+    idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
+    #en este caso encontrado no va a ser bool porque quiero que guarde los datos del json que se quiere modificar
+    encontrado = None
+
+    # Recorrer la lista y verificar si algún diccionario tiene el id del producto que se requiere eliminar
+    for diccionario in productos:
+        if diccionario['id'] == idProducto :
+            encontrado = diccionario
+            #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
+            # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
+            # practica o solo fue el profe anterior
+            
+        
+    while encontrado is None:
+        print(f"El producto con id {idProducto} no existe, ingrese otro por favor: ")
+        idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
+        encontrado = None
+        for diccionario in productos:
+            if diccionario['id'] == idProducto :
+                encontrado = diccionario
+                #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
+                # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
+                # practica o solo fue el profe anterior
+        
+    #pido todos los datos del producto que se quiere modificar nuevamente, con las mismas validaciones que en el alta
+    nombre = input("\tIngrese el nombre: ")
+    marca = input("\tIngrese la marca: ")
+    precio = float(input("\tIngrese el precio (sin signos): "))
+    while precio <= 0:
+        precio = float(input("\tError. Ingrese el precio (sin signos): "))
+        
+    ubicacion = input("\tIngrese la ubicacion: ")
+    
+    stock = int(input("\tIngrese el stock: "))
+    while stock < 1:
+        stock = int(input("\tError. Ingrese el stock: "))
+    
+    print("\t¿Desea agregar una promocion? \n\t\t1.Si \n\t\t2.No")
+    print()
+    promo = int(input("\t\tOpcion: "))
+
+    while promo < 1 or promo > 2:
+        promo = int(input("\t\tError. Ingrese una opcion correcta: ")) 
+    promocion = "0"    
+    if promo == 1:
+        print("\tQue promocion desea agregar (ejemplos): \n\t\t1.NxM \n\t\t2.N'%' en la M unidad \n\t\t3.N'%'")
+        print()
+        promo_opcion = int(input("\t\tOpcion: "))
+        while promo_opcion < 1 or promo_opcion > 3:
+            promo_opcion = int(input("\t\tError. Ingrese una opcion correcta: ")) 
+        if promo_opcion == 1:
+            valor_1 = int(input("Ingrese el primer valor: "))
+            while valor_1 < 1:
+                valor_1 = int(input("Error. Ingrese el primer valor: "))
+            valor_2 = int(input("Ingrese el segundo valor: "))
+            while valor_2 < 1:
+                valor_2 = int(input("Error. Ingrese el segundo valor: "))
+            promocion = str(valor_1) + "x" + str(valor_2) #agregue parse a str pq sino rompia
+        elif promo_opcion == 2:
+            valor_1 = int(input("Ingrese el primer valor: "))
+            while valor_1 < 1 or valor_1 > 99:
+                valor_1 = int(input("Error. Ingrese el primer valor: "))
+            valor_2 = int(input("Ingrese el segundo valor: "))
+            while valor_2 < 1:
+                valor_2 = int(input("Error. Ingrese el segundo valor: "))
+            promocion = str(valor_1) + str(valor_2)
+        else:
+            valor_1 = int(input("Ingrese el valor: "))
+            while valor_1 < 1 or valor_1 > 99:
+                valor_1 = int(input("Error. Ingrese el valor: "))
+            promocion = str(valor_1)    
+    else:
+        promocion = "0"
+
+    encontrado['nombre'] = nombre
+    encontrado['marca'] = marca
+    encontrado['precio'] = precio
+    encontrado['ubicacion'] = ubicacion
+    encontrado['stock'] = stock
+    encontrado['promocion'] = promocion  
+    
+    productosJSON = json.dumps(productos, indent=4)
+    try:
+        archivo = open("productos.json", "w") #open("TP_ElKoto_Algoritmos_I/productos.json", "w")
+        archivo.write(productosJSON)
+        archivo.close()
+        print("Producto modificado con exito")
+    except:
+        print("No se pudo modificar el producto en el archivo productos") 
+
+# La diferencia con la funcion mostrar menu productos es que esta solo muestra la tabla de manera informativa, 
+# no permite realizar acciones como filtrar
+def mostrar_info_productos():
+    print()
+    productos = leer_archivo()
+    
+    # Obtener las claves (nombres de las columnas) desde el primer elemento del JSON
+    columnas = list(productos[0].keys())
+    
+    # Calcular el ancho de cada columna (máximo entre el largo del nombre de la clave y los valores)
+    anchuras = {columna: len(columna) for columna in columnas}
+    for fila in productos:
+        for columna in columnas:
+            anchuras[columna] = max(anchuras[columna], len(str(fila[columna])))
+    
+    # Imprimir la cabecera
+    cabecera = " | ".join([columna.ljust(anchuras[columna]) for columna in columnas])
+    separador = "-+-".join(['-' * anchuras[columna] for columna in columnas])
+    print(cabecera)
+    print(separador)
+    
+    # Imprimir las filas de datos
+    for fila in productos:
+        linea = " | ".join([str(fila[columna]).ljust(anchuras[columna]) for columna in columnas])
+        print(linea)
+
+
+
 
 def menu_salir():
     banner = """
