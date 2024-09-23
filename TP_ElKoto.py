@@ -9,7 +9,8 @@ Ademas las promociones son unicamente enteros. En caso de no tener promocion se 
 JSON: Todo lo que se ingrese al JSON debe ingresarse sin tildes.
 '''
 
-#Funcion Menu Inicial
+#Funcion Menu Inicial, muestra un banner de bienvenida mediante un print, luego le da la opcion al usuario 
+# de seleccionar entre las opciones que cuenta el menu, valida que la opcion elegida este entre las opciones dadas
 def menu_principal():
     banner = """
          _ ____  _                           _     _                 _____ _ _  __     _        _ 
@@ -29,6 +30,10 @@ def menu_principal():
     
     return opcion
 
+# Esta función abre el archivo 'productos.json' y carga su contenido.
+# Si el archivo está vacío, muestra un mensaje indicando que no hay datos.
+# Si todo sale bien, devuelve la información de los productos como un diccionario.
+# En caso de que algo falle, muestra un mensaje de error.
 def leer_archivo():
     try:
         archivo = open("productos.json", "r")
@@ -45,6 +50,10 @@ def leer_archivo():
     except:
         print("No se puede abrir el archivo productos")
 
+
+# Esta funcion uestra toda la información de los productos en formato de tabla.
+# Además, permite buscar productos por nombre, marca o promoción.
+# Luego de cada búsqueda, vuelve a mostrar el menú para hacer más consultas.
 def menu_info_productos():
     print()
     productos = leer_archivo()
@@ -103,6 +112,10 @@ def menu_info_productos():
     else:
         return
         
+
+
+# Estan funcion filtra los productos según la columna y el valor que elijas (nombre, marca o promoción).
+# Si no encuentra nada, te avisa. Si encuentra, te muestra los resultados en una tabla.       
 def busqueda_filtrada(productos, columna_busqueda, valor_busqueda):
 
     # Obtener las claves (nombres de las columnas) desde el primer elemento del JSON
@@ -133,6 +146,9 @@ def busqueda_filtrada(productos, columna_busqueda, valor_busqueda):
         linea = " | ".join([str(fila[columna]).ljust(anchuras[columna]) for columna in columnas])
         print(linea)
 
+
+ # Esta funcion muestra un menú donde puedes agregar, eliminar o modificar productos.
+ # Te pide elegir una opción y ejecuta la función correspondiente (alta, baja o modificación).
 def menu_abm_productos():
     print()
     print("Menu ABM Productos: \n\t1. Alta Producto \n\t2. Baja Producto \n\t3. Modificacion Producto \n\t4. Volver")
@@ -161,7 +177,11 @@ def menu_abm_productos():
             opcion = int(input("Error. Ingrese una opcion correcta: "))     
     else:
         return
-    
+
+
+# Esta funcion agrega un nuevo producto pidiendo los datos como nombre, marca, precio, ubicación y stock.
+# Además, te da la opción de agregar una promoción al producto.
+# Guarda el producto nuevo en el archivo JSON.
 def alta_producto(productos):
     print("Datos del Producto: ")
     # Obtener el diccionario con el valor máximo de "id"
@@ -236,9 +256,17 @@ def alta_producto(productos):
     else:
         promocion = "0"
     
+    #uso .append para añadir el nuevo producto 
     productos.append({"id": id, "nombre": nombre, "marca": marca, "precio": precio, "ubicacion": ubicacion, "stock": stock, "promocion": promocion})
+    
+    #json.dumps(): Toma la lista de productos y lo convierte a una cadena en formato JSON.
+    #indent=4: Le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer.
     productosJSON = json.dumps(productos, indent=4)
     try:
+        #Abro el archivo a editar con open(), 
+        #luego con archivo.write(productosJSON) guardo el contenido de la variable productosJSON 
+        # (que tiene los productos en formato JSON) dentro del archivo. 
+        # Por ultimo cierro el archivo con archivo.close()
         archivo = open("productos.json", "w") #open("TP_ElKoto_Algoritmos_I/productos.json", "w")
         archivo.write(productosJSON)
         archivo.close()
@@ -248,11 +276,14 @@ def alta_producto(productos):
 
 
 # Función para obtener el valor del campo "id"
+# Es una función de apoyo para encontrar el ID más alto cuando agregamos un nuevo producto.
 def obtener_id(elemento):
     return elemento['id']
 
 
-# Funcion de baja de articulos
+# Esta funcion elimina un producto de la lista según su ID.
+# Si el ID no existe, te pide otro.
+# Una vez eliminado, guarda los cambios en el archivo JSON.
 def baja_producto(productos):
     mostrar_info_productos()
     
@@ -279,12 +310,20 @@ def baja_producto(productos):
                 #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
                 # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
                 # practica o solo fue el profe anterior
-        
+
+    #si el producto existe en el listado, se guarda en una variable todos los items del listado donde el ID 
+    #sea distinto al ID que deseamos eliminar, para luego reescribir el json sin este producto    
     if encontrado :
          productos_actualizados = [producto for producto in productos if producto['id'] != idProducto]
     
+    #json.dumps(): Toma la lista de productos y lo convierte a una cadena en formato JSON.
+    #indent=4: Le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer.
     productosJSON = json.dumps(productos_actualizados, indent=4)
     try:
+        #Abro el archivo a editar con open(), 
+        #luego con archivo.write(productosJSON) guardo el contenido de la variable productosJSON 
+        # (que tiene los productos en formato JSON) dentro del archivo. 
+        # Por ultimo cierro el archivo con archivo.close()
         archivo = open("productos.json", "w") #open("TP_ElKoto_Algoritmos_I/productos.json", "w") NO ME LEIA EL ARCHIVO SI PONIA LA RUTA CON LA CARPETA INCLUIDA
         archivo.write(productosJSON)
         archivo.close()
@@ -306,9 +345,6 @@ def modificar_producto(productos):
     for diccionario in productos:
         if diccionario['id'] == idProducto :
             encontrado = diccionario
-            #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
-            # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
-            # practica o solo fue el profe anterior
             
         
     while encontrado is None:
@@ -318,9 +354,6 @@ def modificar_producto(productos):
         for diccionario in productos:
             if diccionario['id'] == idProducto :
                 encontrado = diccionario
-                #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
-                # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
-                # practica o solo fue el profe anterior
         
     
     #Inicializo en 0 porque la peticion y validacion la manejo dentro del while
@@ -390,10 +423,17 @@ def modificar_producto(productos):
             encontrado['promocion'] = promocion
 
         elif opcion == 7:
+            #json.dumps(): Toma la lista de productos y lo convierte a una cadena en formato JSON.
+            #indent=4: Le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer.
             productosJSON = json.dumps(productos, indent=4)
             try:
-                with open("productos.json", "w") as archivo:
-                    archivo.write(productosJSON)
+                #Abro el archivo a editar con open(), 
+                #luego con archivo.write(productosJSON) guardo el contenido de la variable productosJSON 
+                # (que tiene los productos en formato JSON) dentro del archivo. 
+                # Por ultimo cierro el archivo con archivo.close()
+                archivo = open("productos.json", "w") #open("TP_ElKoto_Algoritmos_I/productos.json", "w") NO ME LEIA EL ARCHIVO SI PONIA LA RUTA CON LA CARPETA INCLUIDA
+                archivo.write(productosJSON)
+                archivo.close()
                 print("Producto modificado con éxito y archivo actualizado.")
             except:
                 print("No se pudo modificar el producto en el archivo productos.")
@@ -433,7 +473,7 @@ def mostrar_info_productos():
 
 
 
-
+#Esta funcion solo muestra un banner con un mensaje de despedida al usuario mediante un print
 def menu_salir():
     banner = """
          _ _   _           _          _                           _ 
