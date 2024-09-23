@@ -22,6 +22,9 @@ print("El año actual es {}".format(now.year))
 
 new_date = datetime(2019, 2, 28, 10, 15, 00, 00000)
 
+fecha = date.today()
+print(fecha)
+
 #Sumar dos días a la fecha actual
 now = datetime.now()
 new_date = now + timedelta(days=2)

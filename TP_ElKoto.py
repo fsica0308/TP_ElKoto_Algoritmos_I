@@ -1,4 +1,5 @@
 import json
+from datetime import date, timedelta, datetime
 
 '''
 Anotaciones:
@@ -178,6 +179,95 @@ def menu_abm_productos():
     else:
         return
 
+def busqueda_producto(productos, modo):
+    if modo == "alta":
+        encontrado = False
+        
+        nombre = input("\tIngrese el nombre: ")
+        marca = input("\tIngrese la marca: ")
+        
+        # Recorrer la lista y verificar si algún producto tiene el nombre y marca buscado
+        for producto in productos:
+            if producto['nombre'].lower() == nombre.lower() and producto['marca'].lower() == marca.lower():
+                encontrado = True
+                break
+        
+        while encontrado:
+            print("El producto ya existe, ingrese otro por favor: ")
+            nombre = input("\tIngrese el nombre: ")
+            marca = input("\tIngrese la marca: ")
+            encontrado = False
+            for producto in productos:
+                if producto['nombre'].lower() == nombre.lower() and producto['marca'].lower() == marca.lower():
+                    encontrado = True
+                    break
+                
+        return nombre, marca
+                
+    elif modo == "modificacion":
+        idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
+        #en este caso encontrado no va a ser bool porque quiero que guarde los datos del json que se quiere modificar
+        encontrado = None
+
+        # Recorrer la lista y verificar si algún producto tiene el id del producto que se requiere modificar
+        for producto in productos:
+            if producto['id'] == idProducto :
+                encontrado = producto
+                break
+        
+        while encontrado is None:
+            print(f"El producto con id {idProducto} no existe")
+            idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
+            encontrado = None
+            for producto in productos:
+                if producto['id'] == idProducto :
+                    encontrado = producto
+                    break
+                    
+        return idProducto, encontrado
+        
+    elif modo == "baja":
+        idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
+        encontrado = False
+
+        # Recorrer la lista y verificar si algún producto tiene el id del producto que se requiere eliminar
+        for producto in productos:
+            if producto['id'] == idProducto :
+                encontrado = True
+                break    
+            
+        while not encontrado:
+            print(f"El producto con id {idProducto} no existe")
+            idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
+            encontrado = False
+            for producto in productos:
+                if producto['id'] == idProducto :
+                    encontrado = True
+                    break
+                
+        return idProducto, encontrado
+    
+    else:   # Caja
+        idProducto = int(input("\tIngrese el id del producto: "))
+        #en este caso encontrado no va a ser bool porque quiero que guarde los datos del producto vendido
+        encontrado = None
+
+        # Recorrer la lista y verificar si algún producto tiene el id del producto que se requiere vender
+        for producto in productos:
+            if producto['id'] == idProducto :
+                encontrado = producto
+                break
+        
+        while encontrado is None:
+            print(f"El producto con id {idProducto} no existe")
+            idProducto = int(input("\tIngrese el id del producto a vender: "))
+            encontrado = None
+            for producto in productos:
+                if producto['id'] == idProducto :
+                    encontrado = producto
+                    break
+                    
+        return idProducto, encontrado
 
 # Esta funcion agrega un nuevo producto pidiendo los datos como nombre, marca, precio, ubicación y stock.
 # Además, te da la opción de agregar una promoción al producto.
@@ -189,26 +279,8 @@ def alta_producto(productos):
     id_aux = maximo_id["id"]
     id = id_aux + 1
     
-    nombre = input("\tIngrese el nombre: ")
-    marca = input("\tIngrese la marca: ")
-    # Variable para saber si encontramos el nombre
-    encontrado = False
-
-    # Recorrer la lista y verificar si algún diccionario tiene el nombre y marca buscado
-    for diccionario in productos:
-        if diccionario['nombre'].lower() == nombre.lower() and diccionario['marca'].lower() == marca.lower():
-            encontrado = True
-            break
-        
-    while encontrado:
-        print("El producto ya existe, ingrese otro por favor: ")
-        nombre = input("\tIngrese el nombre: ")
-        marca = input("\tIngrese la marca: ")
-        encontrado = False
-        for diccionario in productos:
-            if diccionario['nombre'].lower() == nombre.lower() and diccionario['marca'].lower() == marca.lower():
-                encontrado = True
-                break
+    modo = "alta"
+    nombre, marca = busqueda_producto(productos, modo)
         
     precio = float(input("\tIngrese el precio (sin signos): "))
     while precio <= 0:
@@ -287,27 +359,9 @@ def baja_producto(productos):
     mostrar_info_productos()
     
     print()
-    idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
-    encontrado = False
-
-    # Recorrer la lista y verificar si algún diccionario tiene el id del producto que se requiere eliminar
-    for diccionario in productos:
-        if diccionario['id'] == idProducto :
-            encontrado = True
-            #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
-            # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
-            # practica o solo fue el profe anterior     
-        
-    while not encontrado:
-        print(f"El producto con id {idProducto} no existe, ingrese otro por favor: ")
-        idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
-        encontrado = False
-        for diccionario in productos:
-            if diccionario['id'] == idProducto :
-                encontrado = True
-                #break   ->  es necesario ?? en este caso no vamos a tener tantos articulos como para que la 
-                # busequeda se relentice, no recuerdo si este profe comento algo sobre si el break es una mala 
-                # practica o solo fue el profe anterior
+    
+    modo = "baja"
+    idProducto, encontrado = busqueda_producto(productos, modo)
 
     #si el producto existe en el listado, se guarda en una variable todos los items del listado donde el ID 
     #sea distinto al ID que deseamos eliminar, para luego reescribir el json sin este producto    
@@ -334,24 +388,9 @@ def modificar_producto(productos):
     mostrar_info_productos()
 
     print()
-    idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
-    #en este caso encontrado no va a ser bool porque quiero que guarde los datos del json que se quiere modificar
-    encontrado = None
-
-    # Recorrer la lista y verificar si algún diccionario tiene el id del producto que se requiere eliminar
-    for diccionario in productos:
-        if diccionario['id'] == idProducto :
-            encontrado = diccionario
-            
-        
-    while encontrado is None:
-        print(f"El producto con id {idProducto} no existe, ingrese otro por favor: ")
-        idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
-        encontrado = None
-        for diccionario in productos:
-            if diccionario['id'] == idProducto :
-                encontrado = diccionario
-        
+    
+    modo = "modificacion"
+    idProducto, encontrado = busqueda_producto(productos, modo)
     
     #Inicializo en 0 porque la peticion y validacion la manejo dentro del while
     opcion = 0
@@ -475,9 +514,94 @@ def mostrar_info_productos():
         linea = " | ".join([str(fila[columna]).ljust(anchuras[columna]) for columna in columnas])
         print(linea)
 
-def funciones_caja():
-    mostrar_info_productos()
+def menu_caja():
     print()
+    
+    #Día actual
+    fecha = date.today()
+    #nueva_Fecha = fecha + timedelta(days=2) #Para agregar ventas con otras fechas
+    #print(fecha)
+    
+    print("Menu Caja: \n\t1. Ingresar Productos \n\t2. Volver")
+    print()
+    opcion = int(input("Opcion: "))
+    while opcion < 1 or opcion > 2:
+        opcion = int(input("Error. Ingrese una opcion correcta: "))
+        
+    while opcion == 1:
+        productos = leer_archivo()
+        mostrar_info_productos()
+        
+        importe_total = 0
+        
+        modo = "caja"
+        idProducto, encontrado = busqueda_producto(productos, modo)
+    
+        cantidad = int(input("\t\tIngrese la cantidad de unidades a comprar: "))
+        while cantidad > encontrado['stock']:
+            cantidad = int(input("\t\tError. Stock insuficiente, ingrese la cantidad de unidades a comprar: "))
+            
+        imp = obtener_importe(encontrado['precio'], encontrado['promocion'], cantidad)
+        importe_total += imp
+            
+        print()
+        print("\t\tSeleccione el metodo de pago: ")
+        print("\t\t1. Efectivo \n\t\t2. Tarjeta")
+        opcion = int(input("Opcion: "))
+        while opcion < 1 or opcion > 2:
+            opcion = int(input("Error. Ingrese una opcion correcta: "))
+        
+        if opcion == 1:
+            
+        else:
+            
+        print("Menu ABM Productos: \n\t1. Alta Producto \n\t2. Baja Producto \n\t3. Modificacion Producto \n\t4. Volver")
+        print()
+        opcion = int(input("Opcion: "))
+        while opcion < 1 or opcion > 4:
+            opcion = int(input("Error. Ingrese una opcion correcta: "))     
+    else:
+        return
+
+def obtener_importe(importe, promocion, cantidad):
+    # Caso 1: Promoción del tipo "MxN" (ejemplo: "2x3")
+    if 'x' in promocion:
+        m, n = map(int, promocion.split('x'))
+        grupos = cantidad // n
+        restantes = cantidad % n
+        total = grupos * m * importe + restantes * importe
+        return total
+    
+    # Caso 2: Promoción del tipo "325" (ejemplo: "32% de descuento en la 5ta unidad")
+    elif len(promocion) == 3 and promocion[-1].isdigit():
+        descuento = int(promocion[:2]) / 100  # 32% -> 0.32
+        unidad_descuento = int(promocion[-1])  # 5ta unidad
+        total = 0
+        for i in range(1, cantidad + 1):
+            if i == unidad_descuento:
+                total += importe * (1 - descuento)
+            else:
+                total += importe
+        return total
+    
+    # Caso 3: Promoción del tipo "35" (ejemplo: "35% de descuento en todas las unidades)
+    elif len(promocion) == 2 and promocion.isdigit():
+        descuento = int(promocion) / 100  # 35% -> 0.35
+        total = cantidad * importe * (1 - descuento)
+        return total
+    
+    # Sin promoción
+    else:
+        return cantidad * importe
+
+def formato_fecha(fecha):
+    meses = ("Enero", "Febrero", "Marzo", "Abri", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+    dia = fecha.day
+    mes = meses[fecha.month - 1]
+    año = fecha.year
+    messsage = "{} de {} del {}".format(dia, mes, año)
+
+    return messsage
 
 #Esta funcion solo muestra un banner con un mensaje de despedida al usuario mediante un print
 def menu_salir():
@@ -502,7 +626,8 @@ def main ():
         menu_abm_productos()
         main()
     elif opcion_menu_principal == 3:
-        print()
+        menu_caja()
+        main()
     elif opcion_menu_principal == 4:
         print()
     else:
