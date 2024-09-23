@@ -477,6 +477,7 @@ def mostrar_info_productos():
 
 def funciones_caja():
     mostrar_info_productos()
+    print()
 
 #Esta funcion solo muestra un banner con un mensaje de despedida al usuario mediante un print
 def menu_salir():
