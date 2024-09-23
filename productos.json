@@ -182,7 +182,7 @@
     {
         "id": 21,
         "nombre": "Test hecho a las 20/09  16:50hrs",
-        "marca": "TEST MODIFICACION",
+        "marca": "TEST MODIFICACION-PRUEBAMANUAL",
         "precio": 25.0,
         "ubicacion": "gondola de prueba",
         "stock": 22,
