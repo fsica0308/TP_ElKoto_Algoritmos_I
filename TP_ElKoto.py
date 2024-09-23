@@ -1,6 +1,8 @@
 import json
 
 '''
+Prueba maxi
+
 Anotaciones:
 
 Promociones: 2x1 se guarda como texto "2x1", descuentos se guarda el % ej: 45, descuentos en x unidad se guarda ej: 25% en 2 unidad -> 252
