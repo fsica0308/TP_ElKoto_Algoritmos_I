@@ -8,7 +8,7 @@
         "fecha": "2024-09-23"
     },
     {
-        "id": 22,
+        "id": 2,
         "nombre": "Pan blanco Bimbo 550 g.",
         "marca": "Bimbo",
         "importe": 17234.6,
@@ -16,7 +16,7 @@
         "fecha": "2024-09-23"
     },
     {
-        "id": 22,
+        "id": 3,
         "nombre": "Azucar Blanca 1kg",
         "marca": "Ledesma",
         "importe": 23760,
@@ -24,7 +24,7 @@
         "fecha": "2024-09-23"
     },
     {
-        "id": 22,
+        "id": 4,
         "nombre": "Mayonesa 500g",
         "marca": "Hellmann's",
         "importe": 14432.5,
@@ -32,7 +32,7 @@
         "fecha": "2024-09-23"
     },
     {
-        "id": 22,
+        "id": 5,
         "nombre": "Mayonesa 500g",
         "marca": "Hellmann's",
         "importe": 14432.5,
@@ -40,7 +40,7 @@
         "fecha": "2024-09-23"
     },
     {
-        "id": 22,
+        "id": 6,
         "nombre": "Shampoo 400ml",
         "marca": "Sedal",
         "importe": 29200.0,
@@ -48,7 +48,7 @@
         "fecha": "2024-09-23"
     },
     {
-        "id": 22,
+        "id": 7,
         "nombre": "Shampoo 400ml",
         "marca": "Sedal",
         "importe": 29200.0,
@@ -56,7 +56,7 @@
         "fecha": "2024-09-23"
     },
     {
-        "id": 22,
+        "id": 8,
         "nombre": "Papel Higienico 4 rollos",
         "marca": "Elite",
         "importe": 22900,
@@ -64,11 +64,19 @@
         "fecha": "2024-09-23"
     },
     {
-        "id": 22,
+        "id": 9,
         "nombre": "Gaseosa 2.25L",
         "marca": "Coca-Cola",
         "importe": 21680,
         "cantidad": 8,
+        "fecha": "2024-09-23"
+    },
+    {
+        "id": 10,
+        "nombre": "Gaseosa 2.25L",
+        "marca": "Coca-Cola",
+        "importe": 18970,
+        "cantidad": 7,
         "fecha": "2024-09-23"
     }
 ]
