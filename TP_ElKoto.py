@@ -52,7 +52,22 @@ def leer_archivo():
         
     except:
         print("No se puede abrir el archivo productos")
-
+        
+def leer_archivo_ventas():
+    try:
+        archivo = open("ventas.json", "r")
+        lineas_ventas = archivo.read()
+        archivo.close()
+    
+        if len(lineas_ventas) == 0:
+            print("El archivo JSON está vacío o no contiene datos.")
+            return
+    
+        ventas = json.loads(lineas_ventas)
+        return ventas
+        
+    except:
+        print("No se puede abrir el archivo ventas")
 
 # Esta funcion uestra toda la información de los productos en formato de tabla.
 # Además, permite buscar productos por nombre, marca o promoción.
@@ -517,8 +532,12 @@ def mostrar_info_productos():
 def menu_caja():
     print()
     
+    ventas = leer_archivo_ventas()
+    
     #Día actual
     fecha = date.today()
+    fecha = str(fecha)
+    fecha_aux = date.today()
     #nueva_Fecha = fecha + timedelta(days=2) #Para agregar ventas con otras fechas
     #print(fecha)
     
@@ -531,8 +550,16 @@ def menu_caja():
     while opcion == 1:
         productos = leer_archivo()
         mostrar_info_productos()
+        print()
+        
+        lista_productos_venta = []
         
         importe_total = 0
+        
+        # Obtener el diccionario con el valor máximo de "id"
+        maximo_id = max(productos, key=obtener_id)
+        id_aux = maximo_id["id"]
+        id = id_aux + 1
         
         modo = "caja"
         idProducto, encontrado = busqueda_producto(productos, modo)
@@ -543,23 +570,127 @@ def menu_caja():
             
         imp = obtener_importe(encontrado['precio'], encontrado['promocion'], cantidad)
         importe_total += imp
+        
+        producto_tupla = (id, encontrado['nombre'], encontrado['marca'], imp, cantidad, fecha)
+        lista_productos_venta.append(producto_tupla)
             
+        agregar_prod = True
+        while agregar_prod:
+            # Se añade la venta del producto al archivo ventas
+            #uso .append para añadir la nueva venta
+            ventas.append({"id": id, "nombre": encontrado['nombre'], "marca": encontrado['marca'], "importe": imp, "cantidad": cantidad, "fecha": fecha})
+            
+            #json.dumps(): Toma la lista de ventas y lo convierte a una cadena en formato JSON.
+            #indent=4: Le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer.
+            ventasJSON = json.dumps(ventas, indent=4)
+            try:
+                #Abro el archivo a editar con open(), 
+                #luego con archivo.write(ventasJSON) guardo el contenido de la variable ventasJSON 
+                # (que tiene las ventas en formato JSON) dentro del archivo. 
+                # Por ultimo cierro el archivo con archivo.close()
+                archivo = open("ventas.json", "w")
+                archivo.write(ventasJSON)
+                archivo.close()
+                print("Venta agregada!")
+            except:
+                print("No se puede grabar el archivo ventas")
+                
+            # Se modifica el stock del producto vendido
+            encontrado['stock'] = encontrado['stock'] - cantidad    # Se calcula el nuevo stock
+
+            #json.dumps(): Toma la lista de productos y lo convierte a una cadena en formato JSON.
+            #indent=4: Le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer.
+            productosJSON = json.dumps(productos, indent=4)
+            try:
+                #Abro el archivo a editar con open(), 
+                #luego con archivo.write(productosJSON) guardo el contenido de la variable productosJSON 
+                # (que tiene los productos en formato JSON) dentro del archivo. 
+                # Por ultimo cierro el archivo con archivo.close()
+                archivo = open("productos.json", "w")
+                archivo.write(productosJSON)
+                archivo.close()
+                print("Stock producto modificado con éxito y archivo actualizado.")
+            except:
+                print("No se pudo modificar el stock del producto en el archivo productos.")
+                
+            print()
+            print("\t\t¿Desea agregar otro producto?: \n\t\t1. Si \n\t\t2. No")
+            opcion = int(input("Opcion: "))
+            while opcion < 1 or opcion > 2:
+                opcion = int(input("Error. Ingrese una opcion correcta: "))
+            if opcion == 1:
+                idProducto, encontrado = busqueda_producto(productos, modo)
+    
+                cantidad = int(input("\t\tIngrese la cantidad de unidades a comprar: "))
+                while cantidad > encontrado['stock']:
+                    cantidad = int(input("\t\tError. Stock insuficiente, ingrese la cantidad de unidades a comprar: "))
+                    
+                imp = obtener_importe(encontrado['precio'], encontrado['promocion'], cantidad)
+                importe_total += imp
+                
+                producto_tupla = (id, encontrado['nombre'], encontrado['marca'], imp, cantidad, fecha)
+                lista_productos_venta.append(producto_tupla)
+            else:
+                print(f"Fecha: {formato_fecha(fecha_aux)}")
+                # Títulos de las columnas
+                columnas = ['Producto', 'Nombre', 'Marca', 'Importe', 'Cantidad']
+                
+                # Mapeo de índices de las columnas (para acceder correctamente a las tuplas)
+                indices = {
+                    'Producto': 0,
+                    'Nombre': 1,
+                    'Marca': 2,
+                    'Importe': 3,
+                    'Cantidad': 4
+                }
+                
+                # Calcular el ancho de cada columna (máximo entre el largo del nombre de la clave y los valores)
+                anchuras = {columna: len(columna) for columna in columnas}
+                for fila in lista_productos_venta:
+                    for columna in columnas:
+                        anchuras[columna] = max(anchuras[columna], len(str(fila[indices[columna]])))
+                        
+                # Imprimir la cabecera
+                cabecera = " | ".join([columna.ljust(anchuras[columna]) for columna in columnas])
+                separador = "-+-".join(['-' * anchuras[columna] for columna in columnas])
+                print(cabecera)
+                print(separador)
+                
+                # Imprimir las filas de datos
+                for fila in lista_productos_venta:
+                    linea = " | ".join([str(fila[indices[columna]]).ljust(anchuras[columna]) for columna in columnas])
+                    print(linea)
+                    
+                # Imprimir el total al final
+                print(f"\n{'':>60} Importe Total: {importe_total:,.2f}")
+                
+                print()
+                print("\tSeleccione el metodo de pago: ")
+                print("\t1. Efectivo \n\t2. Tarjeta")
+                opcion = int(input("Opcion: "))
+                while opcion < 1 or opcion > 2:
+                    opcion = int(input("Error. Ingrese una opcion correcta: "))
+                
+                if opcion == 1:
+                    pago = float(input("\tIngrese la cantidad con la que pagara el cliente: "))
+                    while pago < importe_total:
+                        pago = float(input("\tError. Pago insuficiente. Ingrese la cantidad con la que pagara el cliente: "))
+                    if pago > importe_total:
+                        print(f"El vuelto es: ${pago - importe_total}")
+                    else:
+                        print("No es necesario entregar vuelto.")
+                else:
+                    print("No es necesario entregar vuelto.")
+                agregar_prod = False
+                    
         print()
-        print("\t\tSeleccione el metodo de pago: ")
-        print("\t\t1. Efectivo \n\t\t2. Tarjeta")
+        print("Menu Caja: \n\t1. Ingresar Productos \n\t2. Volver")
+        print()
         opcion = int(input("Opcion: "))
         while opcion < 1 or opcion > 2:
-            opcion = int(input("Error. Ingrese una opcion correcta: "))
-        
-        if opcion == 1:
-            
-        else:
-            
-        print("Menu ABM Productos: \n\t1. Alta Producto \n\t2. Baja Producto \n\t3. Modificacion Producto \n\t4. Volver")
-        print()
-        opcion = int(input("Opcion: "))
-        while opcion < 1 or opcion > 4:
-            opcion = int(input("Error. Ingrese una opcion correcta: "))     
+            opcion = int(input("Error. Ingrese una opcion correcta: "))   
+        if opcion == 2:
+            return
     else:
         return
 
