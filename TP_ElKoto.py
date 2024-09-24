@@ -557,7 +557,7 @@ def menu_caja():
         importe_total = 0
         
         # Obtener el diccionario con el valor máximo de "id"
-        maximo_id = max(productos, key=obtener_id)
+        maximo_id = max(ventas, key=obtener_id)
         id_aux = maximo_id["id"]
         id = id_aux + 1
         
@@ -620,6 +620,10 @@ def menu_caja():
                 opcion = int(input("Error. Ingrese una opcion correcta: "))
             if opcion == 1:
                 idProducto, encontrado = busqueda_producto(productos, modo)
+                # Obtener el diccionario con el valor máximo de "id"
+                maximo_id = max(ventas, key=obtener_id)
+                id_aux = maximo_id["id"]
+                id = id_aux + 1
     
                 cantidad = int(input("\t\tIngrese la cantidad de unidades a comprar: "))
                 while cantidad > encontrado['stock']:
