@@ -5,7 +5,7 @@
         "marca": "Nesquik",
         "precio": 7919,
         "ubicacion": "Gondola 3",
-        "stock": 53,
+        "stock": 51,
         "promocion": "252"
     },
     {
@@ -14,7 +14,7 @@
         "marca": "Bimbo",
         "precio": 5069,
         "ubicacion": "Gondola 2",
-        "stock": 24,
+        "stock": 20,
         "promocion": "15"
     },
     {
@@ -50,7 +50,7 @@
         "marca": "Ledesma",
         "precio": 1320,
         "ubicacion": "Gondola 3",
-        "stock": 95,
+        "stock": 86,
         "promocion": "2x1"
     },
     {
@@ -131,7 +131,7 @@
         "marca": "Hellmann's",
         "precio": 2510,
         "ubicacion": "Gondola 4",
-        "stock": 90,
+        "stock": 78,
         "promocion": "252"
     },
     {
@@ -140,7 +140,7 @@
         "marca": "Coca-Cola",
         "precio": 2710,
         "ubicacion": "Gondola 5",
-        "stock": 160,
+        "stock": 152,
         "promocion": "0"
     },
     {
@@ -167,7 +167,7 @@
         "marca": "Sedal",
         "precio": 3650,
         "ubicacion": "Gondola 8",
-        "stock": 110,
+        "stock": 90,
         "promocion": "20"
     },
     {
@@ -176,7 +176,7 @@
         "marca": "Elite",
         "precio": 2290,
         "ubicacion": "Gondola 1",
-        "stock": 200,
+        "stock": 190,
         "promocion": "0"
     },
     {
