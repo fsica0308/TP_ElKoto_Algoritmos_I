@@ -11,7 +11,8 @@ JSON: Todo lo que se ingrese al JSON debe ingresarse sin tildes.
 '''
 
 def menu_principal():
-    """ Funcion Menu Inicial, muestra un banner de bienvenida mediante un print, luego le da la opcion al usuario de seleccionar entre las opciones que cuenta el menu, 
+    """ 
+        Funcion Menu Inicial, muestra un banner de bienvenida mediante un print, luego le da la opcion al usuario de seleccionar entre las opciones que cuenta el menu, 
         valida que la opcion elegida este entre las opciones dadas
     """
     
@@ -27,13 +28,19 @@ def menu_principal():
     print("Menu: \n\t1. Consultar informacion de productos \n\t2. ABM Productos \n\t3. Caja \n\t4. Estadisticas \n\t5. Salir")
     
     print()
-    opcion = int(input("Opcion: "))
-    while opcion < 1 or opcion > 5:
-        opcion = int(input("Error. Ingrese una opcion correcta: "))
     
-    return opcion
 
-def leer_archivo():
+    while True:
+        try:
+            opcion = int(input("Opcion: "))
+            if opcion >= 1 or opcion <= 5:
+                return opcion
+            else:
+                print("Error. Ingrese una opcion correcta.")
+        except ValueError:
+            print("Error. Debe ingresar un número entero.")
+
+def leer_archivo_productos():
     """
         Esta función abre el archivo 'productos.json' y carga su contenido.
         Si el archivo está vacío, muestra un mensaje indicando que no hay datos.
@@ -87,7 +94,7 @@ def menu_info_productos():
     """
     
     print()
-    productos = leer_archivo()  # Llamamos funcion leer_archivo() y almacenamos el resultado en productos
+    productos = leer_archivo_productos()  # Llamamos funcion leer_archivo() y almacenamos el resultado en productos
     
     # Obtener las claves (nombres de las columnas) desde el primer elemento del JSON, ya que es una lista de diccionarios
     columnas = list(productos[0].keys())    # Convertimos la claves en una lista mediante list() para poder usar los nombre como columnas
@@ -192,7 +199,7 @@ def menu_abm_productos():
     while opcion < 1 or opcion > 4:
         opcion = int(input("Error. Ingrese una opcion correcta: "))
         
-    productos = leer_archivo()
+    productos = leer_archivo_productos()
         
     while opcion >= 1 and opcion <= 3:  # Si la opcion ingresada es 1, 2 o 3 (ya que con 4 volves al anterior menu)
         if opcion == 1:
@@ -211,103 +218,6 @@ def menu_abm_productos():
     else:   # Selecciono volver
         return
 
-
-
-#DIVIDO ESTA FUNCION EN 4, BUSQUEDA ALTA, BAJA, MODIFICACION Y CAJA, POR LO QUE PIDIO LA PROFE EN EL PARCIAL
-#DESPUES BORRAR ESTA FUNCION O COMENTAR
-def busqueda_producto(productos, modo):
-    """
-        Esta funcion integra la busqueda de porductos de las funciones alta, baja, mod y caja. Segun las necesidades de cada una de ellas.
-    """
-    
-    if modo == "alta":  # Si el modo es alta, se realizara la busqueda del producto para corroborar que no exista antes de dar de alta
-        encontrado = False  # Variable booleana que comienza default en False hasta encontrar el producto
-        
-        nombre = input("\tIngrese el nombre: ")
-        marca = input("\tIngrese la marca: ")
-        
-        # Recorrer la lista y verificar si algún producto tiene el nombre y marca buscado
-        for producto in productos:  # Por cada producto
-            if producto['nombre'].lower() == nombre.lower() and producto['marca'].lower() == marca.lower(): # Si el valor de la clave nombre es igual al nombre ingresado por el usuario, y al mismo tiempo la marca es la misma que la ingresada, (todo en minusculas)
-                encontrado = True   # Se encontro el producto
-                break   # Se deja de buscar
-        
-        while encontrado:   # Mientras se haya encontrado el producto, se continuara buscando y pidiendo al usuario los datos, hasta que ya no se encuentre y poder dar el alta
-            print("El producto ya existe, ingrese otro por favor: ")
-            nombre = input("\tIngrese el nombre: ")
-            marca = input("\tIngrese la marca: ")
-            encontrado = False  # Se vuelve a poner en False para volver a buscar
-            for producto in productos:
-                if producto['nombre'].lower() == nombre.lower() and producto['marca'].lower() == marca.lower():
-                    encontrado = True
-                    break
-                
-        return nombre, marca    # Devolvemos el nombre y la marca
-                
-    elif modo == "modificacion":    # Si el modo es modificacion, se realizara la busqueda del producto para corroborar que exista y poder modificarlo
-        idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
-        encontrado = None   # Variable default en None ya que aca guardaremos el diccionario del producto una vez encontrado
-
-        # Recorrer la lista y verificar si algún producto tiene el id del producto que se requiere modificar
-        for producto in productos:  # Por cada producto
-            if producto['id'] == idProducto :   # Si el valor de la clave id es igual al id ingresado
-                encontrado = producto   # Se guarda el producto en encontrado
-                break   # Se deja de buscar
-        
-        while encontrado is None:   # Mientras no se haya encontrado el producto, se continuara buscando y pidiendo al usuario un id, hasta encontrar un producto y poder modificarlo
-            print(f"El producto con id {idProducto} no existe")
-            idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
-            encontrado = None   # Se vuelve a poner en None para volver a buscar
-            for producto in productos:
-                if producto['id'] == idProducto :
-                    encontrado = producto
-                    break
-                    
-        return idProducto, encontrado   # Devolvemos el id ingresado y el producto encontrado
-        
-    elif modo == "baja":    # Si el modo es baja, se realizara la busqueda del producto para corroborar que exista y poder eliminarlo
-        idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
-        encontrado = False  # Variable booleana que comienza default en False hasta encontrar el producto
-
-        # Recorrer la lista y verificar si algún producto tiene el id del producto que se requiere eliminar
-        for producto in productos:  # Por cada producto
-            if producto['id'] == idProducto :   # Si el valor de la clave id es igual al id ingresado
-                encontrado = True   # Se encontro el producto
-                break   # Se deja de buscar    
-            
-        while not encontrado:   # Mientras no se haya encontrado el producto, se continuara buscando y pidiendo al usuario el id, hasta que se encuentre y poder dar la baja
-            print(f"El producto con id {idProducto} no existe")
-            idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
-            encontrado = False  # Se vuelve a poner en False para volver a buscar
-            for producto in productos:
-                if producto['id'] == idProducto :
-                    encontrado = True
-                    break
-                
-        return idProducto, encontrado   # Devolvemos el id y el producto encontrado
-    
-    else:   # Si el modo es caja, se realizara la busqueda del producto para corroborar que exista y poder tomar y calcular sus datos
-        idProducto = int(input("\tIngrese el id del producto: "))
-        encontrado = None   # Variable default en None ya que aca guardaremos el diccionario del producto una vez encontrado
-
-        # Recorrer la lista y verificar si algún producto tiene el id del producto que se requiere vender
-        for producto in productos:  # Por cada producto  
-            if producto['id'] == idProducto :   # Si el valor de la clave id es igual al id ingresado
-                encontrado = producto   # Guardamos el producto encontrado
-                break   # Se deja de buscar 
-        
-        while encontrado is None:   # Mientras no se haya encontrado el producto, se continuara buscando y pidiendo al usuario un id, hasta encontrar un producto y poder continuar la venta
-            print(f"El producto con id {idProducto} no existe")
-            idProducto = int(input("\tIngrese el id del producto a vender: "))
-            encontrado = None   # Se vuelve a poner en None para volver a buscar
-            for producto in productos:
-                if producto['id'] == idProducto :
-                    encontrado = producto
-                    break
-                    
-        return idProducto, encontrado   # Devolvemos el id y el producto encontrado
-
-#Declaro las 4 funciones por separado
 def busqueda_producto_alta(productos):
     encontrado = False  # Variable booleana que comienza default en False hasta encontrar el producto
         
@@ -373,7 +283,7 @@ def busqueda_producto_modificacion(productos):
                 encontrado = producto
                 break
                     
-    return idProducto, encontrado   # Devolvemos el id ingresado y el producto encontrado
+    return encontrado   # Devolvemos el producto encontrado
 
 def busqueda_producto_caja(productos):
     idProducto = int(input("\tIngrese el id del producto: "))
@@ -394,7 +304,7 @@ def busqueda_producto_caja(productos):
                 encontrado = producto
                 break
                     
-    return idProducto, encontrado   # Devolvemos el id y el producto encontrado  
+    return encontrado   # Devolvemos el producto encontrado  
 
 
 def alta_producto(productos):
@@ -410,9 +320,7 @@ def alta_producto(productos):
     id_aux = maximo_id["id"]    # Guardamos el valor de id del diccionario del producto obtenido
     id = id_aux + 1 # Sumamos 1 al id maximo para que no hayan ids repetidos
     
-    #DESPUES REVISAR Y BORRAR COMENTARIOS MUERTOS COMO EL MODO = 'ALTA'
-    #modo = "alta"   # Establecemos el modo de busqueda en alta
-    nombre, marca = busqueda_producto_alta(productos)  # Llamamos a la funcion busqueda_producto() en modo alta, y guardamos el nombre y marca obtenidos
+    nombre, marca = busqueda_producto_alta(productos)  # Llamamos a la funcion busqueda_producto_alta() y guardamos el nombre y marca obtenidos
         
     precio = float(input("\tIngrese el precio (sin signos): "))
     while precio <= 0:
@@ -492,8 +400,7 @@ def baja_producto(productos):
     
     print()
     
-    #modo = "baja"   # Establecemos el modo de busqueda en baja
-    idProducto, encontrado = busqueda_producto_baja(productos) # Llamamos a la funcion busqueda_producto() en modo baja, y guardamos el id y el diccionario del producto encontrado
+    idProducto, encontrado = busqueda_producto_baja(productos) # Llamamos a la funcion busqueda_producto_baja() y guardamos el id y el diccionario del producto encontrado
 
     if encontrado : # Si se encontro el producto
          productos_actualizados = [producto for producto in productos if producto['id'] != idProducto]  # Creamos una lista de diccionarios de productos por comprension, en donde todos los productos tengan id distinto al producto a eliminar
@@ -518,8 +425,7 @@ def modificar_producto(productos):
 
     print()
     
-    #modo = "modificacion"   # Establecemos el modo de busqueda en modificacion
-    idProducto, encontrado = busqueda_producto_modificacion(productos) # Llamamos a la funcion busqueda_producto() en modo modificacion, y guardamos el id y el diccionario del producto encontrado
+    encontrado = busqueda_producto_modificacion(productos) # Llamamos a la funcion busqueda_producto_modificacion() y guardamos el diccionario del producto encontrado
     
     opcion = 0  # Se inicializa en 0 ya que la peticion y validacion se manejara dentro del while
     while opcion != 7 and (opcion >= 1 or opcion <= 7): # Validamos que la opcion este dentro del rango, el sistema se detiene cuando se ingresa la opcion 7 de finalizar
@@ -613,7 +519,7 @@ def mostrar_info_productos():
     """
     
     print()
-    productos = leer_archivo()  # Leemos y guardamos los productos
+    productos = leer_archivo_productos()  # Leemos y guardamos los productos
     
     # Obtener las claves (nombres de las columnas) desde el primer elemento del JSON, ya que es una lista de diccionarios
     columnas = list(productos[0].keys())    # Convertimos la claves en una lista mediante list() para poder usar los nombre como columnas
@@ -659,7 +565,7 @@ def menu_caja():
         opcion = int(input("Error. Ingrese una opcion correcta: "))
         
     while opcion == 1:  # Mientras se quiera agregar productos
-        productos = leer_archivo()  # Leemos el archivo de productos y almacenamos la lista de diccionarios de productos obtenida
+        productos = leer_archivo_productos()  # Leemos el archivo de productos y almacenamos la lista de diccionarios de productos obtenida
         mostrar_info_productos()    # Mostramos la tabla informativa de los productos para poder visualizar y seleccionar los productos
         print()
         
@@ -672,8 +578,7 @@ def menu_caja():
         id_aux = maximo_id["id"]    # Guardamos el valor de id del diccionario de la venta obtenida
         id = id_aux + 1 # Sumamos 1 al id maximo para que no hayan ids repetidos
         
-        #modo = "caja"   # Establecemos el modo de busqueda en caja
-        idProducto, encontrado = busqueda_producto_caja(productos) # Llamamos a la funcion busqueda_producto() en modo caja, y guardamos el id y el diccionario del producto encontrado
+        encontrado = busqueda_producto_caja(productos) # Llamamos a la funcion busqueda_producto() y guardamos el diccionario del producto encontrado
     
         cantidad = int(input("\t\tIngrese la cantidad de unidades a comprar: "))
         while cantidad > encontrado['stock']:   # Corroboramos que la cantidad de unidades compradas del producto no supere a las de stock disponible
@@ -718,7 +623,7 @@ def menu_caja():
             while opcion < 1 or opcion > 2:
                 opcion = int(input("Error. Ingrese una opcion correcta: "))
             if opcion == 1: # Si se desea agregar otro, volvemos a realizar el procedimiento de busqueda y creacion de venta
-                idProducto, encontrado = busqueda_producto_caja(productos) 
+                encontrado = busqueda_producto_caja(productos) 
                 # Obtener el diccionario con el valor máximo de "id"
                 maximo_id = max(ventas, key=obtener_id) 
                 id_aux = maximo_id["id"]    

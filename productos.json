@@ -5,7 +5,7 @@
         "marca": "Nesquik",
         "precio": 7919,
         "ubicacion": "Gondola 3",
-        "stock": 51,
+        "stock": 41,
         "promocion": "252"
     },
     {
@@ -50,7 +50,7 @@
         "marca": "Ledesma",
         "precio": 1320,
         "ubicacion": "Gondola 3",
-        "stock": 86,
+        "stock": 81,
         "promocion": "2x1"
     },
     {
@@ -78,15 +78,6 @@
         "precio": 1260,
         "ubicacion": "Gondola 6",
         "stock": 180,
-        "promocion": "0"
-    },
-    {
-        "id": 10,
-        "nombre": "Huevos 12 unidades",
-        "marca": "Granja Tres Arroyos",
-        "precio": 1780,
-        "ubicacion": "Gondola 7",
-        "stock": 300,
         "promocion": "0"
     },
     {
@@ -140,7 +131,7 @@
         "marca": "Coca-Cola",
         "precio": 2710,
         "ubicacion": "Gondola 5",
-        "stock": 145,
+        "stock": 143,
         "promocion": "0"
     },
     {
@@ -178,14 +169,5 @@
         "ubicacion": "Gondola 1",
         "stock": 190,
         "promocion": "0"
-    },
-    {
-        "id": 21,
-        "nombre": "Test hecho a las 20/09  16:50hrs",
-        "marca": "TEST MODIFICACION-PRUEBAMANUAL",
-        "precio": 25.0,
-        "ubicacion": "gondola de prueba",
-        "stock": 22,
-        "promocion": "15% descuento"
     }
 ]
