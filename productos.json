@@ -169,5 +169,14 @@
         "ubicacion": "Gondola 1",
         "stock": 190,
         "promocion": "0"
+    },
+    {
+        "id": 21,
+        "nombre": "producto de prueba",
+        "marca": "prueba",
+        "precio": 456756.0,
+        "ubicacion": "ubi de prueba",
+        "stock": 456,
+        "promocion": "4x6"
     }
 ]

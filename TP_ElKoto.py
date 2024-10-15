@@ -115,41 +115,37 @@ def menu_info_productos():
     for fila in productos:  # Por cada producto (fila) en la lista de productos
         linea = " | ".join([str(fila[columna]).ljust(anchuras[columna]) for columna in columnas])   # Mediante (" | ".join([...])) se crea una cadena de texto donde los valores de las columnas están separados por " | ". Luego (str(fila[columna]).ljust(anchuras[columna])) convierte cada valor de la columna en una cadena de texto y lo alinea a la izquierda, utilizando el ancho calculado para la columna
         print(linea)    # Se imprime cada fila de productos, alineando los valores de cada columna
-      
-    print()  
-    print("Menu Consulta Producto: \n\t1. Busqueda por Nombre \n\t2. Busqueda por Marca \n\t3. Busqueda por Promocion \n\t4. Volver")   # Mostramos menu de consulta de productos
     
-    print()
-    opcion = int(input("Opcion: ")) 
-    while opcion < 1 or opcion > 4:
-        opcion = int(input("Error. Ingrese una opcion correcta: "))
-        
-    while opcion >= 1 and opcion <= 3:  # Si la opcion ingresada es 1, 2 o 3 (ya que con 4 volves al anterior menu)
-        if opcion == 1:
-            columna_busqueda = "nombre" # El campo del diccionario a filtrar es nombre
-            valor_busqueda = input("Ingrese el Nombre del Producto: ")
+    while True:
+        try:
+            print()  
+            print("Menu Consulta Producto: \n\t1. Busqueda por Nombre \n\t2. Busqueda por Marca \n\t3. Busqueda por Promocion \n\t4. Volver")   # Mostramos menu de consulta de productos
             print()
-            busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y nombre ingresado
-        elif opcion == 2:
-            columna_busqueda = "marca"  # El campo del diccionario a filtrar es marca
-            valor_busqueda = input("Ingrese la Marca del Producto: ")
-            print()
-            busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y marca ingresada
-        else:
-            columna_busqueda = "promocion"  # El campo del diccionario a filtrar es promocion
-            valor_busqueda = input("Ingrese la Promocion del Producto: ")
-            print()
-            busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y promocion ingresada
-        
-        # Volvemos a mostrar el menu las veces necesarias por si se requieren mas busquedas
-        print()    
-        print("Menu Consulta Producto: \n\t1. Busqueda por Nombre \n\t2. Busqueda por Marca \n\t3. Busqueda por Promocion \n\t4. Volver")   # Mostramos menu de consulta de productos
-        print()
-        opcion = int(input("Opcion: "))
-        while opcion < 1 or opcion > 4:
-            opcion = int(input("Error. Ingrese una opcion correcta: "))     
-    else:   # Selecciono volver
-        return
+            
+            opcion = int(input("Opcion: "))
+            
+            while opcion < 1 or opcion > 4:
+                opcion = int(input("Error. Ingrese una opcion correcta: "))
+                
+            if opcion == 1: # Busqueda por nombre
+                columna_busqueda = "nombre" # El campo del diccionario a filtrar es nombre
+                valor_busqueda = input("Ingrese el Nombre del Producto: ")
+                print()
+                busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y nombre ingresado
+            elif opcion == 2:   # Busqueda por Marca
+                columna_busqueda = "marca"  # El campo del diccionario a filtrar es marca
+                valor_busqueda = input("Ingrese la Marca del Producto: ")
+                print()
+                busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y marca ingresada
+            elif opcion == 3:   # Busqueda por promocion
+                columna_busqueda = "promocion"  # El campo del diccionario a filtrar es promocion
+                valor_busqueda = input("Ingrese la Promocion del Producto: ")
+                print()
+                busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y promocion ingresada
+            else:   # Volver
+                return
+        except ValueError:  # Ingreso incorrecto de opcion
+            print("Error. Debe ingresar un número entero.")
              
 def busqueda_filtrada(productos, columna_busqueda, valor_busqueda):
     """
@@ -191,38 +187,48 @@ def menu_abm_productos():
         Te pide elegir una opción y ejecuta la función correspondiente (alta, baja o modificación).
     """
     
-    print()
-    print("Menu ABM Productos: \n\t1. Alta Producto \n\t2. Baja Producto \n\t3. Modificacion Producto \n\t4. Volver")   # Mostramos menu abm productos
-    
-    print()
-    opcion = int(input("Opcion: "))
-    while opcion < 1 or opcion > 4:
-        opcion = int(input("Error. Ingrese una opcion correcta: "))
-        
     productos = leer_archivo_productos()
-        
-    while opcion >= 1 and opcion <= 3:  # Si la opcion ingresada es 1, 2 o 3 (ya que con 4 volves al anterior menu)
-        if opcion == 1:
-            alta_producto(productos)    # Llamamos y hacemos alta de producto
-        elif opcion == 2:
-            baja_producto(productos)    # Llamamos y hacemos baja de producto
-        else:
-            modificar_producto(productos)   # Llamamos y hacemos modificacion de producto
+    
+    while True:
+        try:
+            print()
+            print("Menu ABM Productos: \n\t1. Alta Producto \n\t2. Baja Producto \n\t3. Modificacion Producto \n\t4. Volver")   # Mostramos menu abm productos        
+            print()
             
-        # Volvemos a mostrar el menu las veces necesarias por si se requieren mas abm productos
-        print("Menu ABM Productos: \n\t1. Alta Producto \n\t2. Baja Producto \n\t3. Modificacion Producto \n\t4. Volver")   # Mostramos menu abm productos
-        print()
-        opcion = int(input("Opcion: "))
-        while opcion < 1 or opcion > 4:
-            opcion = int(input("Error. Ingrese una opcion correcta: "))     
-    else:   # Selecciono volver
-        return
+            opcion = int(input("Opcion: "))
+            
+            while opcion < 1 or opcion > 4:
+                opcion = int(input("Error. Ingrese una opcion correcta: "))
+                
+            if opcion == 1:
+                alta_producto(productos)    # Llamamos y hacemos alta de producto
+            elif opcion == 2:
+                baja_producto(productos)    # Llamamos y hacemos baja de producto
+            elif opcion == 3:
+                modificar_producto(productos)   # Llamamos y hacemos modificacion de producto
+            else:
+                return
+        except ValueError:
+            print("Error. Debe ingresar un número entero.")
 
 def busqueda_producto_alta(productos):
     encontrado = False  # Variable booleana que comienza default en False hasta encontrar el producto
-        
-    nombre = input("\tIngrese el nombre: ")
-    marca = input("\tIngrese la marca: ")
+    
+    while True:
+        try:
+            nombre = input("\tIngrese el nombre: ").strip()  # Elimina espacios antes y después
+            if nombre:
+                break
+        except:
+            print("\tError. El nombre no puede estar vacío o contener solo espacios.")
+            
+    while True:
+        try:
+            marca = input("\tIngrese la marca: ").strip()  # Elimina espacios antes y después
+            if marca:
+                break
+        except:
+            print("\tError. La marca no puede estar vacía o contener solo espacios.")
         
     # Recorrer la lista y verificar si algún producto tiene el nombre y marca buscado
     for producto in productos:  # Por cada producto
@@ -320,54 +326,110 @@ def alta_producto(productos):
     id_aux = maximo_id["id"]    # Guardamos el valor de id del diccionario del producto obtenido
     id = id_aux + 1 # Sumamos 1 al id maximo para que no hayan ids repetidos
     
-    nombre, marca = busqueda_producto_alta(productos)  # Llamamos a la funcion busqueda_producto_alta() y guardamos el nombre y marca obtenidos
+    nombre, marca = busqueda_producto_alta(productos)  # Llamamos a la funcion busqueda_producto_alta() y guardamos el nombre y marca obtenidos  
         
-    precio = float(input("\tIngrese el precio (sin signos): "))
-    while precio <= 0:
-        precio = float(input("\tError. Ingrese el precio (sin signos): "))
-        
-    ubicacion = input("\tIngrese la ubicacion: ")
+    while True:
+        try:
+            precio = float(input("\tIngrese el precio (sin signos): "))
+            if precio > 0:
+                break
+            else:
+                print("\tError. El precio debe ser mayor a 0.")
+        except ValueError:
+            print("\tError. Ingrese un valor numérico válido para el precio.")
     
-    stock = int(input("\tIngrese el stock: "))
-    while stock < 1:
-        stock = int(input("\tError. Ingrese el stock: "))
+    while True:
+        try:
+            ubicacion = input("\tIngrese la ubicacion: ").strip()  # Elimina espacios antes y después
+            if ubicacion:
+                break
+        except:
+            print("\tError. La ubicación no puede estar vacía o contener solo espacios.")
     
-    print("\t¿Desea agregar una promocion? \n\t\t1.Si \n\t\t2.No")  # Mostramos menu promocion
-    print()
-    promo = int(input("\t\tOpcion: "))
-    while promo < 1 or promo > 2:
-        promo = int(input("\t\tError. Ingrese una opcion correcta: ")) 
-        
-    if promo == 1:  # Si se agrega promocion
-        print("\tQue promocion desea agregar (ejemplos): \n\t\t1.NxM \n\t\t2.N'%' en la M unidad \n\t\t3.N'%' de descuento")    # Mostramos menu opciones de promocion
-        print()
-        promo_opcion = int(input("\t\tOpcion: "))
-        while promo_opcion < 1 or promo_opcion > 3:
-            promo_opcion = int(input("\t\tError. Ingrese una opcion correcta: ")) 
-        # Guardado de promociones con formato segun opcion seleccionada
-        if promo_opcion == 1:
-            valor_1 = int(input("Ingrese el primer valor: "))
-            while valor_1 < 1:
-                valor_1 = int(input("Error. Ingrese el primer valor: "))
-            valor_2 = int(input("Ingrese el segundo valor: "))
-            while valor_2 < 1:
-                valor_2 = int(input("Error. Ingrese el segundo valor: "))
-            promocion = str(valor_1) + "x" + str(valor_2) 
-        elif promo_opcion == 2:
-            valor_1 = int(input("Ingrese el primer valor: "))
-            while valor_1 < 1 or valor_1 > 99:
-                valor_1 = int(input("Error. Ingrese el primer valor: "))
-            valor_2 = int(input("Ingrese el segundo valor: "))
-            while valor_2 < 1:
-                valor_2 = int(input("Error. Ingrese el segundo valor: "))
-            promocion = str(valor_1) + str(valor_2)
-        else:
-            valor_1 = int(input("Ingrese el valor: "))
-            while valor_1 < 1 or valor_1 > 99:
-                valor_1 = int(input("Error. Ingrese el valor: "))
-            promocion = str(valor_1)     
-    else:   # Promocion valdra 0
-        promocion = "0"
+    while True:
+        try:
+            stock = int(input("\tIngrese el stock: "))
+            if stock >= 1:
+                break
+            else:
+                print("\tError. El stock debe ser un número mayor o igual a 1.")
+        except ValueError:
+            print("\tError. Ingrese un número entero válido para el stock.")
+    
+    while True:
+        try:
+            print()
+            print("\t¿Desea agregar una promocion? \n\t\t1.Si \n\t\t2.No")  # Mostramos menu promocion
+            print()
+            
+            promo = int(input("\t\tOpcion: "))
+            
+            while promo < 1 or promo > 2:
+                promo = int(input("\t\tError. Ingrese una opcion correcta: ")) 
+                
+            if promo == 1:  # Si se agrega promocion
+                while True:
+                    try:
+                        print()
+                        print("\tQue promocion desea agregar (ejemplos): \n\t\t1.2x1 \n\t\t2.10'%' de descuento en la 4 unidad \n\t\t3.25'%' de descuento")    # Mostramos menu opciones de promocion
+                        print()
+                        
+                        promo_opcion = int(input("\t\tOpcion: "))
+                        
+                        while promo_opcion < 1 or promo_opcion > 3:
+                            promo_opcion = int(input("\t\tError. Ingrese una opcion correcta: ")) 
+                            
+                        # Guardado de promociones con formato segun opcion seleccionada
+                        if promo_opcion == 1:
+                            while True:
+                                try:
+                                    valor_1 = int(input("Ingrese el primer valor: "))
+                                    valor_2 = int(input("Ingrese el segundo valor: "))
+                                    if valor_1 < 1:
+                                        print("El primer valor debe ser un numero entero mayor o igual a 1.")
+                                    elif valor_2 < 1:
+                                        print("El segundo valor debe ser un numero entero mayor o igual a 1.")
+                                    else:
+                                        promocion = str(valor_1) + "x" + str(valor_2) 
+                                        break
+                                except ValueError:
+                                    print("\tError. Ingrese un número entero válido para la promoción.")
+                            break
+                        elif promo_opcion == 2:
+                            while True:
+                                try:
+                                    valor_1 = int(input("Ingrese el primer valor: "))
+                                    valor_2 = int(input("Ingrese el segundo valor: "))
+                                    if valor_1 < 1 or valor_1 > 99:
+                                        print("El primer valor debe ser un numero entero mayor o igual a 1 y menor o igual a 99.")
+                                    elif valor_2 < 1:
+                                        print("El segundo valor debe ser un numero entero mayor o igual a 1.")
+                                    else:
+                                        promocion = str(valor_1) + str(valor_2)
+                                        break
+                                except ValueError:
+                                    print("\tError. Ingrese un número entero válido para la promoción.")
+                            break
+                        else:
+                            while True:
+                                try:
+                                    valor_1 = int(input("Ingrese el valor: "))
+                                    if valor_1 < 1 or valor_1 > 99:
+                                        print("El valor debe ser un numero entero mayor o igual a 1 y menor o igual a 99.")
+                                    else:
+                                        promocion = str(valor_1) 
+                                        break
+                                except ValueError:
+                                    print("\tError. Ingrese un número entero válido para la promoción.")
+                            break
+                    except ValueError:
+                        print("Error. Debe ingresar un número entero.")   
+                break
+            else:   # Promocion valdra 0
+                promocion = "0"
+                break
+        except ValueError:
+            print("Error. Debe ingresar un número entero.")
     
     # Añadir producto
     productos.append({"id": id, "nombre": nombre, "marca": marca, "precio": precio, "ubicacion": ubicacion, "stock": stock, "promocion": promocion})    # Guardamos el nuevo producto junto con sus datos como un diccionario, mediante el append a la lista de diccionarios de productos
