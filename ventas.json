@@ -102,5 +102,29 @@
         "importe": 5420,
         "cantidad": 2,
         "fecha": "2024-09-24"
+    },
+    {
+        "id": 14,
+        "nombre": "producto de prueba",
+        "marca": "prueba",
+        "importe": 17356728.0,
+        "cantidad": 56,
+        "fecha": "2024-10-17"
+    },
+    {
+        "id": 15,
+        "nombre": "producto de prueba",
+        "marca": "prueba",
+        "importe": 6394584.0,
+        "cantidad": 20,
+        "fecha": "2024-10-17"
+    },
+    {
+        "id": 16,
+        "nombre": "producto de prueba",
+        "marca": "prueba",
+        "importe": 10962144.0,
+        "cantidad": 36,
+        "fecha": "2024-10-17"
     }
 ]

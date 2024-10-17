@@ -250,7 +250,12 @@ def busqueda_producto_alta(productos):
 
 
 def busqueda_producto_baja(productos):
-    idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
+    while True:
+            try:
+                idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
+                break
+            except ValueError:
+                print("\tError. Ingrese un id valido.")
     encontrado = False  # Variable booleana que comienza default en False hasta encontrar el producto
 
     # Recorrer la lista y verificar si algún producto tiene el id del producto que se requiere eliminar
@@ -261,7 +266,12 @@ def busqueda_producto_baja(productos):
             
     while not encontrado:   # Mientras no se haya encontrado el producto, se continuara buscando y pidiendo al usuario el id, hasta que se encuentre y poder dar la baja
         print(f"El producto con id {idProducto} no existe")
-        idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
+        while True:
+            try:
+                idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
+                break
+            except ValueError:
+                print("\tError. Ingrese un id valido.")
         encontrado = False  # Se vuelve a poner en False para volver a buscar
         for producto in productos:
             if producto['id'] == idProducto :
@@ -271,7 +281,12 @@ def busqueda_producto_baja(productos):
     return idProducto, encontrado   # Devolvemos el id y el producto encontrado
 
 def busqueda_producto_modificacion(productos):
-    idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
+    while True:
+        try:
+            idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
+            break
+        except ValueError:
+            print("\tError. Ingrese un id valido.")
     encontrado = None   # Variable default en None ya que aca guardaremos el diccionario del producto una vez encontrado
 
     # Recorrer la lista y verificar si algún producto tiene el id del producto que se requiere modificar
@@ -282,7 +297,12 @@ def busqueda_producto_modificacion(productos):
         
     while encontrado is None:   # Mientras no se haya encontrado el producto, se continuara buscando y pidiendo al usuario un id, hasta encontrar un producto y poder modificarlo
         print(f"El producto con id {idProducto} no existe")
-        idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
+        while True:
+            try:
+                idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
+                break
+            except ValueError:
+                print("\tError. Ingrese un id valido.")
         encontrado = None   # Se vuelve a poner en None para volver a buscar
         for producto in productos:
             if producto['id'] == idProducto :
@@ -292,7 +312,13 @@ def busqueda_producto_modificacion(productos):
     return encontrado   # Devolvemos el producto encontrado
 
 def busqueda_producto_caja(productos):
-    idProducto = int(input("\tIngrese el id del producto: "))
+    while True:
+        try:
+            idProducto = int(input("\tIngrese el id del producto a vender: "))
+            break
+        except ValueError:
+            print("\tError. Ingrese un id valido.")
+            
     encontrado = None   # Variable default en None ya que aca guardaremos el diccionario del producto una vez encontrado
 
     # Recorrer la lista y verificar si algún producto tiene el id del producto que se requiere vender
@@ -303,7 +329,14 @@ def busqueda_producto_caja(productos):
         
     while encontrado is None:   # Mientras no se haya encontrado el producto, se continuara buscando y pidiendo al usuario un id, hasta encontrar un producto y poder continuar la venta
         print(f"El producto con id {idProducto} no existe")
-        idProducto = int(input("\tIngrese el id del producto a vender: "))
+        
+        while True:
+            try:
+                idProducto = int(input("\tIngrese el id del producto a vender: "))
+                break
+            except ValueError:
+                print("\tError. Ingrese un id valido.")
+                
         encontrado = None   # Se vuelve a poner en None para volver a buscar
         for producto in productos:
             if producto['id'] == idProducto :
@@ -622,9 +655,18 @@ def menu_caja():
     
     print("Menu Caja: \n\t1. Ingresar Productos \n\t2. Volver") # Mostramos el menu de la caja
     print()
-    opcion = int(input("Opcion: "))
-    while opcion < 1 or opcion > 2:
-        opcion = int(input("Error. Ingrese una opcion correcta: "))
+        
+    while True:
+        try:
+            opcion = int(input("Opcion: "))
+            
+            while opcion < 1 or opcion > 2:
+                opcion = int(input("Error. Ingrese una opcion correcta: "))
+            
+            break
+        
+        except ValueError:
+            print("Error. Debe ingresar un número entero.")
         
     while opcion == 1:  # Mientras se quiera agregar productos
         productos = leer_archivo_productos()  # Leemos el archivo de productos y almacenamos la lista de diccionarios de productos obtenida
@@ -641,15 +683,23 @@ def menu_caja():
         id = id_aux + 1 # Sumamos 1 al id maximo para que no hayan ids repetidos
         
         encontrado = busqueda_producto_caja(productos) # Llamamos a la funcion busqueda_producto() y guardamos el diccionario del producto encontrado
-    
-        cantidad = int(input("\t\tIngrese la cantidad de unidades a comprar: "))
-        while cantidad > encontrado['stock']:   # Corroboramos que la cantidad de unidades compradas del producto no supere a las de stock disponible
-            cantidad = int(input("\t\tError. Stock insuficiente, ingrese la cantidad de unidades a comprar: "))
+            
+        while True:
+            try:
+                cantidad = int(input("\t\tIngrese la cantidad de unidades a comprar: "))
+                while cantidad > encontrado['stock']:   # Corroboramos que la cantidad de unidades compradas del producto no supere a las de stock disponible
+                    cantidad = int(input("\t\tError. Stock insuficiente, ingrese la cantidad de unidades a comprar: "))
+                break
+            except ValueError:
+                print("\tError. Ingrese un número entero válido para la cantidad.")
             
         imp = obtener_importe(encontrado['precio'], encontrado['promocion'], cantidad)  # Llamamos a la funcion obtener_importe(), y mediante el precio, promocion y cantidad, del producto obtenemos su importe
         importe_total += imp    # Sumamos el importe total del producto al importe total de la venta
         
-        producto_tupla = (id, encontrado['nombre'], encontrado['marca'], imp, cantidad, fecha)  # Creamos una tupla con los datos del producto y los datos necesarios de la venta
+        importe = encontrado['precio']
+        promocion = encontrado['promocion']
+        
+        producto_tupla = (id, encontrado['nombre'], encontrado['marca'], importe, promocion, cantidad, imp, fecha)  # Creamos una tupla con los datos del producto y los datos necesarios de la venta
         lista_productos_venta.append(producto_tupla)    # Añadimos la tupla generado con la informacion de la venta a la lista de productos vendidos que sera usada luego para mostrar el resumen de la venta
             
         agregar_prod = True # Mediante este booleano permitimos que siempre entre al siguiente menu en donde se connsultara si desea agregar mas productos a la venta
@@ -691,20 +741,28 @@ def menu_caja():
                 id_aux = maximo_id["id"]    
                 id = id_aux + 1 
     
-                cantidad = int(input("\t\tIngrese la cantidad de unidades a comprar: "))
-                while cantidad > encontrado['stock']:
-                    cantidad = int(input("\t\tError. Stock insuficiente, ingrese la cantidad de unidades a comprar: "))
+                while True:
+                    try:
+                        cantidad = int(input("\t\tIngrese la cantidad de unidades a comprar: "))
+                        while cantidad > encontrado['stock']:   # Corroboramos que la cantidad de unidades compradas del producto no supere a las de stock disponible
+                            cantidad = int(input("\t\tError. Stock insuficiente, ingrese la cantidad de unidades a comprar: "))
+                        break
+                    except ValueError:
+                        print("\tError. Ingrese un número entero válido para la cantidad.")
                     
                 imp = obtener_importe(encontrado['precio'], encontrado['promocion'], cantidad)
                 importe_total += imp
                 
-                producto_tupla = (id, encontrado['nombre'], encontrado['marca'], imp, cantidad, fecha)
+                importe = encontrado['precio']
+                promocion = encontrado['promocion']
+                
+                producto_tupla = (id, encontrado['nombre'], encontrado['marca'], importe, promocion, cantidad, imp, fecha)
                 lista_productos_venta.append(producto_tupla)
             else:   # Si no se desea agregar mas productos, se mostrara el resumen de la venta
                 print(f"Fecha: {formato_fecha(fecha_aux)}") # Mostramos la fecha de hoy, la cual sera la fecha que se guardara para la venta, y utilizamos la funcion formato_Fecha() para mostrarla de forma prolija
                 
                 # Títulos de las columnas
-                columnas = ['Producto', 'Nombre', 'Marca', 'Importe', 'Cantidad']   # Creamos una lista de columnas, con el nombre de cada columna que tendra el resumen final
+                columnas = ['Producto', 'Nombre', 'Marca', 'Importe', 'Promocion', 'Cantidad', 'Tot Prod']   # Creamos una lista de columnas, con el nombre de cada columna que tendra el resumen final
                 
                 # Mapeo de índices de las columnas (para acceder correctamente a las tuplas)
                 indices = { # Generamos un diccionario con clave: nombre de la columna, y valor: indice de la columna en la tupla
@@ -712,7 +770,9 @@ def menu_caja():
                     'Nombre': 1,
                     'Marca': 2,
                     'Importe': 3,
-                    'Cantidad': 4
+                    'Promocion': 4,
+                    'Cantidad': 5,
+                    'Tot Prod': 6
                 }
                 
                 # Calcular el ancho de cada columna (máximo entre el largo del nombre de la clave y los valores)
