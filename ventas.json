@@ -126,5 +126,37 @@
         "importe": 10962144.0,
         "cantidad": 36,
         "fecha": "2024-10-17"
+    },
+    {
+        "id": 17,
+        "nombre": "prod pru",
+        "marca": "pru",
+        "importe": 93084.6,
+        "cantidad": 120,
+        "fecha": "2024-10-22"
+    },
+    {
+        "id": 18,
+        "nombre": "prod pru",
+        "marca": "pru",
+        "importe": 28593.6,
+        "cantidad": 37,
+        "fecha": "2024-10-22"
+    },
+    {
+        "id": 19,
+        "nombre": "prod pru",
+        "marca": "pru",
+        "importe": 34809.6,
+        "cantidad": 45,
+        "fecha": "2024-10-22"
+    },
+    {
+        "id": 20,
+        "nombre": "prod pru",
+        "marca": "pru",
+        "importe": 267909.6,
+        "cantidad": 345,
+        "fecha": "2024-10-22"
     }
 ]

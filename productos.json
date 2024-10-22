@@ -172,11 +172,11 @@
     },
     {
         "id": 21,
-        "nombre": "producto de prueba",
-        "marca": "prueba",
-        "precio": 456756.0,
-        "ubicacion": "ubi de prueba",
-        "stock": 344,
-        "promocion": "4x6"
+        "nombre": "prod prue",
+        "marca": "prueb",
+        "precio": 777.0,
+        "ubicacion": "ubi prod",
+        "stock": 4020,
+        "promocion": "205"
     }
 ]
