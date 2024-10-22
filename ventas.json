@@ -78,5 +78,85 @@
         "importe": 18970,
         "cantidad": 7,
         "fecha": "2024-09-23"
+    },
+    {
+        "id": 11,
+        "nombre": "Azucar Blanca 1kg",
+        "marca": "Ledesma",
+        "importe": 13200,
+        "cantidad": 5,
+        "fecha": "2024-09-24"
+    },
+    {
+        "id": 12,
+        "nombre": "Nesquik original cacao en polvo 800 g.",
+        "marca": "Nesquik",
+        "importe": 77210.25,
+        "cantidad": 10,
+        "fecha": "2024-09-24"
+    },
+    {
+        "id": 13,
+        "nombre": "Gaseosa 2.25L",
+        "marca": "Coca-Cola",
+        "importe": 5420,
+        "cantidad": 2,
+        "fecha": "2024-09-24"
+    },
+    {
+        "id": 14,
+        "nombre": "producto de prueba",
+        "marca": "prueba",
+        "importe": 17356728.0,
+        "cantidad": 56,
+        "fecha": "2024-10-17"
+    },
+    {
+        "id": 15,
+        "nombre": "producto de prueba",
+        "marca": "prueba",
+        "importe": 6394584.0,
+        "cantidad": 20,
+        "fecha": "2024-10-17"
+    },
+    {
+        "id": 16,
+        "nombre": "producto de prueba",
+        "marca": "prueba",
+        "importe": 10962144.0,
+        "cantidad": 36,
+        "fecha": "2024-10-17"
+    },
+    {
+        "id": 17,
+        "nombre": "prod pru",
+        "marca": "pru",
+        "importe": 93084.6,
+        "cantidad": 120,
+        "fecha": "2024-10-22"
+    },
+    {
+        "id": 18,
+        "nombre": "prod pru",
+        "marca": "pru",
+        "importe": 28593.6,
+        "cantidad": 37,
+        "fecha": "2024-10-22"
+    },
+    {
+        "id": 19,
+        "nombre": "prod pru",
+        "marca": "pru",
+        "importe": 34809.6,
+        "cantidad": 45,
+        "fecha": "2024-10-22"
+    },
+    {
+        "id": 20,
+        "nombre": "prod pru",
+        "marca": "pru",
+        "importe": 267909.6,
+        "cantidad": 345,
+        "fecha": "2024-10-22"
     }
 ]
