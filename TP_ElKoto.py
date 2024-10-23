@@ -1,5 +1,6 @@
 import json
 from datetime import date, timedelta, datetime
+import re
 
 '''
 Anotaciones:
@@ -8,6 +9,8 @@ Promociones: 2x1 se guarda como texto "2x1", descuentos se guarda el % ej: 45, d
 Ademas las promociones son unicamente enteros. En caso de no tener promocion se indica con un 0.
 
 JSON: Todo lo que se ingrese al JSON debe ingresarse sin tildes.
+
+Arreglas los try except y usar solo validacione como la de nombre en 545
 '''
 
 def menu_principal():
@@ -85,6 +88,10 @@ def leer_archivo_ventas():
         
     except: # Si hubo alguna excepcion
         print("No se puede abrir el archivo ventas")
+        
+def limpiar_espacios(nombre_producto):
+    # Eliminar espacios en blanco al inicio y al final
+    return re.sub(r"^\s+|\s+$", "", nombre_producto)
 
 def menu_info_productos():
     """
@@ -539,12 +546,12 @@ def modificar_producto(productos):
                 
             if opcion == 1:
                 while True:
-                    try:
-                        nombre = input("\tIngrese el nuevo nombre: ").strip()  # Elimina espacios antes y después
-                        if nombre:
-                            encontrado['nombre'] = nombre   # Reemplazamos el valor de nombre en el diccionario del producto a modificar
-                            break
-                    except:
+                    nombre = input("\tIngrese el nuevo nombre: ")
+                    nombre_limpio = limpiar_espacios(nombre)  # Limpiamos los espacios alrededor del nombre
+                    if nombre_limpio:  # Si nombre_limpio no está vacío
+                        encontrado['nombre'] = nombre_limpio  # Reemplazamos el valor de nombre en el diccionario del producto a modificar
+                        break  # Salimos del bucle si el nombre es válido
+                    else:
                         print("\tError. El nombre no puede estar vacío o contener solo espacios.")
 
             elif opcion == 2:
