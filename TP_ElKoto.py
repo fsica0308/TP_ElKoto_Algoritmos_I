@@ -10,7 +10,6 @@ Ademas las promociones son unicamente enteros. En caso de no tener promocion se 
 
 JSON: Todo lo que se ingrese al JSON debe ingresarse sin tildes.
 
-Arreglas los try except y usar solo validacione como la de nombre en 545
 '''
 
 def menu_principal():
@@ -136,17 +135,41 @@ def menu_info_productos():
                 
             if opcion == 1: # Busqueda por nombre
                 columna_busqueda = "nombre" # El campo del diccionario a filtrar es nombre
-                valor_busqueda = input("Ingrese el Nombre del Producto: ")
+                while True:
+                    nombre = input("Ingrese el Nombre del Producto: ")
+                    nombre_limpio = limpiar_espacios(nombre)  # Limpiamos los espacios alrededor del nombre
+                    if nombre_limpio:  # Si nombre_limpio no está vacío
+                        nombre = nombre_limpio
+                        break 
+                    else:
+                        print("\tError. El nombre no puede estar vacío o contener solo espacios.")
+                valor_busqueda = nombre
                 print()
                 busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y nombre ingresado
             elif opcion == 2:   # Busqueda por Marca
                 columna_busqueda = "marca"  # El campo del diccionario a filtrar es marca
-                valor_busqueda = input("Ingrese la Marca del Producto: ")
+                while True:
+                    marca = input("Ingrese la Marca del Producto: ")
+                    marca_limpia = limpiar_espacios(marca)  # Limpiamos los espacios alrededor de la marca
+                    if marca_limpia:  # Si marca_limpia no está vacía
+                        marca = marca_limpia
+                        break 
+                    else:
+                        print("\tError. La marca no puede estar vacía o contener solo espacios.")
+                valor_busqueda = marca
                 print()
                 busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y marca ingresada
             elif opcion == 3:   # Busqueda por promocion
                 columna_busqueda = "promocion"  # El campo del diccionario a filtrar es promocion
-                valor_busqueda = input("Ingrese la Promocion del Producto: ")
+                while True:
+                    promocion = input("Ingrese la Promocion del Producto: ")
+                    promocion_limpia = limpiar_espacios(promocion)  # Limpiamos los espacios alrededor de la promocion
+                    if promocion_limpia:  # Si promocion_limpia no está vacía
+                        promocion = promocion_limpia
+                        break 
+                    else:
+                        print("\tError. La marca no puede estar vacía o contener solo espacios.")
+                valor_busqueda = promocion
                 print()
                 busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y promocion ingresada
             else:   # Volver
@@ -220,21 +243,23 @@ def menu_abm_productos():
 
 def busqueda_producto_alta(productos):
     encontrado = False  # Variable booleana que comienza default en False hasta encontrar el producto
-    
+            
     while True:
-        try:
-            nombre = input("\tIngrese el nombre: ").strip()  # Elimina espacios antes y después
-            if nombre:
-                break
-        except:
+        nombre = input("\tIngrese el nombre: ")
+        nombre_limpio = limpiar_espacios(nombre)  # Limpiamos los espacios alrededor del nombre
+        if nombre_limpio:  # Si nombre_limpio no está vacío
+            nombre = nombre_limpio
+            break 
+        else:
             print("\tError. El nombre no puede estar vacío o contener solo espacios.")
             
     while True:
-        try:
-            marca = input("\tIngrese la marca: ").strip()  # Elimina espacios antes y después
-            if marca:
-                break
-        except:
+        marca = input("\tIngrese la marca: ")
+        marca_limpia = limpiar_espacios(marca)  # Limpiamos los espacios alrededor de la marca
+        if marca_limpia:  # Si marca_limpia no está vacía
+            marca = marca_limpia
+            break 
+        else:
             print("\tError. La marca no puede estar vacía o contener solo espacios.")
         
     # Recorrer la lista y verificar si algún producto tiene el nombre y marca buscado
@@ -245,8 +270,23 @@ def busqueda_producto_alta(productos):
     
     while encontrado:   # Mientras se haya encontrado el producto, se continuara buscando y pidiendo al usuario los datos, hasta que ya no se encuentre y poder dar el alta
         print("El producto ya existe, ingrese otro por favor: ")
-        nombre = input("\tIngrese el nombre: ")
-        marca = input("\tIngrese la marca: ")
+        while True:
+            nombre = input("\tIngrese el nombre: ")
+            nombre_limpio = limpiar_espacios(nombre)  # Limpiamos los espacios alrededor del nombre
+            if nombre_limpio:  # Si nombre_limpio no está vacío
+                nombre = nombre_limpio
+                break 
+            else:
+                print("\tError. El nombre no puede estar vacío o contener solo espacios.")
+            
+        while True:
+            marca = input("\tIngrese la marca: ")
+            marca_limpia = limpiar_espacios(marca)  # Limpiamos los espacios alrededor de la marca
+            if marca_limpia:  # Si marca_limpia no está vacía
+                marca = marca_limpia
+                break 
+            else:
+                print("\tError. La marca no puede estar vacía o contener solo espacios.")
         encontrado = False  # Se vuelve a poner en False para volver a buscar
         for producto in productos:
             if producto['nombre'].lower() == nombre.lower() and producto['marca'].lower() == marca.lower():
@@ -377,14 +417,15 @@ def alta_producto(productos):
                 print("\tError. El precio debe ser mayor a 0.")
         except ValueError:
             print("\tError. Ingrese un valor numérico válido para el precio.")
-    
+            
     while True:
-        try:
-            ubicacion = input("\tIngrese la ubicacion: ").strip()  # Elimina espacios antes y después
-            if ubicacion:
-                break
-        except:
-            print("\tError. La ubicación no puede estar vacía o contener solo espacios.")
+        ubicacion = input("\tIngrese la ubicacion: ")
+        ubicacion_limpia = limpiar_espacios(ubicacion)  # Limpiamos los espacios alrededor de la ubicacion
+        if ubicacion_limpia:  # Si ubicacion_limpia no está vacía
+            ubicacion = ubicacion_limpia
+            break 
+        else:
+            print("\tError. La ubicacion no puede estar vacía o contener solo espacios.")
     
     while True:
         try:
@@ -556,12 +597,12 @@ def modificar_producto(productos):
 
             elif opcion == 2:
                 while True:
-                    try:
-                        marca = input("\tIngrese la nueva marca: ").strip()  # Elimina espacios antes y después
-                        if marca:
-                            encontrado['marca'] = marca # Reemplazamos el valor de marca en el diccionario del producto a modificar
-                            break
-                    except:
+                    marca = input("\tIngrese la nueva marca: ")
+                    marca_limpia = limpiar_espacios(marca)  # Limpiamos los espacios alrededor de la marca
+                    if marca_limpia:  # Si marca_limpia no está vacía
+                        encontrado['marca'] = marca_limpia # Reemplazamos el valor de marca en el diccionario del producto a modificar
+                        break 
+                    else:
                         print("\tError. La marca no puede estar vacía o contener solo espacios.")
 
             elif opcion == 3:
@@ -578,13 +619,13 @@ def modificar_producto(productos):
 
             elif opcion == 4:
                 while True:
-                    try:
-                        ubicacion = input("\tIngrese la nueva ubicación: ").strip()  # Elimina espacios antes y después
-                        if ubicacion:
-                            encontrado['ubicacion'] = ubicacion # Reemplazamos el valor de ubicacion en el diccionario del producto a modificar
-                            break
-                    except:
-                        print("\tError. La ubicación no puede estar vacía o contener solo espacios.")
+                    ubicacion = input("\tIngrese la nueva ubicación: ")
+                    ubicacion_limpia = limpiar_espacios(ubicacion)  # Limpiamos los espacios alrededor de la ubicacion
+                    if ubicacion_limpia:  # Si marca_limpia no está vacía
+                        encontrado['ubicacion'] = ubicacion_limpia # Reemplazamos el valor de ubicacion en el diccionario del producto a modificar
+                        break 
+                    else:
+                        print("\tError. La ubicacion no puede estar vacía o contener solo espacios.")
 
             elif opcion == 5:
                 while True:
