@@ -15,7 +15,7 @@
         "precio": 5069,
         "ubicacion": "Gondola 2",
         "stock": 20,
-        "promocion": "15"
+        "promocion": "20"
     },
     {
         "id": 3,
@@ -178,5 +178,23 @@
         "ubicacion": "ubi prod",
         "stock": 4020,
         "promocion": "205"
+    },
+    {
+        "id": 22,
+        "nombre": "pru",
+        "marca": "pru",
+        "precio": 53466.0,
+        "ubicacion": "dfgd",
+        "stock": 45,
+        "promocion": "50"
+    },
+    {
+        "id": 23,
+        "nombre": "prue",
+        "marca": "prue",
+        "precio": 4564.0,
+        "ubicacion": "gfhb",
+        "stock": 559,
+        "promocion": "206"
     }
 ]
