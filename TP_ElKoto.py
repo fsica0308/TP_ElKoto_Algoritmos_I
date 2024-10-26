@@ -10,6 +10,8 @@ Ademas las promociones son unicamente enteros. En caso de no tener promocion se 
 
 JSON: Todo lo que se ingrese al JSON debe ingresarse sin tildes.
 
+Guardar promociones en las ventas
+
 '''
 
 def menu_principal():
@@ -87,6 +89,29 @@ def leer_archivo_ventas():
         
     except: # Si hubo alguna excepcion
         print("No se puede abrir el archivo ventas")
+        
+def leer_archivo_promos():
+    """
+        Esta función abre el archivo 'promos.json' y carga su contenido.
+        Si el archivo está vacío, muestra un mensaje indicando que no hay datos.
+        Si todo sale bien, devuelve la información de las ventas como un diccionario.
+        En caso de que algo falle, muestra un mensaje de error.
+    """
+    
+    try:    # Manejo de excepciones (si cualquier linea dentro de try lanza error, pasa al except)
+        archivo = open("promos.json", "r")  # Abrimos el archivo promos.json en modo lectura y guardamos el objeto del archivo en archivo
+        lineas_promos = archivo.read()  # Leemos todo el contenido de archivo y lo almacenamos en lineas_promos como una cadena de texto
+        archivo.close() # Cerramos el archivo leido
+    
+        if len(lineas_promos) == 0: # Si el archivo no contenia datos, entonces comprobamos que no sea una cadena vacia el resultado
+            print("El archivo JSON está vacío o no contiene datos.")
+            return
+    
+        promos = json.loads(lineas_promos)  # Convertimos el la cadena de texto del json en un diccionario o una lista dependiendo del archivo, y lo almacenamos en promos
+        return promos   # Devolvemos el diccionario/lista obtenido
+        
+    except: # Si hubo alguna excepcion
+        print("No se puede abrir el archivo promos")
         
 def limpiar_espacios(nombre_producto):
     # Eliminar espacios en blanco al inicio y al final
@@ -218,7 +243,7 @@ def menu_abm_productos():
     """
     
     productos = leer_archivo_productos()
-    
+
     while True:
         try:
             print()
@@ -392,7 +417,6 @@ def busqueda_producto_caja(productos):
                     
     return encontrado   # Devolvemos el producto encontrado  
 
-
 def alta_producto(productos):
     """
         Esta funcion agrega un nuevo producto pidiendo los datos como nombre, marca, precio, ubicación y stock.
@@ -455,6 +479,10 @@ def alta_producto(productos):
                         print("\tQue promocion desea agregar (ejemplos): \n\t\t1.2x1 \n\t\t2.10'%' de descuento en la 4 unidad \n\t\t3.25'%' de descuento")    # Mostramos menu opciones de promocion
                         print()
                         
+                        promociones = set() # Conjunto para almacenar promociones únicas
+                        promos = leer_archivo_promos()
+                        promociones.update(promos)
+                        
                         promo_opcion = int(input("\t\tOpcion: "))
                         
                         while promo_opcion < 1 or promo_opcion > 3:
@@ -471,7 +499,7 @@ def alta_producto(productos):
                                     elif valor_2 < 1:
                                         print("El segundo valor debe ser un numero entero mayor o igual a 1.")
                                     else:
-                                        promocion = str(valor_1) + "x" + str(valor_2) 
+                                        promocion = str(valor_1) + "x" + str(valor_2)
                                         break
                                 except ValueError:
                                     print("\tError. Ingrese un número entero válido para la promoción.")
@@ -483,8 +511,8 @@ def alta_producto(productos):
                                     valor_2 = int(input("Ingrese el segundo valor: "))
                                     if valor_1 < 1 or valor_1 > 99:
                                         print("El primer valor debe ser un numero entero mayor o igual a 1 y menor o igual a 99.")
-                                    elif valor_2 < 1:
-                                        print("El segundo valor debe ser un numero entero mayor o igual a 1.")
+                                    elif valor_2 < 1 or valor_2 > 9:
+                                        print("El segundo valor debe ser un numero entero mayor o igual a 1 y menor o igual a 9.")
                                     else:
                                         promocion = str(valor_1) + str(valor_2)
                                         break
@@ -515,6 +543,9 @@ def alta_producto(productos):
     # Añadir producto
     productos.append({"id": id, "nombre": nombre, "marca": marca, "precio": precio, "ubicacion": ubicacion, "stock": stock, "promocion": promocion})    # Guardamos el nuevo producto junto con sus datos como un diccionario, mediante el append a la lista de diccionarios de productos
     
+    # Añadir promocion
+    promociones.add(promocion)   # Guardamos la promocion en el conjunto de promociones
+    
     productosJSON = json.dumps(productos, indent=4) # json.dumps() toma la lista de productos y lo convierte a una cadena en formato JSON, indent=4 le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer. Y por ultimo se almacena en productosJSON
     try:    # Manejo de excepciones (si cualquier linea dentro de try lanza error, pasa al except)
         archivo = open("productos.json", "w")   # Abrimos el archivo productos.json en modo escritura y guardamos el objeto del archivo en archivo
@@ -523,6 +554,15 @@ def alta_producto(productos):
         print("Producto agregado!")
     except: # Si hubo alguna excepcion
         print("No se puede grabar el archivo productos")
+        
+    promocionesJSON = json.dumps(list(promociones), indent=4) # json.dumps() toma e conjunto de promociones y lo convierte a una cadena en formato JSON, indent=4 le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer. Y por ultimo se almacena en promocionesJSON
+    try:    # Manejo de excepciones (si cualquier linea dentro de try lanza error, pasa al except)
+        archivo = open("promos.json", "w")   # Abrimos el archivo promos.json en modo escritura y guardamos el objeto del archivo en archivo
+        archivo.write(promocionesJSON)    # Se guarda el contenido mediante write de la variable promocionesJSON (que tiene las promociones en formato JSON) dentro del archivo
+        archivo.close() # Cerramos el archivo leido
+        print("Promocion agregada!")
+    except: # Si hubo alguna excepcion
+        print("No se puede grabar el archivo promos")
 
 def obtener_id(elemento):
     """
@@ -646,6 +686,10 @@ def modificar_producto(productos):
                         print("\t¿Desea agregar una promocion? \n\t\t1.Si \n\t\t2.No")  # Mostramos menu promocion
                         print()
                         
+                        promociones = set()
+                        promos = leer_archivo_promos()
+                        promociones.update(promos)
+                        
                         promo = int(input("\t\tOpcion: "))
                         
                         while promo < 1 or promo > 2:
@@ -686,8 +730,8 @@ def modificar_producto(productos):
                                                 valor_2 = int(input("Ingrese el segundo valor: "))
                                                 if valor_1 < 1 or valor_1 > 99:
                                                     print("El primer valor debe ser un numero entero mayor o igual a 1 y menor o igual a 99.")
-                                                elif valor_2 < 1:
-                                                    print("El segundo valor debe ser un numero entero mayor o igual a 1.")
+                                                elif valor_2 < 1 or valor_2 > 9:
+                                                    print("El segundo valor debe ser un numero entero mayor o igual a 1 y menor o igual a 9.")
                                                 else:
                                                     promocion = str(valor_1) + str(valor_2)
                                                     break
@@ -716,6 +760,7 @@ def modificar_producto(productos):
                         print("Error. Debe ingresar un número entero.")
                         
                 encontrado['promocion'] = promocion # Reemplazamos el valor de promocion en el diccionario del producto a modificar
+                promociones.add(promocion)   # Guardamos la promocion en el conjunto de promociones
 
             else:   # Si la opcion es 7, es decir finalizar, se guardan los cambios en el archivo
                 productosJSON = json.dumps(productos, indent=4) # json.dumps() toma la lista de productos y lo convierte a una cadena en formato JSON, indent=4 le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer. Y por ultimo se almacena en productosJSON
@@ -724,9 +769,18 @@ def modificar_producto(productos):
                     archivo.write(productosJSON)    # Se guarda el contenido mediante write de la variable productosJSON (que tiene los productos en formato JSON) dentro del archivo
                     archivo.close() # Cerramos el archivo leido
                     print("Producto modificado con éxito y archivo actualizado.")
-                    return
                 except: # Si hubo alguna excepcion
                     print("No se pudo modificar el producto en el archivo productos.")
+                
+                promocionesJSON = json.dumps(list(promociones), indent=4) # json.dumps() toma e conjunto de promociones y lo convierte a una cadena en formato JSON, indent=4 le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer. Y por ultimo se almacena en promocionesJSON
+                try:    # Manejo de excepciones (si cualquier linea dentro de try lanza error, pasa al except)
+                    archivo = open("promos.json", "w")   # Abrimos el archivo promos.json en modo escritura y guardamos el objeto del archivo en archivo
+                    archivo.write(promocionesJSON)    # Se guarda el contenido mediante write de la variable promocionesJSON (que tiene las promociones en formato JSON) dentro del archivo
+                    archivo.close() # Cerramos el archivo leido
+                    print("Promocion agregada!")
+                except: # Si hubo alguna excepcion
+                    print("No se puede grabar el archivo promos")
+                return
         except ValueError:
             print("Error. Debe ingresar un número entero.")
 
@@ -969,6 +1023,13 @@ def obtener_importe(importe, promocion, cantidad):
     """
         Esta funcion genera el importe total de un producto segun la cantidad de este, y el tipo de promocion que posea
     """
+    patron325 = r"^\d{2}\d$"  # Dos dígitos seguidos de un solo dígito
+    '''
+    ^: Marca el inicio de la cadena.
+    \d{2}: Coincide con exactamente dos dígitos, que representan el porcentaje de descuento.
+    \d: Coincide con un solo dígito, que representa la unidad en la que se aplica el descuento.
+    $: Marca el final de la cadena.
+    '''
     
     # Caso 1: Promoción del tipo "MxN" (ejemplo: "2x3")
     if 'x' in promocion:    # Chequeamos si hay una "x" en el str promocion
@@ -989,7 +1050,7 @@ def obtener_importe(importe, promocion, cantidad):
         '''
     
     # Caso 2: Promoción del tipo "325" (ejemplo: "32% de descuento en la 5ta unidad")
-    elif len(promocion) == 3 and promocion[-1].isdigit():   # Primero (len(promocion) == 3) verifica si la cadena de la promoción tiene exactamente 3 caracteres, luego (promocion[-1].isdigit()) verifica si el último carácter de la cadena es un número (esto indica que se refiere a la unidad en la que se aplica el descuento) 
+    elif (re.match(patron325, promocion)):  # Comprobamos que la promocion coincida con el patron de descuento en x unidad
         descuento = int(promocion[:2]) / 100  # Primero, (promocion[:2]) obtiene los primeros dos caracteres de la cadena, que representan el porcentaje de descuento, luego (int(promocion[:2])) convierte esa parte de la cadena en un entero, y por ultimo (/ 100) convierte el porcentaje en un valor decimal. Ejemplo: 32% -> 0.32
         unidad_descuento = int(promocion[-1])  # Primero, (promocion[-1]) obtiene el último carácter de la cadena, que representa la unidad en la que se aplicará el descuento, luego (int(promocion[-1])) convierte ese carácter en un entero. Ejemplo: 5ta unidad
         total = 0   # Creamos variable total para acumular el total de los productos
