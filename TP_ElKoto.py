@@ -10,8 +10,6 @@ Ademas las promociones son unicamente enteros. En caso de no tener promocion se 
 
 JSON: Todo lo que se ingrese al JSON debe ingresarse sin tildes.
 
-Guardar promociones en las ventas
-
 '''
 
 def menu_principal():
@@ -876,7 +874,7 @@ def menu_caja():
                     
                 agregar_prod = True # Mediante este booleano permitimos que siempre entre al siguiente menu en donde se connsultara si desea agregar mas productos a la venta
                 while agregar_prod: # Mientras se desee agregar productos
-                    ventas.append({"id": id, "nombre": encontrado['nombre'], "marca": encontrado['marca'], "importe": imp, "cantidad": cantidad, "fecha": fecha})   # Se añade mediante append, la venta del producto como diccionario a la lista de diccionarios de ventas
+                    ventas.append({"id": id, "nombre": encontrado['nombre'], "marca": encontrado['marca'], "importe": round(imp, 2), "cantidad": cantidad, "promocion": promocion, "fecha": fecha})   # Se añade mediante append, la venta del producto como diccionario a la lista de diccionarios de ventas
                     
                     # Agregacion de venta a archivo de ventas
                     ventasJSON = json.dumps(ventas, indent=4)   # json.dumps() toma la lista de ventas y la convierte a una cadena en formato JSON, indent=4 le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer. Y por ultimo se almacena en ventasJSON
