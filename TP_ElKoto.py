@@ -1117,6 +1117,162 @@ def menu_salir():
     """
     print(banner)
     
+def menu_estadisticas():
+    
+    
+#Día actual
+    fecha = date.today()    # Conseguimos y guardamos la fecha de hoy mediante date.today()
+    fecha = str(fecha)  # Transformamos la fecha a str para almacenarla luego en el json
+    fecha_aux = date.today()    # Conseguimos y guardamos la fecha de hoy mediante date.today() en una variable auxiliar que usaremos para una tabla
+    # En caso de querer simular ventas de otros dias podemos usar timedelta
+    #nueva_fecha = fecha + timedelta(days=2) #Para agregar ventas con otras fechas    
+    
+    
+    
+    
+
+    while True:
+        try:
+            print()
+            print("Menu: \n\t1. Diarias \n\t2. Diarias con dia a eleccion \n\t3. Mensuales \n\t4. Mensuales con mes a eleccion \n\t5. Anuales a eleccion \n\t6. Salir")
+            print()
+            opcion = int(input("Opcion: "))
+            
+            while opcion < 1 or opcion > 6:
+                opcion = int(input("Error. Ingrese una opcion correcta: "))
+            
+            if opcion == 6:
+                return
+            
+            ventas = leer_archivo_ventas()  # Leemos el archivo de ventas y almacenamos la lista de diccionarios de ventas obtenida
+            
+            while opcion == 1:
+                fecha = date.today()    # Conseguimos y guardamos la fecha de hoy mediante date.today()
+                fecha = str(fecha)  # Transformamos la fecha a str para almacenarla luego en el json
+                
+                while True:
+                    try:
+                        print()
+                        print(f"Menu: Estadisticas del Dia: {fecha} \n\t1. Cantidad de Ventas \n\t2. Top 3 Promociones \n\t3. Recaudacion \n\t4. Cantidad de Productos Vendidos \n\t5. Top 3 Marcas \n\t6. Volver")
+                        print()
+                        opcion = int(input("Opcion: "))
+                        
+                        while opcion < 1 or opcion > 6:
+                            opcion = int(input("Error. Ingrese una opcion correcta: "))
+                        
+                        if opcion == 6:
+                            break
+                        
+                    except ValueError:
+                        print("Error. Debe ingresar un número entero.")
+                break
+            
+            while opcion == 2:
+                while True:
+                    try:
+                        print()
+                        print("Menu: \n\t1. Cantidad de Ventas \n\t2. Top 3 Promociones \n\t3. Recaudacion \n\t4. Cantidad de Productos Vendidos \n\t5. Top 3 Marcas \n\t6. Volver")
+                        print()
+                        opcion = int(input("Opcion: "))
+                        
+                        while opcion < 1 or opcion > 6:
+                            opcion = int(input("Error. Ingrese una opcion correcta: "))
+                        
+                        if opcion == 6:
+                            break
+                        
+                    except ValueError:
+                        print("Error. Debe ingresar un número entero.")
+                break
+                
+            while opcion == 3:
+                fecha = datetime.now()    # Conseguimos y guardamos la fecha de hoy mediante datetime.now()
+                mes_pasado = fecha.month-1  # Conseguimos el mes anterior
+                mes_pasado = str(mes_pasado) 
+                
+                while True:
+                    try:
+                        print()
+                        print(f"Menu: Estadisticas del Mes Pasado: {mes_pasado} \n\t1. Cantidad de Ventas \n\t2. Top 3 Promociones \n\t3. Recaudacion \n\t4. Cantidad de Productos Vendidos \n\t5. Top 3 Marcas \n\t6. Volver")
+                        print()
+                        opcion = int(input("Opcion: "))
+                        
+                        while opcion < 1 or opcion > 6:
+                            opcion = int(input("Error. Ingrese una opcion correcta: "))
+                        
+                        if opcion == 6:
+                            break
+                        
+                    except ValueError:
+                        print("Error. Debe ingresar un número entero.")
+                break
+            
+            while opcion == 4:  # Mensuales con mes a eleccion
+                while True:
+                    try:
+                        mes = int(input("Ingrese el mes que desea consultar: "))
+                        
+                        while mes < 1 or mes > 12:
+                            mes = int(input("Error. Ingrese un mes valido: "))
+                    except ValueError:
+                            print("Error. Debe ingresar un número entero.")
+                    break
+                
+                mes_patron = re.compile(rf"^\d{4}-{mes}-\d{2}$")
+                ventas_filtradas = [venta for venta in ventas if mes_patron.match(venta["fecha"])]
+            
+                while True:
+                    try:
+                        print()
+                        print(f"Menu: Estadisticas del Mes: {mes} \n\t1. Cantidad de Ventas \n\t2. Top 3 Promociones \n\t3. Recaudacion \n\t4. Cantidad de Productos Vendidos \n\t5. Top 3 Marcas \n\t6. Volver")
+                        print()
+                        opcion = int(input("Opcion: "))
+                        
+                        while opcion < 1 or opcion > 6:
+                            opcion = int(input("Error. Ingrese una opcion correcta: "))
+                            
+                        if opcion == 1:
+                            cant_ventas = len(ventas_filtradas)
+                            print(f"\n\t La cantidad de ventas es {cant_ventas}")
+                        elif opcion == 2:
+                            promociones = list(map(lambda venta: venta["promocion"], ventas_filtradas)) # Usamos map para extraer el valor de la clave "promocion" de cada diccionario en la lista productos. map aplica la función lambda producto: producto["promocion"] a cada elemento de productos, devolviendo solo el valor de la promoción para cada producto. La salida de map se convierte en una lista con list(...), de forma que promociones es ahora una lista con todas las promociones de cada producto.
+                            top_3_promociones = sorted( # sorted(...) ordena la lista de tuplas (promocion, frecuencia) en orden descendente de frecuencia.
+                                [(promocion, promociones.count(promocion)) for promocion in set(promociones)],  # recorre cada promoción única en set(promociones). Para cada promoción, crea una tupla (promocion, frecuencia), donde: promociones.count(promocion) cuenta cuántas veces aparece esa promoción en la lista original promociones. set(promociones) convierte la lista de promociones en un conjunto, eliminando duplicados y dejando solo valores únicos.
+                                key=lambda x: x[1], # key=lambda x: x[1] indica que se debe ordenar usando el segundo valor de cada tupla (la frecuencia).
+                                reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
+                            )[:3]   # [:3] selecciona los primeros tres elementos de la lista ordenada, es decir, las 3 promociones más frecuentes.
+                            print("Top 3 Promociones:")
+                            for i in range(3):
+                                print(f"     {i + 1}. {top_3_promociones[i][0]}")
+                        if opcion == 6:
+                            break
+                        
+                    except ValueError:
+                        print("Error. Debe ingresar un número entero.")
+                break
+            
+            while opcion == 5: 
+                
+                while True:
+                    try:
+                        print()
+                        print(f"Menu: \n\t1. Cantidad de Ventas \n\t2. Top 3 Promociones \n\t3. Recaudacion \n\t4. Cantidad de Productos Vendidos \n\t5. Top 3 Marcas \n\t6. Volver")
+                        print()
+                        opcion = int(input("Opcion: "))
+                        
+                        while opcion < 1 or opcion > 6:
+                            opcion = int(input("Error. Ingrese una opcion correcta: "))
+                        
+                        if opcion == 6:
+                            break
+                        
+                    except ValueError:
+                        print("Error. Debe ingresar un número entero.")
+                break
+            
+        except ValueError:
+            print("Error. Debe ingresar un número entero.")
+    
 # Funcion Principal
 def main ():
     """
@@ -1128,14 +1284,15 @@ def main ():
     if opcion_menu_principal == 1:  # Selecciono consultar productos
         menu_info_productos()   # Llamado a funcion menu_info_productos()
         main()  # Al finalizar volver a correr main() para mostrar el menu principal
-    elif opcion_menu_principal == 2:
+    elif opcion_menu_principal == 2:    # Selecciono ralizar abm productos
         menu_abm_productos()    # Llamado a funcion menu_abm_productos()
         main()  # Al finalizar volver a correr main() para mostrar el menu principal
-    elif opcion_menu_principal == 3:
+    elif opcion_menu_principal == 3:    # Selecciono administrar caja
         menu_caja() # Llamado a funcion menu_caja()
         main()  # Al finalizar volver a correr main() para mostrar el menu principal
-    elif opcion_menu_principal == 4:    # Funcion estadisticas en construccion
-        print()
+    elif opcion_menu_principal == 4:    # Selecciono consultar estadisticas  
+        menu_estadisticas() # Llamado a funcion menu_estadisticas()
+        main()  # Al finalizar volver a correr main() para mostrar el menu principal
     else:   # Selecciono salir del programa
         menu_salir()    # Llamado a funcion menu_salir() para mostrar mensaje de salida
     
