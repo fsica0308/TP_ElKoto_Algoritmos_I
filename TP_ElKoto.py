@@ -1127,9 +1127,7 @@ def menu_estadisticas():
     # En caso de querer simular ventas de otros dias podemos usar timedelta
     #nueva_fecha = fecha + timedelta(days=2) #Para agregar ventas con otras fechas    
     
-    
-    
-    
+    ventas = leer_archivo_ventas()  # Leemos el archivo de ventas y almacenamos la lista de diccionarios de ventas obtenida
 
     while True:
         try:
@@ -1143,8 +1141,6 @@ def menu_estadisticas():
             
             if opcion == 6:
                 return
-            
-            ventas = leer_archivo_ventas()  # Leemos el archivo de ventas y almacenamos la lista de diccionarios de ventas obtenida
             
             while opcion == 1:
                 fecha = date.today()    # Conseguimos y guardamos la fecha de hoy mediante date.today()
@@ -1185,10 +1181,23 @@ def menu_estadisticas():
                         print("Error. Debe ingresar un número entero.")
                 break
                 
-            while opcion == 3:
+            while opcion == 3:  # Mensuales (mes pasado)
                 fecha = datetime.now()    # Conseguimos y guardamos la fecha de hoy mediante datetime.now()
                 mes_pasado = fecha.month-1  # Conseguimos el mes anterior
                 mes_pasado = str(mes_pasado) 
+                año_actual = fecha.year   # Conseguimos el año
+                año_actual = str(año_actual) 
+                
+                # Convertir el mes a un formato de dos dígitos
+                mes_str = f"{mes_pasado:02}"
+
+                # Crear el patrón de expresión regular con el mes en formato de dos dígitos
+                mes_patron = re.compile(rf"^\d{{4}}-{mes_str}-\d{{2}}$")
+                año_patron = re.compile(rf"^{año_actual}-\d{{2}}-\d{{2}}$")
+                ventas_filtradas = [venta for venta in ventas if mes_patron.match(venta["fecha"]) and año_patron.match(venta["fecha"])]
+                if ventas_filtradas == []:
+                    print("No existen ventas registradas para el mes pasado.")
+                    return menu_estadisticas()
                 
                 while True:
                     try:
@@ -1199,6 +1208,78 @@ def menu_estadisticas():
                         
                         while opcion < 1 or opcion > 6:
                             opcion = int(input("Error. Ingrese una opcion correcta: "))
+                            
+                        if opcion == 1:
+                            cant_ventas = len(ventas_filtradas)
+                            print(f"\n\t La cantidad de ventas es {cant_ventas}")
+                            
+                        elif opcion == 2:
+                            promociones = list(map(lambda venta: venta["promocion"], ventas_filtradas)) # Usamos map para extraer el valor de la clave "promocion" de cada diccionario en la lista productos. map aplica la función lambda producto: producto["promocion"] a cada elemento de productos, devolviendo solo el valor de la promoción para cada producto. La salida de map se convierte en una lista con list(...), de forma que promociones es ahora una lista con todas las promociones de cada producto.
+                            top_3_promociones = sorted( # sorted(...) ordena la lista de tuplas (promocion, frecuencia) en orden descendente de frecuencia.
+                                [(promocion, promociones.count(promocion)) for promocion in set(promociones)],  # recorre cada promoción única en set(promociones). Para cada promoción, crea una tupla (promocion, frecuencia), donde: promociones.count(promocion) cuenta cuántas veces aparece esa promoción en la lista original promociones. set(promociones) convierte la lista de promociones en un conjunto, eliminando duplicados y dejando solo valores únicos.
+                                key=lambda x: x[1], # key=lambda x: x[1] indica que se debe ordenar usando el segundo valor de cada tupla (la frecuencia).
+                                reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
+                            )[:3]   # [:3] selecciona los primeros tres elementos de la lista ordenada, es decir, las 3 promociones más frecuentes.
+                            print("Top 3 Promociones:")
+                            for i, (promocion, frecuencia) in enumerate(top_3_promociones):
+                                print(f"     {i + 1}. {promocion}")
+                                
+                        elif opcion == 3:
+                            # Extraer los importes de cada venta filtrada
+                            recaudaciones = list(map(lambda venta: venta["importe"], ventas_filtradas))
+
+                            # Calcular la recaudación total
+                            recaudacion_total = sum(recaudaciones)
+                            
+                            # Agrupar importes por día usando un diccionario regular
+                            importes_por_dia = {}
+                            for venta in ventas_filtradas:
+                                dia = venta["fecha"][-2:]  # Extraer el día de la fecha (últimos dos caracteres)
+                                if dia in importes_por_dia:
+                                    importes_por_dia[dia] += venta["importe"]
+                                else:
+                                    importes_por_dia[dia] = venta["importe"]
+
+                            # Convertir el resultado en una lista de listas (matriz) con "día", "importe"
+                            matriz_dias_importes = [[dia, importe] for dia, importe in sorted(importes_por_dia.items())]
+
+                            # Imprimir la matriz
+                            print("Recaudacion")
+                            print("Día, Importe")
+                            for fila in matriz_dias_importes:
+                                print(f"{fila[0]}, {fila[1]}")
+                                
+                            # Imprimir la recaudación total
+                            print("Recaudación total del mes:", recaudacion_total)
+                        
+                        elif opcion == 4:
+                            # Agrupar cantidades por producto
+                            cantidades_por_producto = {}
+                            for venta in ventas_filtradas:
+                                producto = venta["nombre"]  # Obtener el nombre del producto
+                                if producto in cantidades_por_producto:
+                                    cantidades_por_producto[producto] += venta["cantidad"]
+                                else:
+                                    cantidades_por_producto[producto] = venta["cantidad"]
+
+                            # Convertir el resultado en una lista de listas (matriz) con "producto", "cantidad"
+                            matriz_productos_cantidades = [[producto, cantidad] for producto, cantidad in cantidades_por_producto.items()]
+
+                            # Imprimir la matriz
+                            print("Producto, Cantidad")
+                            for fila in matriz_productos_cantidades:
+                                print(f"{fila[0]}, {fila[1]}")
+                                
+                        elif opcion == 5:
+                            marcas = list(map(lambda venta: venta["marca"], ventas_filtradas)) # Usamos map para extraer el valor de la clave "marca" de cada diccionario en la lista productos. map aplica la función lambda producto: producto["marca"] a cada elemento de productos, devolviendo solo el valor de la marca para cada producto. La salida de map se convierte en una lista con list(...), de forma que marcas es ahora una lista con todas las marcas de cada producto.
+                            top_3_marcas = sorted( # sorted(...) ordena la lista de tuplas (marca, frecuencia) en orden descendente de frecuencia.
+                                [(marca, marcas.count(marca)) for marca in set(marcas)],  # recorre cada marca única en set(marcas). Para cada marca, crea una tupla (marca, frecuencia), donde: marcas.count(marca) cuenta cuántas veces aparece esa marca en la lista original marcas. set(marcas) convierte la lista de marcas en un conjunto, eliminando duplicados y dejando solo valores únicos.
+                                key=lambda x: x[1], # key=lambda x: x[1] indica que se debe ordenar usando el segundo valor de cada tupla (la frecuencia).
+                                reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
+                            )[:3]   # [:3] selecciona los primeros tres elementos de la lista ordenada, es decir, las 3 marcas más frecuentes.
+                            print("Top 3 Marcas:")
+                            for i, (marca, frecuencia) in enumerate(top_3_marcas):
+                                print(f"     {i + 1}. {marca}")
                         
                         if opcion == 6:
                             break
@@ -1208,6 +1289,10 @@ def menu_estadisticas():
                 break
             
             while opcion == 4:  # Mensuales con mes a eleccion
+                fecha = datetime.now()
+                año_actual = fecha.year   # Conseguimos el año
+                año_actual = str(año_actual) 
+                
                 while True:
                     try:
                         mes = int(input("Ingrese el mes que desea consultar: "))
@@ -1218,8 +1303,16 @@ def menu_estadisticas():
                             print("Error. Debe ingresar un número entero.")
                     break
                 
-                mes_patron = re.compile(rf"^\d{4}-{mes}-\d{2}$")
-                ventas_filtradas = [venta for venta in ventas if mes_patron.match(venta["fecha"])]
+                # Convertir el mes a un formato de dos dígitos
+                mes_str = f"{mes:02}"
+
+                # Crear el patrón de expresión regular con el mes en formato de dos dígitos
+                mes_patron = re.compile(rf"^\d{{4}}-{mes_str}-\d{{2}}$")
+                año_patron = re.compile(rf"^{año_actual}-\d{{2}}-\d{{2}}$")
+                ventas_filtradas = [venta for venta in ventas if mes_patron.match(venta["fecha"]) and año_patron.match(venta["fecha"])]
+                if ventas_filtradas == []:
+                    print("No existen ventas registradas para el mes elegido.")
+                    return menu_estadisticas()
             
                 while True:
                     try:
@@ -1234,6 +1327,7 @@ def menu_estadisticas():
                         if opcion == 1:
                             cant_ventas = len(ventas_filtradas)
                             print(f"\n\t La cantidad de ventas es {cant_ventas}")
+                            
                         elif opcion == 2:
                             promociones = list(map(lambda venta: venta["promocion"], ventas_filtradas)) # Usamos map para extraer el valor de la clave "promocion" de cada diccionario en la lista productos. map aplica la función lambda producto: producto["promocion"] a cada elemento de productos, devolviendo solo el valor de la promoción para cada producto. La salida de map se convierte en una lista con list(...), de forma que promociones es ahora una lista con todas las promociones de cada producto.
                             top_3_promociones = sorted( # sorted(...) ordena la lista de tuplas (promocion, frecuencia) en orden descendente de frecuencia.
@@ -1242,8 +1336,66 @@ def menu_estadisticas():
                                 reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
                             )[:3]   # [:3] selecciona los primeros tres elementos de la lista ordenada, es decir, las 3 promociones más frecuentes.
                             print("Top 3 Promociones:")
-                            for i in range(3):
-                                print(f"     {i + 1}. {top_3_promociones[i][0]}")
+                            for i, (promocion, frecuencia) in enumerate(top_3_promociones):
+                                print(f"     {i + 1}. {promocion}")
+                                
+                        elif opcion == 3:
+                            # Extraer los importes de cada venta filtrada
+                            recaudaciones = list(map(lambda venta: venta["importe"], ventas_filtradas))
+
+                            # Calcular la recaudación total
+                            recaudacion_total = sum(recaudaciones)
+                            
+                            # Agrupar importes por día usando un diccionario regular
+                            importes_por_dia = {}
+                            for venta in ventas_filtradas:
+                                dia = venta["fecha"][-2:]  # Extraer el día de la fecha (últimos dos caracteres)
+                                if dia in importes_por_dia:
+                                    importes_por_dia[dia] += venta["importe"]
+                                else:
+                                    importes_por_dia[dia] = venta["importe"]
+
+                            # Convertir el resultado en una lista de listas (matriz) con "día", "importe"
+                            matriz_dias_importes = [[dia, importe] for dia, importe in sorted(importes_por_dia.items())]
+
+                            # Imprimir la matriz
+                            print("Recaudacion")
+                            print("Día, Importe")
+                            for fila in matriz_dias_importes:
+                                print(f"{fila[0]}, {fila[1]}")
+                                
+                            # Imprimir la recaudación total
+                            print("Recaudación total del mes:", recaudacion_total)
+                        
+                        elif opcion == 4:
+                            # Agrupar cantidades por producto
+                            cantidades_por_producto = {}
+                            for venta in ventas_filtradas:
+                                producto = venta["nombre"]  # Obtener el nombre del producto
+                                if producto in cantidades_por_producto:
+                                    cantidades_por_producto[producto] += venta["cantidad"]
+                                else:
+                                    cantidades_por_producto[producto] = venta["cantidad"]
+
+                            # Convertir el resultado en una lista de listas (matriz) con "producto", "cantidad"
+                            matriz_productos_cantidades = [[producto, cantidad] for producto, cantidad in cantidades_por_producto.items()]
+
+                            # Imprimir la matriz
+                            print("Producto, Cantidad")
+                            for fila in matriz_productos_cantidades:
+                                print(f"{fila[0]}, {fila[1]}")
+                                
+                        elif opcion == 5:
+                            marcas = list(map(lambda venta: venta["marca"], ventas_filtradas)) # Usamos map para extraer el valor de la clave "marca" de cada diccionario en la lista productos. map aplica la función lambda producto: producto["marca"] a cada elemento de productos, devolviendo solo el valor de la marca para cada producto. La salida de map se convierte en una lista con list(...), de forma que marcas es ahora una lista con todas las marcas de cada producto.
+                            top_3_marcas = sorted( # sorted(...) ordena la lista de tuplas (marca, frecuencia) en orden descendente de frecuencia.
+                                [(marca, marcas.count(marca)) for marca in set(marcas)],  # recorre cada marca única en set(marcas). Para cada marca, crea una tupla (marca, frecuencia), donde: marcas.count(marca) cuenta cuántas veces aparece esa marca en la lista original marcas. set(marcas) convierte la lista de marcas en un conjunto, eliminando duplicados y dejando solo valores únicos.
+                                key=lambda x: x[1], # key=lambda x: x[1] indica que se debe ordenar usando el segundo valor de cada tupla (la frecuencia).
+                                reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
+                            )[:3]   # [:3] selecciona los primeros tres elementos de la lista ordenada, es decir, las 3 marcas más frecuentes.
+                            print("Top 3 Marcas:")
+                            for i, (marca, frecuencia) in enumerate(top_3_marcas):
+                                print(f"     {i + 1}. {marca}")
+                                
                         if opcion == 6:
                             break
                         
@@ -1251,18 +1403,110 @@ def menu_estadisticas():
                         print("Error. Debe ingresar un número entero.")
                 break
             
-            while opcion == 5: 
+            while opcion == 5:  # Anuales con año a eleccion
+                fecha = datetime.now()    # Conseguimos y guardamos la fecha de hoy mediante datetime.now()
+                año_actual = fecha.year   # Conseguimos el año 
+                
+                while True:
+                    try:
+                        año = int(input("Ingrese el año que desea consultar: "))
+                        
+                        while año < 1980 or año > año_actual:
+                            año = int(input("Error. Ingrese un año valido: "))
+                    except ValueError:
+                            print("Error. Debe ingresar un número entero.")
+                    break
+                
+                año_actual = str(año_actual)
+                # Crear el patrón de expresión regular con el año
+                año_patron = re.compile(rf"^{año}-\d{{2}}-\d{{2}}$")
+                ventas_filtradas = [venta for venta in ventas if año_patron.match(venta["fecha"])]
+                if ventas_filtradas == []:
+                    print("No existen ventas registradas para el mes elegido.")
+                    return menu_estadisticas()
                 
                 while True:
                     try:
                         print()
-                        print(f"Menu: \n\t1. Cantidad de Ventas \n\t2. Top 3 Promociones \n\t3. Recaudacion \n\t4. Cantidad de Productos Vendidos \n\t5. Top 3 Marcas \n\t6. Volver")
+                        print(f"Menu: Estadisticas del Año: {año} \n\t1. Cantidad de Ventas \n\t2. Top 3 Promociones \n\t3. Recaudacion \n\t4. Cantidad de Productos Vendidos \n\t5. Top 3 Marcas \n\t6. Volver")
                         print()
                         opcion = int(input("Opcion: "))
                         
                         while opcion < 1 or opcion > 6:
                             opcion = int(input("Error. Ingrese una opcion correcta: "))
                         
+                        if opcion == 1:
+                            cant_ventas = len(ventas_filtradas)
+                            print(f"\n\t La cantidad de ventas es {cant_ventas}")
+                            
+                        elif opcion == 2:
+                            promociones = list(map(lambda venta: venta["promocion"], ventas_filtradas)) # Usamos map para extraer el valor de la clave "promocion" de cada diccionario en la lista productos. map aplica la función lambda producto: producto["promocion"] a cada elemento de productos, devolviendo solo el valor de la promoción para cada producto. La salida de map se convierte en una lista con list(...), de forma que promociones es ahora una lista con todas las promociones de cada producto.
+                            top_3_promociones = sorted( # sorted(...) ordena la lista de tuplas (promocion, frecuencia) en orden descendente de frecuencia.
+                                [(promocion, promociones.count(promocion)) for promocion in set(promociones)],  # recorre cada promoción única en set(promociones). Para cada promoción, crea una tupla (promocion, frecuencia), donde: promociones.count(promocion) cuenta cuántas veces aparece esa promoción en la lista original promociones. set(promociones) convierte la lista de promociones en un conjunto, eliminando duplicados y dejando solo valores únicos.
+                                key=lambda x: x[1], # key=lambda x: x[1] indica que se debe ordenar usando el segundo valor de cada tupla (la frecuencia).
+                                reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
+                            )[:3]   # [:3] selecciona los primeros tres elementos de la lista ordenada, es decir, las 3 promociones más frecuentes.
+                            print("Top 3 Promociones:")
+                            for i, (promocion, frecuencia) in enumerate(top_3_promociones):
+                                print(f"     {i + 1}. {promocion}")
+                                
+                        elif opcion == 3:
+                            # Extraer los importes de cada venta filtrada
+                            recaudaciones = list(map(lambda venta: venta["importe"], ventas_filtradas))
+
+                            # Calcular la recaudación total
+                            recaudacion_total = sum(recaudaciones)
+                            
+                            # Agrupar importes por mes usando un diccionario regular
+                            importes_por_mes = {}
+                            for venta in ventas_filtradas:
+                                mes = venta["fecha"][5:7]  # Extraer el mes de la fecha
+                                if mes in importes_por_mes:
+                                    importes_por_mes[mes] += venta["importe"]
+                                else:
+                                    importes_por_mes[mes] = venta["importe"]
+
+                            # Convertir el resultado en una lista de listas (matriz) con "mes", "importe"
+                            matriz_meses_importes = [[mes, importe] for mes, importe in sorted(importes_por_mes.items())]
+
+                            # Imprimir la matriz
+                            print("Recaudacion")
+                            print("Mes, Importe")
+                            for fila in matriz_meses_importes:
+                                print(f"{fila[0]}, {fila[1]}")
+                                
+                            # Imprimir la recaudación total
+                            print("Recaudación total del año:", recaudacion_total)
+                        
+                        elif opcion == 4:
+                            # Agrupar cantidades por producto
+                            cantidades_por_producto = {}
+                            for venta in ventas_filtradas:
+                                producto = venta["nombre"]  # Obtener el nombre del producto
+                                if producto in cantidades_por_producto:
+                                    cantidades_por_producto[producto] += venta["cantidad"]
+                                else:
+                                    cantidades_por_producto[producto] = venta["cantidad"]
+
+                            # Convertir el resultado en una lista de listas (matriz) con "producto", "cantidad"
+                            matriz_productos_cantidades = [[producto, cantidad] for producto, cantidad in cantidades_por_producto.items()]
+
+                            # Imprimir la matriz
+                            print("Producto, Cantidad")
+                            for fila in matriz_productos_cantidades:
+                                print(f"{fila[0]}, {fila[1]}")
+                                
+                        elif opcion == 5:
+                            marcas = list(map(lambda venta: venta["marca"], ventas_filtradas)) # Usamos map para extraer el valor de la clave "marca" de cada diccionario en la lista productos. map aplica la función lambda producto: producto["marca"] a cada elemento de productos, devolviendo solo el valor de la marca para cada producto. La salida de map se convierte en una lista con list(...), de forma que marcas es ahora una lista con todas las marcas de cada producto.
+                            top_3_marcas = sorted( # sorted(...) ordena la lista de tuplas (marca, frecuencia) en orden descendente de frecuencia.
+                                [(marca, marcas.count(marca)) for marca in set(marcas)],  # recorre cada marca única en set(marcas). Para cada marca, crea una tupla (marca, frecuencia), donde: marcas.count(marca) cuenta cuántas veces aparece esa marca en la lista original marcas. set(marcas) convierte la lista de marcas en un conjunto, eliminando duplicados y dejando solo valores únicos.
+                                key=lambda x: x[1], # key=lambda x: x[1] indica que se debe ordenar usando el segundo valor de cada tupla (la frecuencia).
+                                reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
+                            )[:3]   # [:3] selecciona los primeros tres elementos de la lista ordenada, es decir, las 3 marcas más frecuentes.
+                            print("Top 3 Marcas:")
+                            for i, (marca, frecuencia) in enumerate(top_3_marcas):
+                                print(f"     {i + 1}. {marca}")
+                                
                         if opcion == 6:
                             break
                         

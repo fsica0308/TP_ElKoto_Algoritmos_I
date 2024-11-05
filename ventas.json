@@ -475,5 +475,140 @@
         "cantidad": 10,
         "promocion": "252",
         "fecha": "2024-10-28"
+    },
+    {
+        "id": 54,
+        "nombre": "Detergente Concentrado 494g",
+        "marca": "Ledesma",
+        "importe": 74578.4,
+        "cantidad": 11,
+        "promocion": "325",
+        "fecha": "2024-10-10"
+    },
+    {
+        "id": 55,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 6848.0,
+        "cantidad": 16,
+        "promocion": "20",
+        "fecha": "2024-10-11"
+    },
+    {
+        "id": 56,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 44330.0,
+        "cantidad": 5,
+        "promocion": "0",
+        "fecha": "2024-10-28"
+    },
+    {
+        "id": 57,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 168454.0,
+        "cantidad": 19,
+        "promocion": "0",
+        "fecha": "2024-10-13"
+    },
+    {
+        "id": 58,
+        "nombre": "Fideos Spaghetti 893g",
+        "marca": "Marolio",
+        "importe": 55497.0,
+        "cantidad": 13,
+        "promocion": "0",
+        "fecha": "2024-10-21"
+    },
+    {
+        "id": 59,
+        "nombre": "Detergente Concentrado 494g",
+        "marca": "Ledesma",
+        "importe": 75200.0,
+        "cantidad": 10,
+        "promocion": "20",
+        "fecha": "2023-09-09"
+    },
+    {
+        "id": 60,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 6980.0,
+        "cantidad": 15,
+        "promocion": "0",
+        "fecha": "2023-11-14"
+    },
+    {
+        "id": 61,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 45500.0,
+        "cantidad": 4,
+        "promocion": "0",
+        "fecha": "2023-08-27"
+    },
+    {
+        "id": 62,
+        "nombre": "Fideos Spaghetti 893g",
+        "marca": "Marolio",
+        "importe": 56000.0,
+        "cantidad": 12,
+        "promocion": "10",
+        "fecha": "2024-05-10"
+    },
+    {
+        "id": 63,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 7000.0,
+        "cantidad": 18,
+        "promocion": "30",
+        "fecha": "2025-02-22"
+    },
+    {
+        "id": 64,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 44100.0,
+        "cantidad": 6,
+        "promocion": "5",
+        "fecha": "2024-12-15"
+    },
+    {
+        "id": 65,
+        "nombre": "Detergente Concentrado 494g",
+        "marca": "Ledesma",
+        "importe": 76000.0,
+        "cantidad": 8,
+        "promocion": "15",
+        "fecha": "2024-01-16"
+    },
+    {
+        "id": 66,
+        "nombre": "Fideos Spaghetti 893g",
+        "marca": "Marolio",
+        "importe": 55500.0,
+        "cantidad": 10,
+        "promocion": "2x1",
+        "fecha": "2024-07-29"
+    },
+    {
+        "id": 67,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 6850.0,
+        "cantidad": 20,
+        "promocion": "0",
+        "fecha": "2025-06-10"
+    },
+    {
+        "id": 68,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 43800.0,
+        "cantidad": 7,
+        "promocion": "5",
+        "fecha": "2025-03-21"
     }
 ]
