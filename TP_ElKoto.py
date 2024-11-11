@@ -448,7 +448,7 @@ def alta_producto(productos):
             ubicacion = ubicacion_limpia
             break 
         else:
-            print("\tError. La ubicacion no puede estar vacía o contener solo espacios.")
+            print("\tError. La ubicacion no xpuede estar vacía o contener solo espacios.")
     
     while True:
         try:
@@ -1646,7 +1646,7 @@ def top_promociones(ventas_filtradas):
 
     # Generamos una lista de tuplas (promocion, frecuencia) para cada promoción única
     top_3_promociones = sorted(
-        [(promocion, promociones.count(promocion)) for promocion in set(promociones)],  
+        [(promocion, len(list(filter(lambda x: x == promocion, promociones)))) for promocion in set(promociones)],  
         key=lambda x: x[1],    # Ordenamos por la frecuencia en la segunda posición de cada tupla
         reverse=True           # Orden descendente para mostrar las promociones más frecuentes al inicio
         )[:3]                      # Seleccionamos las tres promociones con mayor frecuencia
