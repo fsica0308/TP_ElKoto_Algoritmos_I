@@ -9,7 +9,8 @@ from TP_ElKoto import (
     mostrar_top_promociones,
     mostrar_recaudacion_total_dia_mes,
     mostrar_total_productos_vendidos,
-    mostrar_top_marcas
+    mostrar_top_marcas, 
+    busqueda_filtrada
 )
 
 def test_limpiar_espacios():
@@ -36,48 +37,54 @@ def test_formato_fecha():
     fecha = date(2024, 9, 23)
     assert formato_fecha(fecha) == "23 de Septiembre del 2024"
 
-def test_busqueda_producto_alta(monkeypatch):
-    inputs = iter(["Producto 1", "Marca 1"])
-    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
-    productos = [{"nombre": "Producto 2", "marca": "Marca 2"}]
-    nombre, marca = busqueda_producto_alta(productos)
-    assert nombre == "Producto 1"
-    assert marca == "Marca 1"
+def test_busqueda_filtrada():
+    productos = [
+        {"nombre": "Producto 1", "marca": "Marca A", "promocion": "2x1"},
+        {"nombre": "Producto 2", "marca": "Marca B", "promocion": "30%"},
+        {"nombre": "Producto 3", "marca": "Marca A", "promocion": "2x1"},
+    ]
+    columna_busqueda = "marca"
+    valor_busqueda = "Marca A"
+    
+    resultado = busqueda_filtrada(productos, columna_busqueda, valor_busqueda)
+    assert len(resultado) == 2
+    assert resultado[0]["nombre"] == "Producto 1"
+    assert resultado[1]["nombre"] == "Producto 3"
 
-def test_mostrar_top_promociones(capfd):
+
+def test_mostrar_top_promociones():
     ventas = [
         {"id": 1, "promocion": "2x1", "cantidad": 5},
         {"id": 2, "promocion": "30", "cantidad": 3},
         {"id": 3, "promocion": "2x1", "cantidad": 7},
         {"id": 4, "promocion": "10", "cantidad": 2},
     ]
-    mostrar_top_promociones(ventas)
-    captured = capfd.readouterr()
-    assert "2x1" in captured.out
-    assert "30" in captured.out
-    assert "10" in captured.out
+    resultado = mostrar_top_promociones(ventas)
+    assert "2x1" in resultado
+    assert "30" in resultado
+    assert "10" in resultado
 
-def test_mostrar_recaudacion_total_dia_mes(capfd):
+
+def test_mostrar_recaudacion_total_dia_mes():
     ventas = [
         {"id": 1, "importe": 100.0},
         {"id": 2, "importe": 200.5},
         {"id": 3, "importe": 50.0},
     ]
-    mostrar_recaudacion_total_dia_mes(ventas)
-    captured = capfd.readouterr()
-    assert "350.5" in captured.out  # Verifica si la suma total es correcta
+    total_recaudado = mostrar_recaudacion_total_dia_mes(ventas)
+    assert total_recaudado == 350.5  #chequeo si el total recaudado es 350.5
 
-def test_mostrar_total_productos_vendidos(capfd):
+
+def test_mostrar_total_productos_vendidos():
     ventas = [
         {"id": 1, "cantidad": 5},
         {"id": 2, "cantidad": 3},
         {"id": 3, "cantidad": 7},
     ]
-    mostrar_total_productos_vendidos(ventas)
-    captured = capfd.readouterr()
-    assert "15" in captured.out  # Verifica si el total de productos vendidos es correcto
+    total_productos = mostrar_total_productos_vendidos(ventas)
+    assert total_productos == 15  # Chequeo si el total de productos vendidos es 15
 
-def test_mostrar_top_marcas(capfd):
+def test_mostrar_top_marcas():
     ventas = [
         {"id": 1, "marca": "Marca A", "cantidad": 5},
         {"id": 2, "marca": "Marca B", "cantidad": 3},
@@ -85,8 +92,8 @@ def test_mostrar_top_marcas(capfd):
         {"id": 4, "marca": "Marca C", "cantidad": 2},
         {"id": 5, "marca": "Marca B", "cantidad": 4},
     ]
-    mostrar_top_marcas(ventas)
-    captured = capfd.readouterr()
-    assert "Marca A" in captured.out
-    assert "Marca B" in captured.out
-    assert "Marca C" in captured.out
+    top_marcas = mostrar_top_marcas(ventas)
+    assert "Marca A" in top_marcas
+    assert "Marca B" in top_marcas
+    assert "Marca C" in top_marcas
+    assert "Marca D" not in top_marcas

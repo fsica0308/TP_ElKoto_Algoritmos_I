@@ -1103,20 +1103,6 @@ def formato_fecha(fecha):
 
     return messsage
 
-def menu_salir():
-    """
-        Esta funcion solo muestra un banner con un mensaje de despedida al usuario mediante un print
-    """
-
-    banner = """
-         _ _   _           _          _                           _ 
-        (_) | | | __ _ ___| |_ __ _  | |   _   _  ___  __ _  ___ | |
-        | | |_| |/ _` / __| __/ _` | | |  | | | |/ _ \/ _` |/ _ \| |
-        | |  _  | (_| \__ \ || (_| | | |__| |_| |  __/ (_| | (_) |_|
-        |_|_| |_|\__,_|___/\__\__,_| |_____\__,_|\___|\__, |\___/(_)
-                                                      |___/         
-    """
-    print(banner)
     
 def menu_estadisticas():
     
@@ -1421,111 +1407,159 @@ def obtener_fecha():
 
 #Utilizada para mostrar la recaudadion total de un dia o mes, muestra el print con formato de dia / importe
 def mostrar_recaudacion_total_dia_mes(ventas_filtradas):
-    # Extraer los importes de cada venta filtrada
-    recaudaciones = list(map(lambda venta: venta["importe"], ventas_filtradas))
 
-    # Calcular la recaudación total
-    recaudacion_total = sum(recaudaciones)
-                            
-    # Agrupar importes por día usando un diccionario regular
-    importes_por_dia = {}
-    for venta in ventas_filtradas:
-        dia = venta["fecha"][-2:]  # Extraer el día de la fecha (últimos dos caracteres)
-        if dia in importes_por_dia :                  
-            importes_por_dia[dia] += venta["importe"]
-        else:
-            importes_por_dia[dia] = venta["importe"]
+    try:
+            # Extraer los importes de cada venta filtrada
+        recaudaciones = list(map(lambda venta: venta["importe"], ventas_filtradas))
 
-    # Convertir el resultado en una lista de listas (matriz) con "día", "importe"
-    matriz_dias_importes = [[dia, importe] for dia, importe in sorted(importes_por_dia.items())]
-
-    # Imprimir la matriz
-    print("Recaudacion")
-    print("Día, Importe")
-    for fila in matriz_dias_importes:
-        print(f"{fila[0]}, {fila[1]}")
+        # Calcular la recaudación total
+        recaudacion_total = sum(recaudaciones)
                                 
-    # Imprimir la recaudación total
-    print("Recaudación total del mes:", recaudacion_total)
+        # Agrupar importes por día usando un diccionario regular
+        importes_por_dia = {}
+        for venta in ventas_filtradas:
+            dia = venta["fecha"][-2:]  # Extraer el día de la fecha (últimos dos caracteres)
+            if dia in importes_por_dia :                  
+                importes_por_dia[dia] += venta["importe"]
+            else:
+                importes_por_dia[dia] = venta["importe"]
+
+        # Convertir el resultado en una lista de listas (matriz) con "día", "importe"
+        matriz_dias_importes = [[dia, importe] for dia, importe in sorted(importes_por_dia.items())]
+
+        # Imprimir la matriz
+        print("Recaudacion")
+        print("Día, Importe")
+        for fila in matriz_dias_importes:
+            print(f"{fila[0]}, {fila[1]}")
+                                    
+        # Imprimir la recaudación total
+        print("Recaudación total del mes:", recaudacion_total)
+    except ValueError:
+        # En caso de que la fecha no tenga el formato correcto
+        print("No se pudo obtener la recaudacion total.")
+
+
+    
 
 #Utilizada para mostrar la recaudadion total de un año, muestra el print con formato de mes / importe
 def mostrar_recaudacion_total_año(ventas_filtradas):
-    # Extraer los importes de cada venta filtrada
-    recaudaciones = list(map(lambda venta: venta["importe"], ventas_filtradas))
 
-    # Calcular la recaudación total
-    recaudacion_total = sum(recaudaciones)
-                                
-    # Agrupar importes por mes usando un diccionario regular
-    importes_por_mes = {}
-    for venta in ventas_filtradas:
-        mes = venta["fecha"][5:7]  # Extraer el mes de la fecha
-        if mes in importes_por_mes:
-            importes_por_mes[mes] += venta["importe"]
-        else:
-            importes_por_mes[mes] = venta["importe"]
+    try:
+        # Extraer los importes de cada venta filtrada
+        recaudaciones = list(map(lambda venta: venta["importe"], ventas_filtradas))
 
-    # Convertir el resultado en una lista de listas (matriz) con "mes", "importe"
-    matriz_meses_importes = [[mes, importe] for mes, importe in sorted(importes_por_mes.items())]
+        # Calcular la recaudación total
+        recaudacion_total = sum(recaudaciones)
+                                    
+        # Agrupar importes por mes usando un diccionario regular
+        importes_por_mes = {}
+        for venta in ventas_filtradas:
+            mes = venta["fecha"][5:7]  # Extraer el mes de la fecha
+            if mes in importes_por_mes:
+                importes_por_mes[mes] += venta["importe"]
+            else:
+                importes_por_mes[mes] = venta["importe"]
 
-    # Imprimir la matriz
-    print("Recaudacion")
-    print("Mes, Importe")
-    for fila in matriz_meses_importes:
-        print(f"{fila[0]}, {fila[1]}")
-                                
-    # Imprimir la recaudación total
-    print("Recaudación total del año:", recaudacion_total)
+        # Convertir el resultado en una lista de listas (matriz) con "mes", "importe"
+        matriz_meses_importes = [[mes, importe] for mes, importe in sorted(importes_por_mes.items())]
+
+        # Imprimir la matriz
+        print("Recaudacion")
+        print("Mes, Importe")
+        for fila in matriz_meses_importes:
+            print(f"{fila[0]}, {fila[1]}")
+                                    
+        # Imprimir la recaudación total
+        print("Recaudación total del año:", recaudacion_total)
+    except ValueError:
+        # En caso de que la fecha no tenga el formato correcto
+        print("No se pudo obtener la recaudacion total.")
+
+   
               
 
 #Se utiliza tanto para meses, dias, años, muestra el total de productos vendidos
 def mostrar_total_productos_vendidos(ventas_filtradas):
-    # Agrupar cantidades por producto
-    cantidades_por_producto = {}
-    for venta in ventas_filtradas:
-        producto = venta["nombre"]  # Obtener el nombre del producto
-        if producto in cantidades_por_producto:
-            cantidades_por_producto[producto] += venta["cantidad"]
-        else:
-            cantidades_por_producto[producto] = venta["cantidad"]
+    try:
+         # Agrupar cantidades por producto
+        cantidades_por_producto = {}
+        for venta in ventas_filtradas:
+            producto = venta["nombre"]  # Obtener el nombre del producto
+            if producto in cantidades_por_producto:
+                cantidades_por_producto[producto] += venta["cantidad"]
+            else:
+                cantidades_por_producto[producto] = venta["cantidad"]
 
-    # Convertir el resultado en una lista de listas (matriz) con "producto", "cantidad"
-    matriz_productos_cantidades = [[producto, cantidad] for producto, cantidad in cantidades_por_producto.items()]
-    # Imprimir la matriz
-    print("Producto, Cantidad")
-    for fila in matriz_productos_cantidades:
-        print(f"{fila[0]}, {fila[1]}")
+        # Convertir el resultado en una lista de listas (matriz) con "producto", "cantidad"
+        matriz_productos_cantidades = [[producto, cantidad] for producto, cantidad in cantidades_por_producto.items()]
+        # Imprimir la matriz
+        print("Producto, Cantidad")
+        for fila in matriz_productos_cantidades:
+            print(f"{fila[0]}, {fila[1]}")
+    except ValueError:
+        # En caso de que la fecha no tenga el formato correcto
+        print("No se pudo obtener el total de productos vendidos.")
+
+
+   
 
 #Se utiliza tanto para meses, dias, años, muestra el top 3 de marcas
 def mostrar_top_marcas(ventas_filtradas):
-    
-    marcas = list(map(lambda venta: venta["marca"], ventas_filtradas)) # Usamos map para extraer el valor de la clave "marca" de cada diccionario en la lista productos. map aplica la función lambda producto: producto["marca"] a cada elemento de productos, devolviendo solo el valor de la marca para cada producto. La salida de map se convierte en una lista con list(...), de forma que marcas es ahora una lista con todas las marcas de cada producto.
-    top_3_marcas = sorted( # sorted(...) ordena la lista de tuplas (marca, frecuencia) en orden descendente de frecuencia.
-    [(marca, marcas.count(marca)) for marca in set(marcas)],  # recorre cada marca única en set(marcas). Para cada marca, crea una tupla (marca, frecuencia), donde: marcas.count(marca) cuenta cuántas veces aparece esa marca en la lista original marcas. set(marcas) convierte la lista de marcas en un conjunto, eliminando duplicados y dejando solo valores únicos.
-    key=lambda x: x[1], # key=lambda x: x[1] indica que se debe ordenar usando el segundo valor de cada tupla (la frecuencia).
-    reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
-    )[:3] 
-    
-    print("Top 3 Marcas:")
-    for i, (marca, frecuencia) in enumerate(top_3_marcas):
-        print(f"     {i + 1}. {marca}")
+    try:
+        marcas = list(map(lambda venta: venta["marca"], ventas_filtradas)) # Usamos map para extraer el valor de la clave "marca" de cada diccionario en la lista productos. map aplica la función lambda producto: producto["marca"] a cada elemento de productos, devolviendo solo el valor de la marca para cada producto. La salida de map se convierte en una lista con list(...), de forma que marcas es ahora una lista con todas las marcas de cada producto.
+        top_3_marcas = sorted( # sorted(...) ordena la lista de tuplas (marca, frecuencia) en orden descendente de frecuencia.
+        [(marca, marcas.count(marca)) for marca in set(marcas)],  # recorre cada marca única en set(marcas). Para cada marca, crea una tupla (marca, frecuencia), donde: marcas.count(marca) cuenta cuántas veces aparece esa marca en la lista original marcas. set(marcas) convierte la lista de marcas en un conjunto, eliminando duplicados y dejando solo valores únicos.
+        key=lambda x: x[1], # key=lambda x: x[1] indica que se debe ordenar usando el segundo valor de cada tupla (la frecuencia).
+        reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
+        )[:3] 
+        
+        print("Top 3 Marcas:")
+        for i, (marca, frecuencia) in enumerate(top_3_marcas):
+            print(f"     {i + 1}. {marca}") 
+    except ValueError:
+        # En caso de que la fecha no tenga el formato correcto
+        print("No se pudo obtenerel top 3 de marcas.") 
+   
 
 
 #Se utiliza tanto para meses, dias, años, muestra el top 3 de promociones
 def mostrar_top_promociones(ventas_filtradas):
-   # Usamos map para extraer el valor de la clave "promocion" de cada venta en ventas_filtradas
-    promociones = list(map(lambda venta: venta["promocion"], ventas_filtradas))  
+    try:
+        # Usamos map para extraer el valor de la clave "promocion" de cada venta en ventas_filtradas
+        promociones = list(map(lambda venta: venta["promocion"], ventas_filtradas))  
 
-    # Generamos una lista de tuplas (promocion, frecuencia) para cada promoción única
-    top_3_promociones = sorted(
-        [(promocion, len(list(filter(lambda x: x == promocion, promociones)))) for promocion in set(promociones)],  
-        key=lambda x: x[1],    # Ordenamos por la frecuencia en la segunda posición de cada tupla
-        reverse=True           # Orden descendente para mostrar las promociones más frecuentes al inicio
-        )[:3]                      # Seleccionamos las tres promociones con mayor frecuencia
+        # Generamos una lista de tuplas (promocion, frecuencia) para cada promoción única
+        top_3_promociones = sorted(
+            [(promocion, len(list(filter(lambda x: x == promocion, promociones)))) for promocion in set(promociones)],  
+            key=lambda x: x[1],    # Ordenamos por la frecuencia en la segunda posición de cada tupla
+            reverse=True           # Orden descendente para mostrar las promociones más frecuentes al inicio
+            )[:3]                      # Seleccionamos las tres promociones con mayor frecuencia
 
-    print("Top 3 Promociones:")
-    for i, (promocion, frecuencia) in enumerate(top_3_promociones):
-        print(f"     {i + 1}. {promocion}")
+        print("Top 3 Promociones:")
+        for i, (promocion, frecuencia) in enumerate(top_3_promociones):
+            print(f"     {i + 1}. {promocion}")
+    except ValueError:
+        # En caso de que la fecha no tenga el formato correcto
+        print("No se pudo obtener el top 3 de promociones.")
+
+
+
+def menu_salir():
+    """
+        Esta funcion solo muestra un banner con un mensaje de despedida al usuario mediante un print
+    """
+
+    banner = """
+         _ _   _           _          _                           _ 
+        (_) | | | __ _ ___| |_ __ _  | |   _   _  ___  __ _  ___ | |
+        | | |_| |/ _` / __| __/ _` | | |  | | | |/ _ \/ _` |/ _ \| |
+        | |  _  | (_| \__ \ || (_| | | |__| |_| |  __/ (_| | (_) |_|
+        |_|_| |_|\__,_|___/\__\__,_| |_____\__,_|\___|\__, |\___/(_)
+                                                      |___/         
+    """
+    print(banner)
+
 
 
 
