@@ -1479,7 +1479,7 @@ def mostrar_recaudacion_total_año(ventas_filtradas):
 #Se utiliza tanto para meses, dias, años, muestra el total de productos vendidos
 def mostrar_total_productos_vendidos(ventas_filtradas):
     try:
-         # Agrupar cantidades por producto
+        # Agrupar cantidades por producto
         cantidades_por_producto = {}
         for venta in ventas_filtradas:
             producto = venta["nombre"]  # Obtener el nombre del producto
@@ -1510,6 +1510,12 @@ def mostrar_top_marcas(ventas_filtradas):
         key=lambda x: x[1], # key=lambda x: x[1] indica que se debe ordenar usando el segundo valor de cada tupla (la frecuencia).
         reverse=True    # reverse=True asegura que el orden sea descendente (de más usada a menos usada).
         )[:3] 
+        '''
+        set(marcas): Convertimos la lista marcas en un conjunto para obtener las marcas unicas 
+        [ (marca, len(list(filter(lambda x: x == marca, marcas)))) for promocion in set(marcas) ]: Creamos una lista de tuplas en donde el primer elemento de cada tupla es una marca unica, y el segundo elemento es la frecuencia de esa marca, mediante filter(lambda x: x == marca, marcas): filtra todos los elementos de marcas que sean iguales a la marca actual, y por ultimo len calcula cuantos elementos cumplen eso
+        sorted(): key=lambda x: x[1]: especifica que se ordene por el segundo valor de cada tupla (la frecuencia), reverse=True: indica que el orden sea descendente
+        [:3]: selecciona solo las 3 primeras marcas de la lista ordenada
+        '''
         
         print("Top 3 Marcas:")
         for i, (marca, frecuencia) in enumerate(top_3_marcas):
