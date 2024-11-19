@@ -1409,11 +1409,8 @@ def obtener_fecha():
 def mostrar_recaudacion_total_dia_mes(ventas_filtradas):
 
     try:
-            # Extraer los importes de cada venta filtrada
-        recaudaciones = list(map(lambda venta: venta["importe"], ventas_filtradas))
-
         # Calcular la recaudación total
-        recaudacion_total = sum(recaudaciones)
+        recaudacion_total = reduce(lambda acc, venta: acc + venta['importe'], ventas_filtradas, 0)
                                 
         # Agrupar importes por día usando un diccionario regular
         importes_por_dia = {}
@@ -1526,7 +1523,7 @@ def mostrar_top_marcas(ventas_filtradas):
 #Se utiliza tanto para meses, dias, años, muestra el top 3 de promociones
 def mostrar_top_promociones(ventas_filtradas):
     try:
-        # Usamos map para extraer el valor de la clave "promocion" de cada venta en ventas_filtradas
+        # Usamos map para extraer el valor de la clave "promocion" de cada venta en ventas_filtradas y convertimos el resultado en una lista
         promociones = list(map(lambda venta: venta["promocion"], ventas_filtradas))  
 
         # Generamos una lista de tuplas (promocion, frecuencia) para cada promoción única
@@ -1534,7 +1531,13 @@ def mostrar_top_promociones(ventas_filtradas):
             [(promocion, len(list(filter(lambda x: x == promocion, promociones)))) for promocion in set(promociones)],  
             key=lambda x: x[1],    # Ordenamos por la frecuencia en la segunda posición de cada tupla
             reverse=True           # Orden descendente para mostrar las promociones más frecuentes al inicio
-            )[:3]                      # Seleccionamos las tres promociones con mayor frecuencia
+        )[:3]                      # Seleccionamos las tres promociones con mayor frecuencia
+        '''
+        set(promociones): Convertimos la lista promociones en un conjunto para obtener las promociones unicas 
+        [ (promocion, len(list(filter(lambda x: x == promocion, promociones)))) for promocion in set(promociones) ]: Creamos una lista de tuplas en donde el primer elemento de cada tupla es una promocion unica, y el segundo elemento es la frecuencia de esa promocion, mediante filter(lambda x: x == promocion, promociones): filtra todos los elementos de promociones que sean iguales a la promocion actual, y por ultimo len calcula cuantos elementos cumplen eso
+        sorted(): key=lambda x: x[1]: especifica que se ordene por el segundo valor de cada tupla (la frecuencia), reverse=True: indica que el orden sea descendente
+        [:3]: selecciona solo las 3 primeras promociones de la lista ordenada
+        '''
 
         print("Top 3 Promociones:")
         for i, (promocion, frecuencia) in enumerate(top_3_promociones):
