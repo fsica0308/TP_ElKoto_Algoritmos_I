@@ -453,7 +453,7 @@
         "id": 51,
         "nombre": "Shampoo Revitalizante 104g",
         "marca": "Bimbo",
-        "importe": 3049.20,
+        "importe": 3049.2,
         "cantidad": 9,
         "promocion": "45",
         "fecha": "2024-10-28"
@@ -610,5 +610,41 @@
         "cantidad": 7,
         "promocion": "5",
         "fecha": "2025-03-21"
+    },
+    {
+        "id": 69,
+        "nombre": "Jabon Liquido 292g",
+        "marca": "Coca-Cola",
+        "importe": 3893.75,
+        "cantidad": 2,
+        "promocion": "252",
+        "fecha": "2024-11-30"
+    },
+    {
+        "id": 70,
+        "nombre": "Jabon Liquido 292g",
+        "marca": "Coca-Cola",
+        "importe": 10568.75,
+        "cantidad": 5,
+        "promocion": "252",
+        "fecha": "2024-11-30"
+    },
+    {
+        "id": 71,
+        "nombre": "Ketchup 613g",
+        "marca": "Suave",
+        "importe": 0,
+        "cantidad": 2,
+        "promocion": "2x1",
+        "fecha": "2024-11-30"
+    },
+    {
+        "id": 72,
+        "nombre": "Aceite de Girasol 444g",
+        "marca": "La Serenisima",
+        "importe": 18646.2,
+        "cantidad": 3,
+        "promocion": "10",
+        "fecha": "2024-11-30"
     }
 ]

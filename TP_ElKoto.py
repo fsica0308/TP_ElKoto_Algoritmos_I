@@ -40,7 +40,9 @@ def menu_principal():
                 return opcion
             else:
                 print("Error. Ingrese una opcion correcta.")
-        except ValueError:
+        except Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en menu_principal. Error: {ex} - Fecha: {fechaHoy}")
             print("Error. Debe ingresar un número entero.")
 
 def leer_archivo_productos():
@@ -63,7 +65,9 @@ def leer_archivo_productos():
         productos = json.loads(lineas_productos)    # Convertimos el la cadena de texto del json en un diccionario o una lista dependiendo del archivo, y lo almacenamos en productos
         return productos    # Devolvemos el diccionario/lista obtenido
         
-    except: # Si hubo alguna excepcion
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en leer_archivo_productos. Error: {ex} - Fecha: {fechaHoy}")
         print("No se puede abrir el archivo productos")
         
 def leer_archivo_ventas():
@@ -86,7 +90,9 @@ def leer_archivo_ventas():
         ventas = json.loads(lineas_ventas)  # Convertimos el la cadena de texto del json en un diccionario o una lista dependiendo del archivo, y lo almacenamos en ventas
         return ventas   # Devolvemos el diccionario/lista obtenido
         
-    except: # Si hubo alguna excepcion
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en leer_archivo_ventas. Error: {ex} - Fecha: {fechaHoy}")
         print("No se puede abrir el archivo ventas")
         
 def leer_archivo_promos():
@@ -109,7 +115,9 @@ def leer_archivo_promos():
         promos = json.loads(lineas_promos)  # Convertimos el la cadena de texto del json en un diccionario o una lista dependiendo del archivo, y lo almacenamos en promos
         return promos   # Devolvemos el diccionario/lista obtenido
         
-    except: # Si hubo alguna excepcion
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en leer_archivo_promos. Error: {ex} - Fecha: {fechaHoy}")
         print("No se puede abrir el archivo promos")
         
 def limpiar_espacios(nombre_producto):
@@ -198,7 +206,9 @@ def menu_info_productos():
                 busqueda_filtrada(productos, columna_busqueda, valor_busqueda)  # Se filtran los productos segun el campo y promocion ingresada
             else:   # Volver
                 return
-        except ValueError:  # Ingreso incorrecto de opcion
+        except Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en menu_info_productos. Error: {ex} - Fecha: {fechaHoy}")
             print("Error. Debe ingresar un número entero.")
              
 def busqueda_filtrada(productos, columna_busqueda, valor_busqueda):
@@ -262,7 +272,9 @@ def menu_abm_productos():
                 modificar_producto(productos)   # Llamamos y hacemos modificacion de producto
             else:
                 return
-        except ValueError:
+        except Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error menu_abm_productos. Error: {ex} - Fecha: {fechaHoy}")
             print("Error. Debe ingresar un número entero.")
 
 def busqueda_producto_alta(productos):
@@ -325,7 +337,9 @@ def busqueda_producto_baja(productos):
             try:
                 idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
                 break
-            except ValueError:
+            except Exception as ex:
+                fechaHoy = str(datetime.now())
+                guardar_error_log(f"Error en busqueda_producto_baja. Error: {ex} - Fecha: {fechaHoy}")
                 print("\tError. Ingrese un id valido.")
     encontrado = False  # Variable booleana que comienza default en False hasta encontrar el producto
 
@@ -341,7 +355,9 @@ def busqueda_producto_baja(productos):
             try:
                 idProducto = int(input("\tIngrese el id del producto que desea eliminar: "))
                 break
-            except ValueError:
+            except Exception as ex:
+                fechaHoy = str(datetime.now())
+                guardar_error_log(f"Error en busqueda_producto_baja. Error: {ex} - Fecha: {fechaHoy}")
                 print("\tError. Ingrese un id valido.")
         encontrado = False  # Se vuelve a poner en False para volver a buscar
         for producto in productos:
@@ -356,7 +372,9 @@ def busqueda_producto_modificacion(productos):
         try:
             idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
             break
-        except ValueError:
+        except  Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en busqueda_producto_modificacion. Error: {ex} - Fecha: {fechaHoy}")
             print("\tError. Ingrese un id valido.")
     encontrado = None   # Variable default en None ya que aca guardaremos el diccionario del producto una vez encontrado
 
@@ -372,7 +390,9 @@ def busqueda_producto_modificacion(productos):
             try:
                 idProducto = int(input("\tIngrese el id del producto que desea modificar: "))
                 break
-            except ValueError:
+            except  Exception as ex:
+                fechaHoy = str(datetime.now())
+                guardar_error_log(f"Error en busqueda_producto_modificacion. Error: {ex} - Fecha: {fechaHoy}")
                 print("\tError. Ingrese un id valido.")
         encontrado = None   # Se vuelve a poner en None para volver a buscar
         for producto in productos:
@@ -387,7 +407,9 @@ def busqueda_producto_caja(productos):
         try:
             idProducto = int(input("\tIngrese el id del producto a vender: "))
             break
-        except ValueError:
+        except  Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en busqueda_producto_caja. Error: {ex} - Fecha: {fechaHoy}")
             print("\tError. Ingrese un id valido.")
             
     encontrado = None   # Variable default en None ya que aca guardaremos el diccionario del producto una vez encontrado
@@ -405,7 +427,9 @@ def busqueda_producto_caja(productos):
             try:
                 idProducto = int(input("\tIngrese el id del producto a vender: "))
                 break
-            except ValueError:
+            except  Exception as ex:
+                fechaHoy = str(datetime.now())
+                guardar_error_log(f"Error en busqueda_producto_caja. Error: {ex} - Fecha: {fechaHoy}")
                 print("\tError. Ingrese un id valido.")
                 
         encontrado = None   # Se vuelve a poner en None para volver a buscar
@@ -438,7 +462,9 @@ def alta_producto(productos):
                 break
             else:
                 print("\tError. El precio debe ser mayor a 0.")
-        except ValueError:
+        except  Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en alta_producto. Error: {ex} - Fecha: {fechaHoy}")
             print("\tError. Ingrese un valor numérico válido para el precio.")
             
     while True:
@@ -457,7 +483,9 @@ def alta_producto(productos):
                 break
             else:
                 print("\tError. El stock debe ser un número mayor o igual a 1.")
-        except ValueError:
+        except  Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en alta_producto. Error: {ex} - Fecha: {fechaHoy}")
             print("\tError. Ingrese un número entero válido para el stock.")
     
     while True:
@@ -500,7 +528,9 @@ def alta_producto(productos):
                                     else:
                                         promocion = str(valor_1) + "x" + str(valor_2)
                                         break
-                                except ValueError:
+                                except Exception as ex:
+                                    fechaHoy = str(datetime.now())
+                                    guardar_error_log(f"Error en alta_producto. Error: {ex} - Fecha: {fechaHoy}")
                                     print("\tError. Ingrese un número entero válido para la promoción.")
                             break
                         elif promo_opcion == 2:
@@ -515,7 +545,9 @@ def alta_producto(productos):
                                     else:
                                         promocion = str(valor_1) + str(valor_2)
                                         break
-                                except ValueError:
+                                except Exception as ex:
+                                    fechaHoy = str(datetime.now())
+                                    guardar_error_log(f"Error en alta_producto. Error: {ex} - Fecha: {fechaHoy}")
                                     print("\tError. Ingrese un número entero válido para la promoción.")
                             break
                         else:
@@ -527,16 +559,22 @@ def alta_producto(productos):
                                     else:
                                         promocion = str(valor_1) 
                                         break
-                                except ValueError:
+                                except Exception as ex:
+                                    fechaHoy = str(datetime.now())
+                                    guardar_error_log(f"Error en alta_producto. Error: {ex} - Fecha: {fechaHoy}")
                                     print("\tError. Ingrese un número entero válido para la promoción.")
                             break
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en alta_producto. Error: {ex} - Fecha: {fechaHoy}")
                         print("Error. Debe ingresar un número entero.")   
                 break
             else:   # Promocion valdra 0
                 promocion = "0"
                 break
-        except ValueError:
+        except Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en alta_producto. Error: {ex} - Fecha: {fechaHoy}")
             print("Error. Debe ingresar un número entero.")
     
     # Añadir producto
@@ -551,7 +589,9 @@ def alta_producto(productos):
         archivo.write(productosJSON)    # Se guarda el contenido mediante write de la variable productosJSON (que tiene los productos en formato JSON) dentro del archivo
         archivo.close() # Cerramos el archivo leido
         print("Producto agregado!")
-    except: # Si hubo alguna excepcion
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en alta_producto. Error: {ex} - Fecha: {fechaHoy}")
         print("No se puede grabar el archivo productos")
         
     promocionesJSON = json.dumps(list(promociones), indent=4) # json.dumps() toma e conjunto de promociones y lo convierte a una cadena en formato JSON, indent=4 le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer. Y por ultimo se almacena en promocionesJSON
@@ -560,7 +600,9 @@ def alta_producto(productos):
         archivo.write(promocionesJSON)    # Se guarda el contenido mediante write de la variable promocionesJSON (que tiene las promociones en formato JSON) dentro del archivo
         archivo.close() # Cerramos el archivo leido
         print("Promocion agregada!")
-    except: # Si hubo alguna excepcion
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en alta_producto. Error: {ex} - Fecha: {fechaHoy}")
         print("No se puede grabar el archivo promos")
 
 def obtener_id(elemento):
@@ -593,7 +635,9 @@ def baja_producto(productos):
         archivo.write(productosJSON)    # Se guarda el contenido mediante write de la variable productosJSON (que tiene los productos en formato JSON) dentro del archivo
         archivo.close() # Cerramos el archivo leido
         print("Producto eliminado con exito")
-    except: # Si hubo alguna excepcion
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en baja_producto. Error: {ex} - Fecha: {fechaHoy}")
         print("No se pudo eliminar el producto en el archivo productos") 
 
 def modificar_producto(productos):
@@ -653,7 +697,9 @@ def modificar_producto(productos):
                             break
                         else:
                             print("\tError. El precio debe ser mayor a 0.")
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
                         print("\tError. Ingrese un valor numérico válido para el precio.")
 
             elif opcion == 4:
@@ -675,7 +721,9 @@ def modificar_producto(productos):
                             break
                         else:
                             print("\tError. El stock debe ser un número mayor o igual a 1.")
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
                         print("\tError. Ingrese un número entero válido para el stock.")
 
             elif opcion == 6:
@@ -719,7 +767,9 @@ def modificar_producto(productos):
                                                 else:
                                                     promocion = str(valor_1) + "x" + str(valor_2) 
                                                     break
-                                            except ValueError:
+                                            except Exception as ex:
+                                                fechaHoy = str(datetime.now())
+                                                guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
                                                 print("\tError. Ingrese un número entero válido para la promoción.")
                                         break
                                     elif promo_opcion == 2:
@@ -734,7 +784,9 @@ def modificar_producto(productos):
                                                 else:
                                                     promocion = str(valor_1) + str(valor_2)
                                                     break
-                                            except ValueError:
+                                            except Exception as ex:
+                                                fechaHoy = str(datetime.now())
+                                                guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
                                                 print("\tError. Ingrese un número entero válido para la promoción.")
                                         break
                                     else:
@@ -746,16 +798,22 @@ def modificar_producto(productos):
                                                 else:
                                                     promocion = str(valor_1) 
                                                     break
-                                            except ValueError:
+                                            except Exception as ex:
+                                                fechaHoy = str(datetime.now())
+                                                guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
                                                 print("\tError. Ingrese un número entero válido para la promoción.")
                                         break
-                                except ValueError:
+                                except Exception as ex:
+                                    fechaHoy = str(datetime.now())
+                                    guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
                                     print("Error. Debe ingresar un número entero.")   
                             break
                         else:   # Promocion valdra 0
                             promocion = "0"
                             break
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
                         print("Error. Debe ingresar un número entero.")
                         
                 encontrado['promocion'] = promocion # Reemplazamos el valor de promocion en el diccionario del producto a modificar
@@ -768,7 +826,9 @@ def modificar_producto(productos):
                     archivo.write(productosJSON)    # Se guarda el contenido mediante write de la variable productosJSON (que tiene los productos en formato JSON) dentro del archivo
                     archivo.close() # Cerramos el archivo leido
                     print("Producto modificado con éxito y archivo actualizado.")
-                except: # Si hubo alguna excepcion
+                except Exception as ex:
+                    fechaHoy = str(datetime.now())
+                    guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
                     print("No se pudo modificar el producto en el archivo productos.")
                 
                 promocionesJSON = json.dumps(list(promociones), indent=4) # json.dumps() toma e conjunto de promociones y lo convierte a una cadena en formato JSON, indent=4 le da formato al JSON resultante con una indentación de 4 espacios, para que sea más fácil de leer. Y por ultimo se almacena en promocionesJSON
@@ -777,10 +837,14 @@ def modificar_producto(productos):
                     archivo.write(promocionesJSON)    # Se guarda el contenido mediante write de la variable promocionesJSON (que tiene las promociones en formato JSON) dentro del archivo
                     archivo.close() # Cerramos el archivo leido
                     print("Promocion agregada!")
-                except: # Si hubo alguna excepcion
+                except Exception as ex:
+                    fechaHoy = str(datetime.now())
+                    guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
                     print("No se puede grabar el archivo promos")
                 return
-        except ValueError:
+        except Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en modificar_producto. Error: {ex} - Fecha: {fechaHoy}")
             print("Error. Debe ingresar un número entero.")
 
 def mostrar_info_productos():
@@ -861,7 +925,9 @@ def menu_caja():
                         while cantidad > encontrado['stock']:   # Corroboramos que la cantidad de unidades compradas del producto no supere a las de stock disponible
                             cantidad = int(input("\t\tError. Stock insuficiente, ingrese la cantidad de unidades a comprar: "))
                         break
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en menu_caja. Error: {ex} - Fecha: {fechaHoy}")
                         print("\tError. Ingrese un número entero válido para la cantidad.")
                     
                 imp = obtener_importe(encontrado['precio'], encontrado['promocion'], cantidad)  # Llamamos a la funcion obtener_importe(), y mediante el precio, promocion y cantidad, del producto obtenemos su importe
@@ -885,7 +951,9 @@ def menu_caja():
                         archivo.write(ventasJSON)   # Se guarda el contenido mediante write de la variable ventasJSON (que tiene las ventas en formato JSON) dentro del archivo
                         archivo.close() # Cerramos el archivo leido
                         print("Venta agregada!")
-                    except: # Si hubo alguna excepcion
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en menu_caja. Error: {ex} - Fecha: {fechaHoy}")
                         print("No se puede grabar el archivo ventas")
                         
                     # Se modifica el stock del producto vendido
@@ -897,7 +965,9 @@ def menu_caja():
                         archivo.write(productosJSON)    # Se guarda el contenido mediante write de la variable productosJSON (que tiene las ventas en formato JSON) dentro del archivo
                         archivo.close() # Cerramos el archivo leido
                         print("Stock producto modificado con éxito y archivo actualizado.")
-                    except: # Si hubo alguna excepcion
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en menu_caja. Error: {ex} - Fecha: {fechaHoy}")
                         print("No se pudo modificar el stock del producto en el archivo productos.")
                     
                     while True:
@@ -924,7 +994,9 @@ def menu_caja():
                                         while cantidad > encontrado['stock']:   # Corroboramos que la cantidad de unidades compradas del producto no supere a las de stock disponible
                                             cantidad = int(input("\t\tError. Stock insuficiente, ingrese la cantidad de unidades a comprar: "))
                                         break
-                                    except ValueError:
+                                    except Exception as ex:
+                                        fechaHoy = str(datetime.now())
+                                        guardar_error_log(f"Error en menu_caja. Error: {ex} - Fecha: {fechaHoy}")
                                         print("\tError. Ingrese un número entero válido para la cantidad.")
                                     
                                 imp = obtener_importe(encontrado['precio'], encontrado['promocion'], cantidad)
@@ -997,25 +1069,33 @@ def menu_caja():
                                                         
                                                     break
                                                 
-                                                except ValueError:
+                                                except Exception as ex:
+                                                    fechaHoy = str(datetime.now())
+                                                    guardar_error_log(f"Error en menu_caja. Error: {ex} - Fecha: {fechaHoy}")
                                                     print("\tError. Ingrese un valor numérico válido para el precio.")
                                                     
                                         else:   # Si paga con tarjeta, no se le debe entregar cambio
                                             print("No es necesario entregar vuelto.")
                                         
                                         break
-                                    except ValueError:
+                                    except Exception as ex:
+                                        fechaHoy = str(datetime.now())
+                                        guardar_error_log(f"Error en menu_caja. Error: {ex} - Fecha: {fechaHoy}")
                                         print("Error. Debe ingresar un número entero.")                        
                                 
                                 agregar_prod = False    # Al finalizar la venta, se setea en False para terminar el bucle de la venta, ya que no se agregaran mas productos                    
                             break
-                        except ValueError:
+                        except Exception as ex:
+                            fechaHoy = str(datetime.now())
+                            guardar_error_log(f"Error en menu_caja. Error: {ex} - Fecha: {fechaHoy}")
                             print("Error. Debe ingresar un número entero.")                    
                 break
             else:
                 return
             
-        except ValueError:
+        except Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en menu_caja. Error: {ex} - Fecha: {fechaHoy}")
             print("Error. Debe ingresar un número entero.")
         
 def obtener_importe(importe, promocion, cantidad):
@@ -1090,6 +1170,8 @@ def obtener_importe(importe, promocion, cantidad):
         total = 500
         '''
 
+
+
 def formato_fecha(fecha):
     """
         Esta funcion simplemente formatea la fecha para que sea mas atractiva al mostrar en el recibo de la caja
@@ -1156,10 +1238,10 @@ def menu_estadisticas():
                             mostrar_top_promociones(ventas_filtradas)   
 
                         elif opcion == 3:
-                           mostrar_recaudacion_total_dia_mes(ventas_filtradas)
+                            mostrar_recaudacion_total_dia_mes(ventas_filtradas)
                         
                         elif opcion == 4:
-                            mostrar_total_productos_vendidos(ventas_filtradas)
+                            mostrar_total_productos_vendidos_recursivo(ventas_filtradas)
                                 
                         elif opcion == 5:
                             mostrar_top_marcas(ventas_filtradas)    
@@ -1167,7 +1249,9 @@ def menu_estadisticas():
                         if opcion == 6:
                             break
                         
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en menu_estadisticas. Error: {ex} - Fecha: {fechaHoy}")
                         print("Error. Debe ingresar un número entero.")
                 break
             
@@ -1199,10 +1283,10 @@ def menu_estadisticas():
                             mostrar_top_promociones(ventas_filtradas)  
 
                         elif opcion == 3:
-                           mostrar_recaudacion_total_dia_mes(ventas_filtradas)
+                            mostrar_recaudacion_total_dia_mes(ventas_filtradas)
                         
                         elif opcion == 4:
-                            mostrar_total_productos_vendidos(ventas_filtradas)
+                            mostrar_total_productos_vendidos_recursivo(ventas_filtradas)
                                 
                         elif opcion == 5:                       
                             mostrar_top_marcas(ventas_filtradas)    
@@ -1210,7 +1294,9 @@ def menu_estadisticas():
                         if opcion == 6:
                             break
                         
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en menu_estadisticas. Error: {ex} - Fecha: {fechaHoy}")
                         print("Error. Debe ingresar un número entero.")
                 break
                 
@@ -1253,7 +1339,7 @@ def menu_estadisticas():
                             mostrar_recaudacion_total_dia_mes(ventas_filtradas)
                         
                         elif opcion == 4:
-                           mostrar_total_productos_vendidos(ventas_filtradas)
+                           mostrar_total_productos_vendidos_recursivo(ventas_filtradas)
                                 
                         elif opcion == 5:
                             mostrar_top_marcas(ventas_filtradas)    
@@ -1261,7 +1347,9 @@ def menu_estadisticas():
                         if opcion == 6:
                             break
                         
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en menu_estadisticas. Error: {ex} - Fecha: {fechaHoy}")
                         print("Error. Debe ingresar un número entero.")
                 break
             
@@ -1276,7 +1364,9 @@ def menu_estadisticas():
                         
                         while mes < 1 or mes > 12:
                             mes = int(input("Error. Ingrese un mes valido: "))
-                    except ValueError:
+                    except Exception as ex:
+                            fechaHoy = str(datetime.now())
+                            guardar_error_log(f"Error en menu_estadisticas. Error: {ex} - Fecha: {fechaHoy}")
                             print("Error. Debe ingresar un número entero.")
                     break
                 
@@ -1312,7 +1402,7 @@ def menu_estadisticas():
                             mostrar_recaudacion_total_dia_mes(ventas_filtradas)
             
                         elif opcion == 4:
-                            mostrar_total_productos_vendidos(ventas_filtradas)
+                            mostrar_total_productos_vendidos_recursivo(ventas_filtradas)
                                 
                         elif opcion == 5:
                             mostrar_top_marcas(ventas_filtradas)    
@@ -1320,7 +1410,9 @@ def menu_estadisticas():
                         if opcion == 6:
                             break
                         
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en menu_estadisticas. Error: {ex} - Fecha: {fechaHoy}")
                         print("Error. Debe ingresar un número entero.")
                 break
             
@@ -1334,7 +1426,9 @@ def menu_estadisticas():
                         
                         while año < 1980 or año > año_actual:
                             año = int(input("Error. Ingrese un año valido: "))
-                    except ValueError:
+                    except Exception as ex:
+                            fechaHoy = str(datetime.now())
+                            guardar_error_log(f"Error en menu_estadisticas. Error: {ex} - Fecha: {fechaHoy}")
                             print("Error. Debe ingresar un número entero.")
                     break
                 
@@ -1343,7 +1437,7 @@ def menu_estadisticas():
                 año_patron = re.compile(rf"^{año}-\d{{2}}-\d{{2}}$")
                 ventas_filtradas = [venta for venta in ventas if año_patron.match(venta["fecha"])]
                 if ventas_filtradas == []:
-                    print("No existen ventas registradas para el mes elegido.")
+                    print("No existen ventas registradas para el año elegido.")
                     return menu_estadisticas()
                 
                 while True:
@@ -1367,7 +1461,7 @@ def menu_estadisticas():
                             mostrar_recaudacion_total_año(ventas_filtradas)
                         
                         elif opcion == 4:
-                            mostrar_total_productos_vendidos(ventas_filtradas)
+                            mostrar_total_productos_vendidos_recursivo(ventas_filtradas)
                                 
                         elif opcion == 5:                      
                             mostrar_top_marcas(ventas_filtradas)                            
@@ -1375,11 +1469,15 @@ def menu_estadisticas():
                         if opcion == 6:
                             break
                         
-                    except ValueError:
+                    except Exception as ex:
+                        fechaHoy = str(datetime.now())
+                        guardar_error_log(f"Error en menu_estadisticas. Error: {ex} - Fecha: {fechaHoy}")
                         print("Error. Debe ingresar un número entero.")
                 break
             
-        except ValueError:
+        except Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en menu_estadisticas. Error: {ex} - Fecha: {fechaHoy}")
             print("Error. Debe ingresar un número entero.")
     
 
@@ -1400,7 +1498,9 @@ def obtener_fecha():
                 print("La fecha no puede ser mayor a la fecha actual.")
             else:
                 return fecha_ingresada
-        except ValueError:
+        except Exception as ex:
+            fechaHoy = str(datetime.now())
+            guardar_error_log(f"Error en obtener_fecha. Error: {ex} - Fecha: {fechaHoy}")
             # En caso de que la fecha no tenga el formato correcto
             print("Fecha inválida. Por favor ingresa una fecha en el formato correcto (YYYY-MM-DD).")
 
@@ -1432,7 +1532,9 @@ def mostrar_recaudacion_total_dia_mes(ventas_filtradas):
                                     
         # Imprimir la recaudación total
         print("Recaudación total del mes:", recaudacion_total)
-    except ValueError:
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en mostrar_recaudacion_total_mes. Error: {ex} - Fecha: {fechaHoy}")
         # En caso de que la fecha no tenga el formato correcto
         print("No se pudo obtener la recaudacion total.")
 
@@ -1469,13 +1571,15 @@ def mostrar_recaudacion_total_año(ventas_filtradas):
                                     
         # Imprimir la recaudación total
         print("Recaudación total del año:", recaudacion_total)
-    except ValueError:
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en mostrar_recaudacion_total_año. Error: {ex} - Fecha: {fechaHoy}")
         # En caso de que la fecha no tenga el formato correcto
         print("No se pudo obtener la recaudacion total.")
 
    
               
-
+''' FUNCION VIEJA DE MOSTRAR TOTAL PRODUCTOS VENDIDOS, AHORA SE USA CON RECURSIVIDAD
 #Se utiliza tanto para meses, dias, años, muestra el total de productos vendidos
 def mostrar_total_productos_vendidos(ventas_filtradas):
     try:
@@ -1494,9 +1598,47 @@ def mostrar_total_productos_vendidos(ventas_filtradas):
         print("Producto, Cantidad")
         for fila in matriz_productos_cantidades:
             print(f"{fila[0]}, {fila[1]}")
-    except ValueError:
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en mostrar_total_productos_vendidos. Error: {ex} - Fecha: {fechaHoy}")
         # En caso de que la fecha no tenga el formato correcto
         print("No se pudo obtener el total de productos vendidos.")
+'''
+
+def mostrar_total_productos_vendidos_recursivo(ventas_filtradas, cantidades_por_producto=None, indice=0):
+    #Calcula y muestra el total de productos vendidos utilizando recursividad
+    try:
+        # Caso base: Inicializar el diccionario en la primera llamada
+        if cantidades_por_producto is None:
+            cantidades_por_producto = {}
+
+        # Caso base: Si ya se recorrieron todas las ventas
+        if indice == len(ventas_filtradas):
+            # Convertir el resultado en una lista de listas (matriz) con "producto", "cantidad"
+            matriz_productos_cantidades = [[producto, cantidad] for producto, cantidad in cantidades_por_producto.items()]
+            # Imprimir la matriz
+            print("Producto, Cantidad")
+            for fila in matriz_productos_cantidades:
+                print(f"{fila[0]}, {fila[1]}")
+            return
+
+        # Proceso recursivo: Sumar cantidades por producto
+        venta = ventas_filtradas[indice]
+        producto = venta["nombre"]  # Obtener el nombre del producto
+        if producto in cantidades_por_producto:
+            cantidades_por_producto[producto] += venta["cantidad"]
+        else:
+            cantidades_por_producto[producto] = venta["cantidad"]
+
+        # Llamada recursiva al siguiente índice
+        mostrar_total_productos_vendidos_recursivo(ventas_filtradas, cantidades_por_producto, indice + 1)
+
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en mostrar_total_productos_vendidos_recursivo. Error: {ex} - Fecha: {fechaHoy}")
+        print("No se pudo obtener el total de productos vendidos.")
+
+
 
 
    
@@ -1520,7 +1662,9 @@ def mostrar_top_marcas(ventas_filtradas):
         print("Top 3 Marcas:")
         for i, (marca, frecuencia) in enumerate(top_3_marcas):
             print(f"     {i + 1}. {marca}") 
-    except ValueError:
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en mostrar_top_marcas. Error: {ex} - Fecha: {fechaHoy}")
         # En caso de que la fecha no tenga el formato correcto
         print("No se pudo obtenerel top 3 de marcas.") 
    
@@ -1548,9 +1692,19 @@ def mostrar_top_promociones(ventas_filtradas):
         print("Top 3 Promociones:")
         for i, (promocion, frecuencia) in enumerate(top_3_promociones):
             print(f"     {i + 1}. {promocion}")
-    except ValueError:
+    except Exception as ex:
+        fechaHoy = str(datetime.now())
+        guardar_error_log(f"Error en mostrar_top_promociones. Error: {ex} - Fecha: {fechaHoy}")
         # En caso de que la fecha no tenga el formato correcto
         print("No se pudo obtener el top 3 de promociones.")
+
+
+#Funcion para guardar errores en un log
+def guardar_error_log(error):
+    #Abrimos el archivo en modo 'a' que es agregar, esto significa que si el archivo existe, agrega el mensaje al final del archivo, si
+    #no existe, lo crea
+    with open('errores_log.txt', 'a') as archivo:
+        archivo.write(f"{error}\n")
 
 
 

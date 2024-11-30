@@ -1,0 +1,3 @@
+Error al leer archivo productos. Error: [Errno 2] No such file or directory: 'productos.json' - Fecha: 2024-11-30 11:10:47.994331
+Error en menu_estadisticas. Error: name 'mostrar_total_productos_vendidos' is not defined - Fecha: 2024-11-30 12:14:24.042767
+Error en menu_estadisticas. Error: name 'mostrar_total_productos_vendidos' is not defined - Fecha: 2024-11-30 12:14:49.372362

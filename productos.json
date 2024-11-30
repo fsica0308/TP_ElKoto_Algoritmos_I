@@ -392,7 +392,7 @@
         "marca": "Suave",
         "precio": 7605,
         "ubicacion": "Gondola 3",
-        "stock": 98,
+        "stock": 96,
         "promocion": "2x1"
     },
     {
@@ -410,7 +410,7 @@
         "marca": "La Serenisima",
         "precio": 6906,
         "ubicacion": "Gondola 1",
-        "stock": 111,
+        "stock": 108,
         "promocion": "10"
     },
     {
@@ -437,7 +437,7 @@
         "marca": "Coca-Cola",
         "precio": 2225,
         "ubicacion": "Gondola 9",
-        "stock": 110,
+        "stock": 103,
         "promocion": "252"
     },
     {
