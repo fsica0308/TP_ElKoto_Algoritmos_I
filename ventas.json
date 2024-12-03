@@ -1,0 +1,650 @@
+[
+    {
+        "id": 1,
+        "nombre": "Detergente Concentrado 494g",
+        "marca": "Ledesma",
+        "importe": 74578.4,
+        "cantidad": 11,
+        "promocion": "325",
+        "fecha": "2024-10-10"
+    },
+    {
+        "id": 2,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 6848.0,
+        "cantidad": 16,
+        "promocion": "20",
+        "fecha": "2024-10-11"
+    },
+    {
+        "id": 3,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 44330.0,
+        "cantidad": 5,
+        "promocion": "0",
+        "fecha": "2024-10-28"
+    },
+    {
+        "id": 4,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 168454.0,
+        "cantidad": 19,
+        "promocion": "0",
+        "fecha": "2024-10-13"
+    },
+    {
+        "id": 5,
+        "nombre": "Fideos Spaghetti 893g",
+        "marca": "Marolio",
+        "importe": 55497.0,
+        "cantidad": 13,
+        "promocion": "0",
+        "fecha": "2024-10-21"
+    },
+    {
+        "id": 6,
+        "nombre": "Ketchup 613g",
+        "marca": "Suave",
+        "importe": 53235,
+        "cantidad": 14,
+        "promocion": "2x1",
+        "fecha": "2024-10-15"
+    },
+    {
+        "id": 7,
+        "nombre": "Yogurt Entero 402g",
+        "marca": "Lucchetti",
+        "importe": 81930.0,
+        "cantidad": 15,
+        "promocion": "0",
+        "fecha": "2024-10-28"
+    },
+    {
+        "id": 8,
+        "nombre": "Cerveza Rubia 432g",
+        "marca": "Suave",
+        "importe": 37052.5,
+        "cantidad": 9,
+        "promocion": "325",
+        "fecha": "2024-10-28"
+    },
+    {
+        "id": 9,
+        "nombre": "Chocolates 393g",
+        "marca": "Gallo",
+        "importe": 15592.5,
+        "cantidad": 9,
+        "promocion": "50",
+        "fecha": "2024-10-27"
+    },
+    {
+        "id": 10,
+        "nombre": "Chocolates 655g",
+        "marca": "Coca-Cola",
+        "importe": 27271.2,
+        "cantidad": 8,
+        "promocion": "45",
+        "fecha": "2024-09-28"
+    },
+    {
+        "id": 11,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 5992.0,
+        "cantidad": 14,
+        "promocion": "20",
+        "fecha": "2024-10-11"
+    },
+    {
+        "id": 12,
+        "nombre": "Leche Descremada 823g",
+        "marca": "Lucchetti",
+        "importe": 25428,
+        "cantidad": 5,
+        "promocion": "2x1",
+        "fecha": "2024-10-12"
+    },
+    {
+        "id": 13,
+        "nombre": "Mayonesa 625g",
+        "marca": "Lucchetti",
+        "importe": 8140.5,
+        "cantidad": 3,
+        "promocion": "10",
+        "fecha": "2024-10-27"
+    },
+    {
+        "id": 14,
+        "nombre": "Ketchup 332g",
+        "marca": "Knorr",
+        "importe": 48812.1,
+        "cantidad": 17,
+        "promocion": "15",
+        "fecha": "2024-10-05"
+    },
+    {
+        "id": 15,
+        "nombre": "Chocolates 655g",
+        "marca": "Coca-Cola",
+        "importe": 30680.1,
+        "cantidad": 9,
+        "promocion": "45",
+        "fecha": "2024-10-21"
+    },
+    {
+        "id": 16,
+        "nombre": "Queso Untable 653g",
+        "marca": "Hellmann's",
+        "importe": 20931,
+        "cantidad": 6,
+        "promocion": "2x1",
+        "fecha": "2024-10-12"
+    },
+    {
+        "id": 17,
+        "nombre": "Mayonesa 469g",
+        "marca": "Lucchetti",
+        "importe": 18736.0,
+        "cantidad": 4,
+        "promocion": "0",
+        "fecha": "2024-09-30"
+    },
+    {
+        "id": 18,
+        "nombre": "Salsa de Tomate 267g",
+        "marca": "Ledesma",
+        "importe": 17952.0,
+        "cantidad": 4,
+        "promocion": "0",
+        "fecha": "2024-10-19"
+    },
+    {
+        "id": 19,
+        "nombre": "Fideos Spaghetti 414g",
+        "marca": "Bimbo",
+        "importe": 47650,
+        "cantidad": 14,
+        "promocion": "3x2",
+        "fecha": "2024-10-07"
+    },
+    {
+        "id": 20,
+        "nombre": "Leche Descremada 803g",
+        "marca": "Hellmann's",
+        "importe": 35945,
+        "cantidad": 20,
+        "promocion": "252",
+        "fecha": "2024-10-03"
+    },
+    {
+        "id": 21,
+        "nombre": "Jabon en Pan 630g",
+        "marca": "La Serenisima",
+        "importe": 21250,
+        "cantidad": 20,
+        "promocion": "2x1",
+        "fecha": "2024-10-02"
+    },
+    {
+        "id": 22,
+        "nombre": "Polenta 432g",
+        "marca": "Lucchetti",
+        "importe": 50234.4,
+        "cantidad": 19,
+        "promocion": "325",
+        "fecha": "2024-10-08"
+    },
+    {
+        "id": 23,
+        "nombre": "Salsa de Tomate 330g",
+        "marca": "Lucchetti",
+        "importe": 3001.0,
+        "cantidad": 1,
+        "promocion": "50",
+        "fecha": "2024-10-07"
+    },
+    {
+        "id": 24,
+        "nombre": "Ketchup 901g",
+        "marca": "Knorr",
+        "importe": 132013.8,
+        "cantidad": 18,
+        "promocion": "10",
+        "fecha": "2024-10-09"
+    },
+    {
+        "id": 25,
+        "nombre": "Harina de Trigo 149g",
+        "marca": "Lucchetti",
+        "importe": 10510.0,
+        "cantidad": 20,
+        "promocion": "50",
+        "fecha": "2024-10-07"
+    },
+    {
+        "id": 26,
+        "nombre": "Mayonesa 625g",
+        "marca": "Lucchetti",
+        "importe": 54270.0,
+        "cantidad": 20,
+        "promocion": "10",
+        "fecha": "2024-10-20"
+    },
+    {
+        "id": 27,
+        "nombre": "Fideos Spaghetti 414g",
+        "marca": "Bimbo",
+        "importe": 28590,
+        "cantidad": 9,
+        "promocion": "3x2",
+        "fecha": "2024-09-28"
+    },
+    {
+        "id": 28,
+        "nombre": "Fideos Spaghetti 601g",
+        "marca": "Arcor",
+        "importe": 7697.25,
+        "cantidad": 9,
+        "promocion": "45",
+        "fecha": "2024-09-29"
+    },
+    {
+        "id": 29,
+        "nombre": "Cerveza Rubia 432g",
+        "marca": "Suave",
+        "importe": 37052.5,
+        "cantidad": 5,
+        "promocion": "325",
+        "fecha": "2024-10-11"
+    },
+    {
+        "id": 30,
+        "nombre": "Polenta 432g",
+        "marca": "Lucchetti",
+        "importe": 42516.4,
+        "cantidad": 16,
+        "promocion": "325",
+        "fecha": "2024-10-09"
+    },
+    {
+        "id": 31,
+        "nombre": "Te en Saquitos 450g",
+        "marca": "Coca-Cola",
+        "importe": 24883.2,
+        "cantidad": 9,
+        "promocion": "20",
+        "fecha": "2024-10-27"
+    },
+    {
+        "id": 32,
+        "nombre": "Manteca 714g",
+        "marca": "Pepsi",
+        "importe": 51742.9,
+        "cantidad": 11,
+        "promocion": "15",
+        "fecha": "2024-10-24"
+    },
+    {
+        "id": 33,
+        "nombre": "Ketchup 332g",
+        "marca": "Knorr",
+        "importe": 48812.1,
+        "cantidad": 17,
+        "promocion": "15",
+        "fecha": "2024-10-22"
+    },
+    {
+        "id": 34,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 26598.0,
+        "cantidad": 3,
+        "promocion": "0",
+        "fecha": "2024-10-03"
+    },
+    {
+        "id": 35,
+        "nombre": "Te en Saquitos 450g",
+        "marca": "Coca-Cola",
+        "importe": 33177.6,
+        "cantidad": 12,
+        "promocion": "20",
+        "fecha": "2024-10-10"
+    },
+    {
+        "id": 36,
+        "nombre": "Queso Untable 653g",
+        "marca": "Hellmann's",
+        "importe": 34885,
+        "cantidad": 9,
+        "promocion": "2x1",
+        "fecha": "2024-10-18"
+    },
+    {
+        "id": 37,
+        "nombre": "Fideos Spaghetti 414g",
+        "marca": "Bimbo",
+        "importe": 57180,
+        "cantidad": 17,
+        "promocion": "3x2",
+        "fecha": "2024-10-19"
+    },
+    {
+        "id": 38,
+        "nombre": "Ketchup 901g",
+        "marca": "Knorr",
+        "importe": 73341.0,
+        "cantidad": 10,
+        "promocion": "10",
+        "fecha": "2024-10-15"
+    },
+    {
+        "id": 39,
+        "nombre": "Cafe Instantaneo 336g",
+        "marca": "Hellmann's",
+        "importe": 22669.2,
+        "cantidad": 5,
+        "promocion": "252",
+        "fecha": "2024-10-19"
+    },
+    {
+        "id": 40,
+        "nombre": "Ketchup 901g",
+        "marca": "Knorr",
+        "importe": 110011.5,
+        "cantidad": 15,
+        "promocion": "10",
+        "fecha": "2024-10-03"
+    },
+    {
+        "id": 41,
+        "nombre": "Jabon Liquido 292g",
+        "marca": "Coca-Cola",
+        "importe": 41618.7,
+        "cantidad": 19,
+        "promocion": "252",
+        "fecha": "2024-10-22"
+    },
+    {
+        "id": 42,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 4708.0,
+        "cantidad": 11,
+        "promocion": "20",
+        "fecha": "2024-10-03"
+    },
+    {
+        "id": 43,
+        "nombre": "Cafe Instantaneo 304g",
+        "marca": "Bimbo",
+        "importe": 17907.2,
+        "cantidad": 4,
+        "promocion": "20",
+        "fecha": "2024-10-18"
+    },
+    {
+        "id": 44,
+        "nombre": "Mayonesa 625g",
+        "marca": "Lucchetti",
+        "importe": 24421.5,
+        "cantidad": 9,
+        "promocion": "10",
+        "fecha": "2024-10-18"
+    },
+    {
+        "id": 45,
+        "nombre": "Dulce de Leche 750g",
+        "marca": "Suave",
+        "importe": 96010,
+        "cantidad": 20,
+        "promocion": "2x1",
+        "fecha": "2024-10-24"
+    },
+    {
+        "id": 46,
+        "nombre": "Galletitas Chocolinas 227g",
+        "marca": "Natura",
+        "importe": 126664,
+        "cantidad": 13,
+        "promocion": "252",
+        "fecha": "2024-10-10"
+    },
+    {
+        "id": 47,
+        "nombre": "Polenta 432g",
+        "marca": "Lucchetti",
+        "importe": 39430.48,
+        "cantidad": 15,
+        "promocion": "325",
+        "fecha": "2024-10-08"
+    },
+    {
+        "id": 48,
+        "nombre": "Queso Untable 653g",
+        "marca": "Hellmann's",
+        "importe": 62793,
+        "cantidad": 18,
+        "promocion": "2x1",
+        "fecha": "2024-10-14"
+    },
+    {
+        "id": 49,
+        "nombre": "Ketchup 421g",
+        "marca": "Suave",
+        "importe": 30794.4,
+        "cantidad": 8,
+        "promocion": "10",
+        "fecha": "2024-10-27"
+    },
+    {
+        "id": 50,
+        "nombre": "Queso Untable 653g",
+        "marca": "Hellmann's",
+        "importe": 6977,
+        "cantidad": 2,
+        "promocion": "2x1",
+        "fecha": "2024-10-07"
+    },
+    {
+        "id": 51,
+        "nombre": "Shampoo Revitalizante 104g",
+        "marca": "Bimbo",
+        "importe": 3049.2,
+        "cantidad": 9,
+        "promocion": "45",
+        "fecha": "2024-10-28"
+    },
+    {
+        "id": 52,
+        "nombre": "Jabon Liquido 292g",
+        "marca": "Coca-Cola",
+        "importe": 10568.75,
+        "cantidad": 5,
+        "promocion": "252",
+        "fecha": "2024-10-28"
+    },
+    {
+        "id": 53,
+        "nombre": "Jabon Liquido 292g",
+        "marca": "Coca-Cola",
+        "importe": 21693.75,
+        "cantidad": 10,
+        "promocion": "252",
+        "fecha": "2024-10-28"
+    },
+    {
+        "id": 54,
+        "nombre": "Detergente Concentrado 494g",
+        "marca": "Ledesma",
+        "importe": 74578.4,
+        "cantidad": 11,
+        "promocion": "325",
+        "fecha": "2024-10-10"
+    },
+    {
+        "id": 55,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 6848.0,
+        "cantidad": 16,
+        "promocion": "20",
+        "fecha": "2024-10-11"
+    },
+    {
+        "id": 56,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 44330.0,
+        "cantidad": 5,
+        "promocion": "0",
+        "fecha": "2024-10-28"
+    },
+    {
+        "id": 57,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 168454.0,
+        "cantidad": 19,
+        "promocion": "0",
+        "fecha": "2024-10-13"
+    },
+    {
+        "id": 58,
+        "nombre": "Fideos Spaghetti 893g",
+        "marca": "Marolio",
+        "importe": 55497.0,
+        "cantidad": 13,
+        "promocion": "0",
+        "fecha": "2024-10-21"
+    },
+    {
+        "id": 59,
+        "nombre": "Detergente Concentrado 494g",
+        "marca": "Ledesma",
+        "importe": 75200.0,
+        "cantidad": 10,
+        "promocion": "20",
+        "fecha": "2023-09-09"
+    },
+    {
+        "id": 60,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 6980.0,
+        "cantidad": 15,
+        "promocion": "0",
+        "fecha": "2023-11-14"
+    },
+    {
+        "id": 61,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 45500.0,
+        "cantidad": 4,
+        "promocion": "0",
+        "fecha": "2023-08-27"
+    },
+    {
+        "id": 62,
+        "nombre": "Fideos Spaghetti 893g",
+        "marca": "Marolio",
+        "importe": 56000.0,
+        "cantidad": 12,
+        "promocion": "10",
+        "fecha": "2024-05-10"
+    },
+    {
+        "id": 63,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 7000.0,
+        "cantidad": 18,
+        "promocion": "30",
+        "fecha": "2025-02-22"
+    },
+    {
+        "id": 64,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 44100.0,
+        "cantidad": 6,
+        "promocion": "5",
+        "fecha": "2024-12-15"
+    },
+    {
+        "id": 65,
+        "nombre": "Detergente Concentrado 494g",
+        "marca": "Ledesma",
+        "importe": 76000.0,
+        "cantidad": 8,
+        "promocion": "15",
+        "fecha": "2024-01-16"
+    },
+    {
+        "id": 66,
+        "nombre": "Fideos Spaghetti 893g",
+        "marca": "Marolio",
+        "importe": 55500.0,
+        "cantidad": 10,
+        "promocion": "2x1",
+        "fecha": "2024-07-29"
+    },
+    {
+        "id": 67,
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "importe": 6850.0,
+        "cantidad": 20,
+        "promocion": "0",
+        "fecha": "2025-06-10"
+    },
+    {
+        "id": 68,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 43800.0,
+        "cantidad": 7,
+        "promocion": "5",
+        "fecha": "2025-03-21"
+    },
+    {
+        "id": 69,
+        "nombre": "Jabon Liquido 292g",
+        "marca": "Coca-Cola",
+        "importe": 3893.75,
+        "cantidad": 2,
+        "promocion": "252",
+        "fecha": "2024-11-30"
+    },
+    {
+        "id": 70,
+        "nombre": "Jabon Liquido 292g",
+        "marca": "Coca-Cola",
+        "importe": 10568.75,
+        "cantidad": 5,
+        "promocion": "252",
+        "fecha": "2024-11-30"
+    },
+    {
+        "id": 71,
+        "nombre": "Ketchup 613g",
+        "marca": "Suave",
+        "importe": 0,
+        "cantidad": 2,
+        "promocion": "2x1",
+        "fecha": "2024-11-30"
+    },
+    {
+        "id": 72,
+        "nombre": "Aceite de Girasol 444g",
+        "marca": "La Serenisima",
+        "importe": 18646.2,
+        "cantidad": 3,
+        "promocion": "10",
+        "fecha": "2024-11-30"
+    }
+]

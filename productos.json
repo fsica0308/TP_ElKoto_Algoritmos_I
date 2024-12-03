@@ -1,191 +1,452 @@
 [
     {
         "id": 1,
-        "nombre": "Nesquik original cacao en polvo 800 g.",
-        "marca": "Nesquik",
-        "precio": 7919,
-        "ubicacion": "Gondola 3",
-        "stock": 53,
-        "promocion": "252"
+        "nombre": "Shampoo Revitalizante 593g",
+        "marca": "Natura",
+        "precio": 535,
+        "ubicacion": "Gondola 2",
+        "stock": 156,
+        "promocion": "20"
     },
     {
         "id": 2,
-        "nombre": "Pan blanco Bimbo 550 g.",
-        "marca": "Bimbo",
-        "precio": 5069,
-        "ubicacion": "Gondola 2",
-        "stock": 24,
-        "promocion": "15"
-    },
-    {
-        "id": 3,
-        "nombre": "Edulcorante liquido Chuker sucralosa 00 cc.",
-        "marca": "Chuker",
-        "precio": 4315,
-        "ubicacion": "Gondola 3",
-        "stock": 67,
+        "nombre": "Queso Untable 653g",
+        "marca": "Hellmann's",
+        "precio": 6977,
+        "ubicacion": "Gondola 9",
+        "stock": 44,
         "promocion": "2x1"
     },
     {
-        "id": 4,
-        "nombre": "Aceite de Girasol 1.5L",
-        "marca": "Cocinero",
-        "precio": 1780,
+        "id": 3,
+        "nombre": "Salsa de Tomate 330g",
+        "marca": "Lucchetti",
+        "precio": 6002,
         "ubicacion": "Gondola 1",
-        "stock": 120,
-        "promocion": "3x2"
+        "stock": 119,
+        "promocion": "50"
+    },
+    {
+        "id": 4,
+        "nombre": "Dulce de Leche 750g",
+        "marca": "Suave",
+        "precio": 9601,
+        "ubicacion": "Gondola 1",
+        "stock": 176,
+        "promocion": "2x1"
     },
     {
         "id": 5,
-        "nombre": "Fideos Spaghetti 500g",
+        "nombre": "Yogurt Entero 402g",
         "marca": "Lucchetti",
-        "precio": 1350,
+        "precio": 5462,
         "ubicacion": "Gondola 2",
-        "stock": 200,
+        "stock": 143,
         "promocion": "0"
     },
     {
         "id": 6,
-        "nombre": "Azucar Blanca 1kg",
-        "marca": "Ledesma",
-        "precio": 1320,
-        "ubicacion": "Gondola 3",
-        "stock": 95,
-        "promocion": "2x1"
+        "nombre": "Mayonesa 469g",
+        "marca": "Lucchetti",
+        "precio": 4684,
+        "ubicacion": "Gondola 2",
+        "stock": 111,
+        "promocion": "0"
     },
     {
         "id": 7,
-        "nombre": "Arroz Largo Fino 1kg",
-        "marca": "Gallo",
-        "precio": 1440,
-        "ubicacion": "Gondola 4",
-        "stock": 100,
-        "promocion": "0"
+        "nombre": "Polenta 432g",
+        "marca": "Lucchetti",
+        "precio": 2686,
+        "ubicacion": "Gondola 10",
+        "stock": 26,
+        "promocion": "325"
     },
     {
         "id": 8,
-        "nombre": "Cafe Instantaneo 170g",
-        "marca": "Nescafe",
-        "precio": 2290,
-        "ubicacion": "Gondola 5",
-        "stock": 50,
-        "promocion": "15"
+        "nombre": "Desodorante Ambiental 914g",
+        "marca": "Marolio",
+        "precio": 4595,
+        "ubicacion": "Gondola 10",
+        "stock": 136,
+        "promocion": "2x1"
     },
     {
         "id": 9,
-        "nombre": "Harina de Trigo 1kg",
-        "marca": "Favorita",
-        "precio": 1260,
-        "ubicacion": "Gondola 6",
-        "stock": 180,
-        "promocion": "0"
-    },
-    {
-        "id": 10,
-        "nombre": "Huevos 12 unidades",
-        "marca": "Granja Tres Arroyos",
-        "precio": 1780,
-        "ubicacion": "Gondola 7",
-        "stock": 300,
-        "promocion": "0"
-    },
-    {
-        "id": 11,
-        "nombre": "Manteca 200g",
-        "marca": "Sancor",
-        "precio": 1430,
-        "ubicacion": "Gondola 8",
-        "stock": 140,
-        "promocion": "10"
-    },
-    {
-        "id": 12,
-        "nombre": "Galletitas Dulces 365g",
-        "marca": "Chocolinas",
-        "precio": 990,
-        "ubicacion": "Gondola 1",
-        "stock": 210,
-        "promocion": "0"
-    },
-    {
-        "id": 13,
-        "nombre": "Sal Fina 500g",
-        "marca": "Celusal",
-        "precio": 1180,
-        "ubicacion": "Gondola 2",
-        "stock": 160,
-        "promocion": "0"
-    },
-    {
-        "id": 14,
-        "nombre": "Salsa de Tomate 340g",
-        "marca": "Arcor",
-        "precio": 2240,
-        "ubicacion": "Gondola 3",
-        "stock": 180,
-        "promocion": "0"
-    },
-    {
-        "id": 15,
-        "nombre": "Mayonesa 500g",
+        "nombre": "Cafe Instantaneo 336g",
         "marca": "Hellmann's",
-        "precio": 2510,
-        "ubicacion": "Gondola 4",
-        "stock": 90,
+        "precio": 4583,
+        "ubicacion": "Gondola 1",
+        "stock": 184,
         "promocion": "252"
     },
     {
-        "id": 16,
-        "nombre": "Gaseosa 2.25L",
-        "marca": "Coca-Cola",
-        "precio": 2710,
-        "ubicacion": "Gondola 5",
-        "stock": 160,
+        "id": 10,
+        "nombre": "Ketchup 332g",
+        "marca": "Knorr",
+        "precio": 3378,
+        "ubicacion": "Gondola 3",
+        "stock": 42,
+        "promocion": "15"
+    },
+    {
+        "id": 11,
+        "nombre": "Dulce de Leche 170g",
+        "marca": "Nescafe",
+        "precio": 5845,
+        "ubicacion": "Gondola 8",
+        "stock": 100,
+        "promocion": "50"
+    },
+    {
+        "id": 12,
+        "nombre": "Fideos Spaghetti 601g",
+        "marca": "Arcor",
+        "precio": 1555,
+        "ubicacion": "Gondola 4",
+        "stock": 133,
+        "promocion": "45"
+    },
+    {
+        "id": 13,
+        "nombre": "Chocolates 766g",
+        "marca": "Pepsi",
+        "precio": 4020,
+        "ubicacion": "Gondola 3",
+        "stock": 43,
+        "promocion": "10"
+    },
+    {
+        "id": 14,
+        "nombre": "Desodorante Ambiental 119g",
+        "marca": "Ledesma",
+        "precio": 4221,
+        "ubicacion": "Gondola 3",
+        "stock": 13,
+        "promocion": "252"
+    },
+    {
+        "id": 15,
+        "nombre": "Fideos Spaghetti 893g",
+        "marca": "Marolio",
+        "precio": 4269,
+        "ubicacion": "Gondola 9",
+        "stock": 199,
         "promocion": "0"
+    },
+    {
+        "id": 16,
+        "nombre": "Gomitas Masticables 794g",
+        "marca": "Lucchetti",
+        "precio": 1549,
+        "ubicacion": "Gondola 7",
+        "stock": 128,
+        "promocion": "2x1"
     },
     {
         "id": 17,
-        "nombre": "Detergente 750ml",
-        "marca": "Ala",
-        "precio": 2230,
-        "ubicacion": "Gondola 6",
-        "stock": 120,
-        "promocion": "5"
+        "nombre": "Desodorante Ambiental 693g",
+        "marca": "La Serenisima",
+        "precio": 4750,
+        "ubicacion": "Gondola 4",
+        "stock": 131,
+        "promocion": "2x1"
     },
     {
         "id": 18,
-        "nombre": "Lavandina 1L",
-        "marca": "Ayudin",
-        "precio": 1200,
-        "ubicacion": "Gondola 7",
-        "stock": 140,
-        "promocion": "0"
+        "nombre": "Cerveza Rubia 432g",
+        "marca": "Suave",
+        "precio": 7917,
+        "ubicacion": "Gondola 10",
+        "stock": 27,
+        "promocion": "325"
     },
     {
         "id": 19,
-        "nombre": "Shampoo 400ml",
-        "marca": "Sedal",
-        "precio": 3650,
-        "ubicacion": "Gondola 8",
-        "stock": 110,
-        "promocion": "20"
+        "nombre": "Chocolates 393g",
+        "marca": "Gallo",
+        "precio": 3465,
+        "ubicacion": "Gondola 4",
+        "stock": 18,
+        "promocion": "50"
     },
     {
         "id": 20,
-        "nombre": "Papel Higienico 4 rollos",
-        "marca": "Elite",
-        "precio": 2290,
-        "ubicacion": "Gondola 1",
-        "stock": 200,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "precio": 8866,
+        "ubicacion": "Gondola 5",
+        "stock": 75,
         "promocion": "0"
     },
     {
         "id": 21,
-        "nombre": "Test hecho a las 20/09  16:50hrs",
-        "marca": "TEST MODIFICACION",
-        "precio": 25.0,
-        "ubicacion": "gondola de prueba",
-        "stock": 22,
-        "promocion": "15% descuento"
+        "nombre": "Papel Higienico Doble Hoja 932g",
+        "marca": "Natura",
+        "precio": 4211,
+        "ubicacion": "Gondola 5",
+        "stock": 145,
+        "promocion": "10"
+    },
+    {
+        "id": 22,
+        "nombre": "Cafe Instantaneo 148g",
+        "marca": "Hellmann's",
+        "precio": 4784,
+        "ubicacion": "Gondola 9",
+        "stock": 48,
+        "promocion": "252"
+    },
+    {
+        "id": 23,
+        "nombre": "Mayonesa 973g",
+        "marca": "Pepsi",
+        "precio": 9941,
+        "ubicacion": "Gondola 9",
+        "stock": 35,
+        "promocion": "15"
+    },
+    {
+        "id": 24,
+        "nombre": "Galletitas Chocolinas 227g",
+        "marca": "Natura",
+        "precio": 9856,
+        "ubicacion": "Gondola 7",
+        "stock": 160,
+        "promocion": "252"
+    },
+    {
+        "id": 25,
+        "nombre": "Chocolates 101g",
+        "marca": "Arcor",
+        "precio": 9986,
+        "ubicacion": "Gondola 2",
+        "stock": 38,
+        "promocion": "20"
+    },
+    {
+        "id": 26,
+        "nombre": "Jabon en Pan 614g",
+        "marca": "Pepsi",
+        "precio": 1339,
+        "ubicacion": "Gondola 9",
+        "stock": 144,
+        "promocion": "50"
+    },
+    {
+        "id": 27,
+        "nombre": "Ketchup 901g",
+        "marca": "Knorr",
+        "precio": 8149,
+        "ubicacion": "Gondola 9",
+        "stock": 66,
+        "promocion": "10"
+    },
+    {
+        "id": 28,
+        "nombre": "Salsa de Tomate 267g",
+        "marca": "Ledesma",
+        "precio": 4488,
+        "ubicacion": "Gondola 3",
+        "stock": 93,
+        "promocion": "0"
+    },
+    {
+        "id": 29,
+        "nombre": "Mayonesa 625g",
+        "marca": "Lucchetti",
+        "precio": 3015,
+        "ubicacion": "Gondola 7",
+        "stock": 145,
+        "promocion": "10"
+    },
+    {
+        "id": 30,
+        "nombre": "Mermelada de Durazno 979g",
+        "marca": "Arcor",
+        "precio": 2676,
+        "ubicacion": "Gondola 4",
+        "stock": 140,
+        "promocion": "3x2"
+    },
+    {
+        "id": 31,
+        "nombre": "Fideos Spaghetti 414g",
+        "marca": "Bimbo",
+        "precio": 4765,
+        "ubicacion": "Gondola 10",
+        "stock": 145,
+        "promocion": "3x2"
+    },
+    {
+        "id": 32,
+        "nombre": "Ketchup 421g",
+        "marca": "Suave",
+        "precio": 4277,
+        "ubicacion": "Gondola 6",
+        "stock": 63,
+        "promocion": "10"
+    },
+    {
+        "id": 33,
+        "nombre": "Jabon en Pan 630g",
+        "marca": "La Serenisima",
+        "precio": 2125,
+        "ubicacion": "Gondola 8",
+        "stock": 153,
+        "promocion": "2x1"
+    },
+    {
+        "id": 34,
+        "nombre": "Jugo de Naranja 165g",
+        "marca": "Ayudin",
+        "precio": 9766,
+        "ubicacion": "Gondola 5",
+        "stock": 162,
+        "promocion": "20"
+    },
+    {
+        "id": 35,
+        "nombre": "Mayonesa 604g",
+        "marca": "Knorr",
+        "precio": 7734,
+        "ubicacion": "Gondola 6",
+        "stock": 19,
+        "promocion": "50"
+    },
+    {
+        "id": 36,
+        "nombre": "Aceite de Girasol 407g",
+        "marca": "Nescafe",
+        "precio": 9407,
+        "ubicacion": "Gondola 8",
+        "stock": 26,
+        "promocion": "15"
+    },
+    {
+        "id": 37,
+        "nombre": "Leche Descremada 803g",
+        "marca": "Hellmann's",
+        "precio": 1820,
+        "ubicacion": "Gondola 9",
+        "stock": 146,
+        "promocion": "252"
+    },
+    {
+        "id": 38,
+        "nombre": "Detergente Concentrado 494g",
+        "marca": "Ledesma",
+        "precio": 6983,
+        "ubicacion": "Gondola 4",
+        "stock": 68,
+        "promocion": "325"
+    },
+    {
+        "id": 39,
+        "nombre": "Leche Descremada 823g",
+        "marca": "Lucchetti",
+        "precio": 8476,
+        "ubicacion": "Gondola 2",
+        "stock": 194,
+        "promocion": "2x1"
+    },
+    {
+        "id": 40,
+        "nombre": "Gomitas Masticables 346g",
+        "marca": "Nescafe",
+        "precio": 8674,
+        "ubicacion": "Gondola 6",
+        "stock": 200,
+        "promocion": "0"
+    },
+    {
+        "id": 41,
+        "nombre": "Harina de Trigo 149g",
+        "marca": "Lucchetti",
+        "precio": 1051,
+        "ubicacion": "Gondola 1",
+        "stock": 145,
+        "promocion": "50"
+    },
+    {
+        "id": 42,
+        "nombre": "Manteca 714g",
+        "marca": "Pepsi",
+        "precio": 5534,
+        "ubicacion": "Gondola 2",
+        "stock": 86,
+        "promocion": "15"
+    },
+    {
+        "id": 43,
+        "nombre": "Chocolates 655g",
+        "marca": "Coca-Cola",
+        "precio": 6198,
+        "ubicacion": "Gondola 3",
+        "stock": 155,
+        "promocion": "45"
+    },
+    {
+        "id": 44,
+        "nombre": "Ketchup 613g",
+        "marca": "Suave",
+        "precio": 7605,
+        "ubicacion": "Gondola 3",
+        "stock": 96,
+        "promocion": "2x1"
+    },
+    {
+        "id": 45,
+        "nombre": "Te en Saquitos 450g",
+        "marca": "Coca-Cola",
+        "precio": 3456,
+        "ubicacion": "Gondola 6",
+        "stock": 173,
+        "promocion": "20"
+    },
+    {
+        "id": 46,
+        "nombre": "Aceite de Girasol 444g",
+        "marca": "La Serenisima",
+        "precio": 6906,
+        "ubicacion": "Gondola 1",
+        "stock": 108,
+        "promocion": "10"
+    },
+    {
+        "id": 47,
+        "nombre": "Cafe Instantaneo 304g",
+        "marca": "Bimbo",
+        "precio": 5596,
+        "ubicacion": "Gondola 8",
+        "stock": 40,
+        "promocion": "20"
+    },
+    {
+        "id": 48,
+        "nombre": "Mermelada de Durazno 677g",
+        "marca": "Gallo",
+        "precio": 9920,
+        "ubicacion": "Gondola 1",
+        "stock": 187,
+        "promocion": "0"
+    },
+    {
+        "id": 49,
+        "nombre": "Jabon Liquido 292g",
+        "marca": "Coca-Cola",
+        "precio": 2225,
+        "ubicacion": "Gondola 9",
+        "stock": 103,
+        "promocion": "252"
+    },
+    {
+        "id": 50,
+        "nombre": "Shampoo Revitalizante 104g",
+        "marca": "Bimbo",
+        "precio": 616,
+        "ubicacion": "Gondola 10",
+        "stock": 50,
+        "promocion": "45"
     }
 ]
