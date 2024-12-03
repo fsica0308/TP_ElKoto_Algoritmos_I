@@ -5,10 +5,9 @@ from TP_ElKoto import (
     obtener_id,
     obtener_importe,
     formato_fecha,
-    busqueda_producto_alta,
     mostrar_top_promociones,
     mostrar_recaudacion_total_dia_mes,
-    mostrar_total_productos_vendidos,
+    mostrar_total_productos_vendidos_recursivo,
     mostrar_top_marcas, 
     busqueda_filtrada
 )
@@ -75,13 +74,13 @@ def test_mostrar_recaudacion_total_dia_mes():
     assert total_recaudado == 350.5  #chequeo si el total recaudado es 350.5
 
 
-def test_mostrar_total_productos_vendidos():
+def test_mostrar_total_productos_vendidos_recursivo():
     ventas = [
         {"id": 1, "cantidad": 5},
         {"id": 2, "cantidad": 3},
         {"id": 3, "cantidad": 7},
     ]
-    total_productos = mostrar_total_productos_vendidos(ventas)
+    total_productos = mostrar_total_productos_vendidos_recursivo(ventas)
     assert total_productos == 15  # Chequeo si el total de productos vendidos es 15
 
 def test_mostrar_top_marcas():
