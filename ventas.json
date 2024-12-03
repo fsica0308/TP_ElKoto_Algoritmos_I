@@ -646,5 +646,32 @@
         "cantidad": 3,
         "promocion": "10",
         "fecha": "2024-11-30"
+    },
+    {
+        "id": 73,
+        "nombre": "Cafe Instantaneo 130g",
+        "marca": "Arcor",
+        "importe": 44100.0,
+        "cantidad": 6,
+        "promocion": "5",
+        "fecha": "2024-12-01"
+    },
+    {
+        "id": 38,
+        "nombre": "Ketchup 901g",
+        "marca": "Knorr",
+        "importe": 73341.0,
+        "cantidad": 10,
+        "promocion": "10",
+        "fecha": "2024-12-02"
+    },
+    {
+        "id": 14,
+        "nombre": "Ketchup 332g",
+        "marca": "Knorr",
+        "importe": 48812.1,
+        "cantidad": 17,
+        "promocion": "15",
+        "fecha": "2024-12-03"
     }
 ]

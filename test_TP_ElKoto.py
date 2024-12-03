@@ -97,3 +97,5 @@ def test_mostrar_top_marcas():
     assert "Marca B" in top_marcas
     assert "Marca C" in top_marcas
     assert "Marca D" not in top_marcas
+
+#tengo errores con pytest. no puedo realizar las pruebas en mi computadora.
